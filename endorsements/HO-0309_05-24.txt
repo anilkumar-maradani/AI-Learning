@@ -1,0 +1,56 @@
+HOMEOWNERS ENDORSEMENT
+Form Number: HO-0309
+Edition Date: 05-24
+Policy Line: homeowners
+Effective Date: May 15, 2024
+Title: Business Pursuits Exclusion — In-Home Office Endorsement
+
+This endorsement modifies insurance provided under the:
+HOMEOWNERS POLICY — SPECIAL FORM
+
+SECTION I — PURPOSE
+This endorsement addresses losses arising from business activities conducted
+at or from the described dwelling, including home-based offices, in-home
+businesses, and remote work activities.
+
+CLAUSE BP-1 — BUSINESS PURSUITS EXCLUSION
+We do not cover bodily injury or property damage arising out of or in connection
+with a business engaged in by an insured. This exclusion applies regardless
+of whether the business activity occurs at the described premises.
+
+CLAUSE BP-2 — IN-HOME OFFICE EXCEPTION (LIMITED)
+Notwithstanding CLAUSE BP-1, if the insured's use of a portion of the
+described dwelling as an office is solely incidental to a primary occupation
+conducted elsewhere, we will cover:
+  (a) Up to $2,500 in business equipment located at the dwelling;
+  (b) Liability arising from a single, non-client business invitee visit
+      per calendar week.
+This exception does NOT apply if the dwelling is the primary place of business.
+
+CLAUSE BP-3 — HOME DAY CARE EXCLUSION
+Coverage is excluded for any bodily injury or property damage arising from
+a home day care, foster care, or after-school care operation conducted
+at the described premises, regardless of whether compensation is received.
+
+SECTION II — EXCLUSIONS TABLE
+EXCLUSION TABLE — HO-0309 ed. 05-24
+
+| Code | Excluded Peril                             | Conditions / Scope                                                 |
+|------|--------------------------------------------|--------------------------------------------------------------------|
+| E-19 | Business pursuits liability                | BI/PD from any business activity; see CLAUSE BP-1                 |
+|      |                                            | Business pursuits exclusion E-19 IS present in HO-0309 ed. 05-24  |
+| E-36 | Home day care and foster care liability    | Any care-giving operation for compensation at described premises    |
+| E-37 | Business inventory and stock               | Merchandise, stock-in-trade held for sale; excluded under Cov C    |
+| E-38 | Professional liability / errors & omissions| Claims arising from professional services rendered from home       |
+| E-39 | Employer's liability — domestic workers    | Claims from household employees for work-related injuries          |
+
+SECTION III — BUSINESS EQUIPMENT SUBLIMIT
+The $2,500 sublimit under CLAUSE BP-2 is per occurrence and per policy year.
+Equipment valued above $2,500 requires a separate Inland Marine floater.
+Electronic data and software are excluded from this sublimit.
+
+SECTION IV — EFFECTIVE DATE
+This endorsement is effective May 15, 2024.
+Premium adjustment: $0.00 (exclusion endorsement).
+
+END OF ENDORSEMENT HO-0309 ed. 05-24

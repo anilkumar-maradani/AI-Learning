@@ -1,0 +1,58 @@
+HOMEOWNERS ENDORSEMENT
+Form Number: HO-0308
+Edition Date: 05-24
+Policy Line: homeowners
+Effective Date: May 1, 2024
+Title: Earth Movement Exclusion — Broadened Definition Endorsement
+
+This endorsement modifies insurance provided under the:
+HOMEOWNERS POLICY — SPECIAL FORM
+
+SECTION I — PURPOSE
+This endorsement broadens and clarifies the earth movement exclusion contained
+in the base homeowners policy to address ambiguity in coverage determinations
+involving sinkholes, soil subsidence, and expansive soil events.
+
+CLAUSE EM-1 — EARTH MOVEMENT DEFINED (BROADENED)
+For purposes of this endorsement, "earth movement" means any movement,
+shifting, rising, sinking, settling, or destabilizing of the earth or soil,
+including but not limited to:
+  (a) Earthquake, including tremors, aftershocks, and volcanic eruption;
+  (b) Landslide, mudslide, or debris flow;
+  (c) Sinkhole formation or collapse;
+  (d) Soil subsidence or expansive soil events;
+  (e) Man-made earth movement, including mining-induced subsidence.
+
+CLAUSE EM-2 — CONCURRENT CAUSATION RULE
+If earth movement and a covered peril act concurrently or in sequence to
+produce a loss, the entire loss is excluded under this endorsement.
+Coverage does not attach to any portion of the loss attributable to
+the covered peril when earth movement is also a contributing cause.
+
+CLAUSE EM-3 — ENSUING FIRE EXCEPTION
+Notwithstanding CLAUSE EM-1 and EM-2, if earth movement causes a fire,
+coverage for the ensuing fire damage is not excluded by this endorsement.
+
+SECTION II — EXCLUSIONS TABLE
+EXCLUSION TABLE — HO-0308 ed. 05-24
+
+| Code | Excluded Peril                             | Conditions / Scope                                                 |
+|------|--------------------------------------------|--------------------------------------------------------------------|
+| E-31 | Earth movement — all forms                 | Earthquake, landslide, mudslide, sinkhole, subsidence; all forms   |
+|      |                                            | of earth movement as defined in CLAUSE EM-1 are excluded.          |
+|      |                                            | Concurrent cause rule applies (CLAUSE EM-2).                       |
+| E-32 | Man-made earth movement                    | Mining subsidence, excavation-induced movement, compaction failure |
+| E-33 | Sinkhole collapse damage                   | Structural damage from sinkhole formation or sudden collapse       |
+| E-34 | Expansive soil and shrinkage               | Foundation cracking from soil expansion, shrinkage, or settlement  |
+| E-35 | Mudslide and debris flow                   | Flowing earth, mud, or debris regardless of triggering event       |
+
+SECTION III — ENSUING LOSS EXCEPTION NOTE
+Only ensuing fire (per CLAUSE EM-3) is excepted from this exclusion.
+Water damage that ensues from ruptured pipes caused by earth movement
+is also excluded under E-31 (concurrent cause rule, CLAUSE EM-2).
+
+SECTION IV — EFFECTIVE DATE
+This endorsement is effective May 1, 2024.
+Premium adjustment: $0.00 (exclusion endorsement).
+
+END OF ENDORSEMENT HO-0308 ed. 05-24

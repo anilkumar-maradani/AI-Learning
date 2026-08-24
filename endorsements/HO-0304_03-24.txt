@@ -1,0 +1,59 @@
+HOMEOWNERS ENDORSEMENT
+Form Number: HO-0304
+Edition Date: 03-24
+Policy Line: homeowners
+Effective Date: March 1, 2024
+Title: Water Damage Limitations and Supply Line Coverage Endorsement
+
+This endorsement modifies insurance provided under the:
+HOMEOWNERS POLICY — SPECIAL FORM
+
+SECTION I — PROPERTY COVERAGES
+
+COVERAGE A — DWELLING
+This endorsement amends the base policy wording for water damage originating
+from supply lines, drain lines, and related plumbing infrastructure.
+
+CLAUSE WD-1 — SUDDEN AND ACCIDENTAL DISCHARGE
+Coverage applies to sudden and accidental discharge or overflow of water or
+steam from within a plumbing, heating, air conditioning, or automatic fire
+protective sprinkler system, or from within a household appliance. The term
+"sudden and accidental" means an event that is abrupt, unintended, and
+not the result of continuous seepage or leakage over a period of time exceeding
+fourteen (14) consecutive days.
+
+CLAUSE WD-2 — SUPPLY LINE DEFINITION
+A "supply line" means any pipe or tube that carries potable water under pressure
+from the main service entry or from a distribution manifold to any plumbing
+fixture, appliance, or point of use within or attached to the described dwelling.
+
+SECTION II — EXCLUSIONS TABLE
+The following exclusion codes apply under this endorsement. Each row identifies
+the exclusion code, the peril excluded, and applicable conditions.
+
+EXCLUSION TABLE — HO-0304 ed. 03-24
+
+| Code | Excluded Peril                             | Conditions / Scope                                                 |
+|------|--------------------------------------------|--------------------------------------------------------------------|
+| E-11 | Gradual seepage or leakage                 | Any water that seeps, leaks, or flows continuously over 14+ days   |
+| E-12 | Flood from external surface water          | Water that enters from outside the structure (storm surge, runoff) |
+| E-13 | Sewer or drain backup (off-premises)       | Backup originating from a municipal or shared drain line           |
+| E-14 | Ground water intrusion                     | Water below the soil surface entering foundation or basement       |
+| E-15 | Ice dam damage without maintenance record  | Loss attributable to ice dam where insured has no annual inspection|
+| E-16 | Appliance wear-and-tear overflow           | Overflow from appliance over 15 years old with no service record   |
+| E-17 | Burst supply line — NOT excluded           | Water damage from a sudden burst of an interior supply line IS     |
+|      |                                            | COVERED under CLAUSE WD-1 and WD-2; this row confirms coverage     |
+|      |                                            | is NOT withheld under this endorsement for that specific peril.    |
+| E-18 | Intentional discharge                      | Any water release caused deliberately by any insured person        |
+
+SECTION III — CONDITIONS
+Claim reporting for water damage under this endorsement must occur within
+72 hours of the insured first discovering the loss. Failure to report within
+this window may result in denial under E-11 (gradual seepage classification).
+
+SECTION IV — EFFECTIVE DATE AND SUPERSESSION
+This endorsement is effective March 1, 2024, and supersedes any conflicting
+language in the base homeowners policy regarding water supply line coverage.
+Premium adjustment: $24.00 additional annual premium.
+
+END OF ENDORSEMENT HO-0304 ed. 03-24

@@ -1,0 +1,52 @@
+HOMEOWNERS ENDORSEMENT
+Form Number: HO-0305
+Edition Date: 03-24
+Policy Line: homeowners
+Effective Date: March 15, 2024
+Title: Increased Deductible for Named Storm Endorsement
+
+This endorsement modifies insurance provided under the:
+HOMEOWNERS POLICY — SPECIAL FORM
+
+SECTION I — PURPOSE AND SCOPE
+This endorsement establishes a separate, higher deductible that applies
+exclusively to losses caused by a Named Storm as defined herein. The standard
+policy deductible continues to apply to all other covered perils.
+
+CLAUSE NS-1 — NAMED STORM DEFINITION
+A "Named Storm" means a tropical cyclone, hurricane, or tropical storm that has
+been assigned a name by the National Hurricane Center (NHC) or the equivalent
+national meteorological authority at any point during its lifecycle, regardless
+of whether the storm bore a name at the time it caused loss to the described
+premises.
+
+CLAUSE NS-2 — NAMED STORM DEDUCTIBLE
+When a Named Storm causes or contributes to a covered loss, the Named Storm
+Deductible is $5,000 or 2% of the Coverage A limit, whichever is greater.
+This deductible applies per occurrence, not per storm season.
+
+CLAUSE NS-3 — STACKING PROHIBITION
+The Named Storm Deductible under this endorsement replaces — and does not stack
+with — any all-peril deductible stated on the declarations page. The higher
+of the two deductibles applies.
+
+SECTION II — EXCLUSIONS TABLE
+EXCLUSION TABLE — HO-0305 ed. 03-24
+
+| Code | Excluded Peril                             | Conditions / Scope                                                 |
+|------|--------------------------------------------|--------------------------------------------------------------------|
+| E-21 | Losses below Named Storm deductible        | Claims where total damage < Named Storm deductible are not payable |
+| E-22 | Coastal storm surge classified as flood    | Storm surge losses subject to NFIP; not covered under this form   |
+| E-23 | Pre-existing wind damage                   | Damage present before the Named Storm made landfall               |
+| E-24 | Business property in dwelling              | Commercial inventory or equipment stored on-premises              |
+
+SECTION III — DEDUCTIBLE SCHEDULE
+Policy Year 2024 Named Storm Deductible: $5,000 minimum or 2% of Cov-A.
+For a dwelling insured at $300,000: deductible = $6,000.
+For a dwelling insured at $200,000: deductible = $5,000 (floor applies).
+
+SECTION IV — EFFECTIVE DATE
+This endorsement is effective March 15, 2024.
+Premium adjustment: $0.00 (deductible shift, no additional premium).
+
+END OF ENDORSEMENT HO-0305 ed. 03-24

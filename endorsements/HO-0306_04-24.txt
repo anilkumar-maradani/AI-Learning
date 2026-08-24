@@ -1,0 +1,53 @@
+HOMEOWNERS ENDORSEMENT
+Form Number: HO-0306
+Edition Date: 04-24
+Policy Line: homeowners
+Effective Date: April 1, 2024
+Title: Mold, Fungi, and Wet Rot Exclusion Endorsement
+
+This endorsement modifies insurance provided under the:
+HOMEOWNERS POLICY — SPECIAL FORM
+
+SECTION I — PURPOSE
+This endorsement clarifies and strengthens the policy's treatment of mold,
+fungi, wet rot, dry rot, and bacteria-related losses that may arise from
+or in connection with a covered water loss event.
+
+CLAUSE MF-1 — MOLD AND FUNGI EXCLUSION (GENERAL)
+We do not cover loss caused directly or indirectly by mold, fungi, wet rot,
+dry rot, or bacteria. This exclusion applies regardless of whether the mold
+or fungi results from a covered or uncovered water event.
+
+CLAUSE MF-2 — REMEDIATION SUBLIMIT EXCEPTION
+Notwithstanding CLAUSE MF-1, if mold is a direct result of a covered sudden
+and accidental water discharge event (as defined in form HO-0304 ed. 03-24,
+CLAUSE WD-1), we will pay up to $10,000 for mold remediation costs, provided:
+  (a) The water event is reported within 72 hours of discovery, and
+  (b) A licensed remediation contractor provides a written estimate.
+
+CLAUSE MF-3 — TESTING EXCLUSION
+We do not cover the cost of air quality testing, mold sampling, or laboratory
+analysis, even if the underlying remediation is covered under CLAUSE MF-2.
+
+SECTION II — EXCLUSIONS TABLE
+EXCLUSION TABLE — HO-0306 ed. 04-24
+
+| Code | Excluded Peril                             | Conditions / Scope                                                 |
+|------|--------------------------------------------|--------------------------------------------------------------------|
+| E-22 | Mold damage — general                      | All mold-related losses UNLESS remediation sublimit applies        |
+| E-23 | Fungi and wet rot losses                   | Wet rot, dry rot, fungi in any form, regardless of water source    |
+| E-24 | Bacteria contamination                     | Losses attributable to bacterial growth or contamination           |
+| E-25 | Mold testing and air sampling costs        | Lab, air-quality, and surface sampling costs are not covered       |
+| E-26 | Pre-existing mold at time of policy issue  | Any mold present before policy inception date                      |
+| E-27 | Mold from HVAC condensation (chronic)      | Condensation-related mold if HVAC system not serviced in 3 years   |
+
+SECTION III — CONDITIONS
+This endorsement does not expand coverage beyond what is expressly stated.
+Where conflict exists between this endorsement and the base policy, this
+endorsement controls with respect to mold and fungi losses.
+
+SECTION IV — EFFECTIVE DATE
+This endorsement is effective April 1, 2024.
+Premium adjustment: $0.00 (exclusion endorsement, no additional premium).
+
+END OF ENDORSEMENT HO-0306 ed. 04-24
