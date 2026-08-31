@@ -1,37 +1,52 @@
 """
-generation.py — RAG generation and hard refusal logic.
+generation.py — Grounded answer generation with a hard refusal gate.
 
-Uses Groq API (OpenAI-compatible) with model openai/gpt-oss-120b.
-The grounding prompt FORCES refusal when the answer cannot be sourced
-from retrieved chunks. No "use your best judgment" loophole.
+Talks to Groq's OpenAI-compatible endpoint (default model: openai/gpt-oss-120b,
+override with the GROQ_MODEL env var). The system prompt forbids answering
+from general knowledge: when the retrieved chunks do not contain the answer
+the model must emit a fixed "REFUSAL:" message, which callers detect via
+``is_refusal``.
 """
 
 import os
 from openai import OpenAI
+from dotenv import load_dotenv
 
 # ---------------------------------------------------------------------------
 # Groq client (OpenAI-compatible)
 # ---------------------------------------------------------------------------
 
-GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "")
 GROQ_BASE_URL = "https://api.groq.com/openai/v1"
-MODEL = "openai/gpt-oss-120b"
+DEFAULT_MODEL = "openai/gpt-oss-120b"
+
+
+def _api_key() -> str:
+    """Resolve the Groq key lazily so a .env file works for every entry point."""
+    load_dotenv()
+    return os.environ.get("GROQ_API_KEY", "").strip()
+
+
+def get_model() -> str:
+    return os.environ.get("GROQ_MODEL", DEFAULT_MODEL)
+
 
 def get_client() -> OpenAI:
-    if not GROQ_API_KEY:
+    key = _api_key()
+    if not key:
         raise ValueError(
-            "GROQ_API_KEY environment variable is not set. "
-            "Export it before running: export GROQ_API_KEY=gsk_..."
+            "GROQ_API_KEY is not set. Put it in .env (see .env.example) or set it "
+            "in your shell: PowerShell `$env:GROQ_API_KEY=\"gsk_...\"`, "
+            "bash `export GROQ_API_KEY=gsk_...`."
         )
-    return OpenAI(api_key=GROQ_API_KEY, base_url=GROQ_BASE_URL)
+    return OpenAI(api_key=key, base_url=GROQ_BASE_URL)
 
 
 # ---------------------------------------------------------------------------
 # Grounding system prompt — HARD refusal, no hallucination escape hatch
 # ---------------------------------------------------------------------------
 
-SYSTEM_PROMPT = """You are an insurance claims assistant that answers questions
-ONLY from the provided policy endorsement context.
+SYSTEM_PROMPT = """You are PolicyLens, a policy-endorsement assistant. You answer
+questions strictly from the endorsement excerpts supplied in the context block.
 
 RULES (non-negotiable):
 1. Answer ONLY using information explicitly stated in the provided context chunks.
@@ -104,7 +119,7 @@ def generate_answer(
     )
 
     response = client.chat.completions.create(
-        model=MODEL,
+        model=get_model(),
         messages=[
             {"role": "system", "content": SYSTEM_PROMPT},
             {"role": "user", "content": user_message},

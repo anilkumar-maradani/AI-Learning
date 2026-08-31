@@ -18,6 +18,9 @@ from chromadb.utils import embedding_functions
 # Add parent dir to path so src imports work when run from project root
 sys.path.insert(0, os.path.dirname(__file__))
 from chunkers import naive_chunker, structure_aware_chunker
+from console import enable_utf8
+
+enable_utf8()
 
 # ---------------------------------------------------------------------------
 # Config

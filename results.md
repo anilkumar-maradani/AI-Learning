@@ -474,3 +474,195 @@ The structure-aware chunker is defined in `src/chunkers.py` under
 
 ---
 
+---
+
+# Week 4 Practical — Task Set D: Debugging Retrieval Results
+
+**Week:** 4 — Debugging Retrieval — Hybrid, Reranking & Failure Separation
+**Domain:** Insurance Claims
+**Generated:** 2026-08-27
+**Single Retrieval Change:** BM25 + RRF Fusion (k=60) added to structure-aware vector search
+
+---
+
+## 1. 12-Question Golden Set
+
+Each question is tagged with its known-correct form, clause, and whether it
+contains an exact token (exclusion code, form number) that dense retrieval
+is structurally bad at.
+
+| # | Question | Expected Form | Expected Clause | Exact Token? |
+|---|---|---|---|---|
+| Q01 | Does exclusion E-17 apply under form HO-0304 ed. 03-24, and is a burst supply line covered? | HO-0304 | EXCLUSION-TABLE (E-17 row) | ✅ yes |
+| Q02 | What does sudden and accidental mean under CLAUSE WD-1 in HO-0304? | HO-0304 | CLAUSE-WD-1 | ✅ yes |
+| Q03 | What is the Named Storm deductible amount under HO-0305 ed. 03-24? | HO-0305 | CLAUSE-NS-2 | ✅ yes |
+| Q04 | Does exclusion E-19 appear in HO-0309 ed. 05-24 for business pursuits? | HO-0309 | EXCLUSION-TABLE (E-19 row) | ✅ yes |
+| Q05 | Is mold damage covered under HO-0306 if it results from a sudden water discharge? | HO-0306 | CLAUSE-MF-2 | no |
+| Q06 | Does HO-0306 cover air quality testing and mold sampling costs? | HO-0306 | CLAUSE-MF-3 | no |
+| Q07 | What is a supply line as defined in HO-0304 CLAUSE WD-2? | HO-0304 | CLAUSE-WD-2 | no |
+| Q08 | Does HO-0308 exclude sinkhole collapse damage? What exclusion code applies? | HO-0308 | EXCLUSION-TABLE (E-33 row) | ✅ yes |
+| Q09 | Is earthquake damage excluded under HO-0308 ed. 05-24, including aftershocks? | HO-0308 | CLAUSE-EM-1 | ✅ yes |
+| Q10 | Does HO-0309 cover liability from a home day care operation? | HO-0309 | CLAUSE-BP-3 | no |
+| Q11 | Under HO-0307, are scheduled jewelry items covered for mysterious disappearance? | HO-0307 | EXCLUSION-TABLE (E-28 row) | no |
+| Q12 | If earth movement and a covered peril cause loss together under HO-0308, what happens? | HO-0308 | CLAUSE-EM-2 | no |
+
+> **Exact-token questions:** Q01, Q02, Q03, Q04, Q08, Q09 (6 of 12 ≥ required 4)
+
+---
+
+## 2. Baseline Hit-rate@3 (Vector-Only, Before Any Change)
+
+Strategy: `structure_aware` (Week 3 retriever, unchanged)
+
+**Baseline hit-rate@3 = 7 / 12 = 58.3%**
+
+Per-question baseline results:
+
+| # | Hit? | Rank | Latency |
+|---|---|---|---|
+| Q01 | ❌ MISS | — | 9355ms (first-load embedding model) |
+| Q02 | ✅ HIT | 1 | 9ms |
+| Q03 | ❌ MISS | — | 7ms |
+| Q04 | ✅ HIT | 1 | 6ms |
+| Q05 | ❌ MISS | — | 6ms |
+| Q06 | ✅ HIT | 1 | 6ms |
+| Q07 | ✅ HIT | 1 | 5ms |
+| Q08 | ❌ MISS | — | 6ms |
+| Q09 | ❌ MISS | — | 6ms |
+| Q10 | ✅ HIT | 1 | 6ms |
+| Q11 | ✅ HIT | 1 | 6ms |
+| Q12 | ✅ HIT | 1 | 6ms |
+
+**p50 (median) latency: 6ms** (excluding first-load cold start)
+
+---
+
+## 3. R / G / Not-In-Corpus Failure Tally
+
+Every miss was inspected using the hit-checking logic in `src/evaluate_w4.py`.
+For each, the top-5 results were examined to determine the root cause.
+
+| # | Question (short) | Label | One-Line Evidence |
+|---|---|---|---|
+| Q01 | E-17 under HO-0304 ed. 03-24? | **R** | Form HO-0304 not found in top-5 at all — dense embedding conflated E-17 row with generic water-damage clauses from other forms |
+| Q03 | Named Storm deductible HO-0305 ed. 03-24? | **R** | HO-0305 form appeared in top-5 but NS-2 clause with the $5,000 figure ranked at #4; exact dollar amount "Named Storm Deductible is $5,000" not in top-3 |
+| Q05 | Mold covered after burst pipe? (HO-0306) | **R** | "mold remediation costs" (MF-2 clause) found at rank 4 in top-5; MF-1 general exclusion clause dominated top-3 instead |
+| Q08 | Sinkhole E-33 under HO-0308? | **R** | E-33 token found at rank 4; earth movement exclusion table (EM-1) dominated top-3 because semantic similarity was higher |
+| Q09 | Earthquake HO-0308 ed. 05-24 aftershocks? | **R** | HO-0308 returned in top-5 but EM-2/EM-3 clauses dominated; the exact phrase "aftershocks" within EM-1 did not rank top-3 |
+
+**Tally:**
+- R (Retrieval): **5**
+- G (Generation): **0**
+- Not-In-Corpus: **0**
+
+> **Conclusion:** ALL 5 failures are pure retrieval failures (R). None are
+> generation failures. No model swap is justified — a new LLM would change
+> exactly zero of these misses. The root cause is that dense vector search
+> fails on queries containing exact, rare tokens (exclusion codes like E-17,
+> E-33; exact form references like HO-0304 ed. 03-24; exact dollar amounts).
+
+---
+
+## 4. Justification for the Single Retrieval Change: BM25 + RRF Fusion
+
+All 5 failures were labelled R, and inspection shows the root cause is a
+structural weakness of dense vector retrieval: rare, exact tokens like "E-17",
+"HO-0305 ed. 03-24", and "Named Storm Deductible is $5,000" are averaged
+away in the embedding space. These tokens carry low frequency across the
+corpus and get diluted by the surrounding clause text, which is semantically
+similar across all six endorsements.
+
+BM25 (Okapi BM25) is a term-frequency/inverse-document-frequency scoring
+function that explicitly rewards rare, exact token matches. "E-17" appears in
+exactly one document; BM25 gives it maximum IDF weight and returns that chunk
+at rank 1. Dense retrieval cannot do this because it works in a 384-dimensional
+semantic space where "E-17", "E-11", and "E-15" project to nearly identical
+vectors (all appear inside exclusion tables with identical surrounding context).
+
+Reciprocal Rank Fusion (k=60) was chosen over score averaging because BM25
+scores (unbounded, corpus-relative) and cosine similarities (bounded [0,1])
+are not on the same scale and cannot be meaningfully averaged. RRF fuses
+rank positions using `1/(60 + rank)`, which is scale-invariant and has been
+shown empirically to outperform linear score combination for hybrid retrieval.
+
+A cross-encoder reranker was considered but rejected: it would re-score the
+top-25 vector results more carefully, but if the correct chunk is not in those
+25 (Q01: HO-0304 not in top-5 at all), the reranker has nothing to fix.
+BM25 expands the candidate pool from a different axis entirely.
+
+**One change only:** BM25 index built from ChromaDB chunks + RRF(k=60)
+fusion of BM25 top-25 and vector top-25. No other parameter was changed.
+
+---
+
+## 5. After Hit-rate@3 (Hybrid: BM25 + Vector + RRF)
+
+Strategy: `hybrid` (BM25 + structure_aware vector + RRF k=60)
+
+**After hit-rate@3 = 9 / 12 = 75.0%**
+
+---
+
+## 6. Before → After Summary Table
+
+| Metric | BEFORE (vector-only) | AFTER (hybrid BM25+RRF) |
+|---|---|---|
+| Hit-rate@3 | 7/12 = **58.3%** | 9/12 = **75.0%** |
+| p50 latency (excl. cold start) | **6ms** | **7ms** |
+| p90 latency | 9ms | 9ms |
+
+**Delta: +16.7 percentage points** on hit-rate@3.
+**Latency cost: +1ms at p50** — a negligible price for BM25 (in-memory index,
+no extra network call, no GPU required).
+
+---
+
+## 7. Per-Question Fixed / Unfixed Table
+
+| # | Exact Token? | BEFORE | AFTER | Status |
+|---|---|---|---|---|
+| Q01 | ✅ | ❌ MISS (R) | ✅ HIT | **FIXED** — BM25 ranked E-17 table chunk #1 by exact token match |
+| Q02 | ✅ | ✅ HIT | ✅ HIT | unchanged |
+| Q03 | ✅ | ❌ MISS (R) | ❌ MISS (R) | **still broken** — "$5,000" token split by naive tokenizer; RRF could not rescue |
+| Q04 | ✅ | ✅ HIT | ✅ HIT | unchanged |
+| Q05 | no | ❌ MISS (R) | ❌ MISS (R) | **still broken** — semantic tie between MF-1 and MF-2 not resolved by BM25 |
+| Q06 | no | ✅ HIT | ✅ HIT | unchanged |
+| Q07 | no | ✅ HIT | ✅ HIT | unchanged |
+| Q08 | ✅ | ❌ MISS (R) | ✅ HIT | **FIXED** — BM25 found "E-33" exact token and lifted it into top-3 |
+| Q09 | ✅ | ❌ MISS (R) | ❌ MISS (R) | **still broken** — "aftershocks" is a single-occurrence token but EM-1 clause is large; correct fragment ranked #4 in both strategies |
+| Q10 | no | ✅ HIT | ✅ HIT | unchanged |
+| Q11 | no | ✅ HIT | ✅ HIT | unchanged |
+| Q12 | no | ✅ HIT | ✅ HIT | unchanged |
+
+**Fixed by BM25+RRF:** Q01, Q08 (2 of 5 R-failures)
+**Unfixed / still broken:** Q03, Q05, Q09 (3 of 5 R-failures)
+
+**Why the 3 remaining misses were not fixed:**
+- **Q03** — "$5,000" is tokenized by the BM25 tokenizer as ["5", "000"] (dollar sign stripped). The exact phrase "Named Storm Deductible is $5,000" is not matched as a single token. BM25 finds the correct form but not the specific clause.
+- **Q05** — No exact token in the question ("mold", "sudden", "water"). Both MF-1 and MF-2 contain similar vocabulary. BM25 scores are identical for both clauses; vector search also ties. The correct clause (MF-2) ranks at #4 in both strategies.
+- **Q09** — "aftershocks" appears in the EM-1 chunk, but that chunk is large and gets split in structure-aware chunking. The sub-chunk containing "aftershocks" ranks at #4 after both BM25 and RRF.
+
+---
+
+## 8. Shipping Decision
+
+**Ship the hybrid retrieval change.**
+
+Hit-rate@3 moved from 58.3% → 75.0% (+16.7 pp) with a latency cost of
+only +1ms at p50 (6ms → 7ms). The BM25 index is built in memory at startup
+(~1-2 seconds, one-time cost) and adds zero network latency per query.
+
+The 3 remaining failures (Q03, Q05, Q09) require different fixes:
+- Q03 needs tokenizer improvement (handle "$" and numeric strings)
+- Q05 and Q09 need a cross-encoder reranker as a second stage — but only
+  after BM25+RRF has expanded the candidate pool to include the correct chunk.
+
+Given that the change fixes 2 out of 5 retrieval failures with negligible
+latency cost and zero infrastructure change, the data supports shipping.
+The 3 unfixed failures are documented above for the next iteration.
+
+> **Not shipping a model swap.** The tally shows 5R / 0G / 0NIC.
+> A new LLM changes exactly zero retrieval failures. The team lead's suggestion
+> to swap the model is not supported by the evidence.
+
+---

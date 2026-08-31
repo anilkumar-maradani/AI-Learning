@@ -67,6 +67,7 @@ pyproject_hooks==1.2.0
 python-dateutil==2.9.0.post0
 python-dotenv==1.2.3
 PyYAML==6.0.3
+rank-bm25==0.2.2
 referencing==0.37.0
 regex==2026.7.19
 requests==2.34.2
@@ -95,7 +96,7 @@ typing-inspection==0.4.4
 typing_extensions==4.16.0
 urllib3==2.7.0
 uvicorn==0.52.4
-uvloop==0.22.1
+uvloop==0.22.1; sys_platform != "win32"
 watchfiles==1.2.0
 websocket-client==1.9.0
 websockets==17.0.1

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-run_all.py — Master runner for Week 3 Practical Task Set D.
+run_all.py — End-to-end evaluation runner for PolicyLens.
 
 Steps:
   1. Ingest 6 endorsements into ChromaDB (naive + structure-aware collections)
@@ -11,9 +11,8 @@ Steps:
   6. Write results.md with all required evidence
 
 Usage:
-  export GROQ_API_KEY=gsk_...
-  source venv/bin/activate
-  python3 run_all.py
+  .venv/Scripts/Activate.ps1   (Windows)   /   source .venv/bin/activate   (macOS/Linux)
+  python run_all.py                (reads GROQ_API_KEY from .env)
 """
 
 import os
@@ -23,6 +22,9 @@ from datetime import datetime
 
 # Make src/ importable
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "src"))
+
+from console import enable_utf8
+enable_utf8()
 
 from ingest import ingest_all, resolve_chunk
 from retrieval import search, metadata_filter_demo, format_results
@@ -101,10 +103,10 @@ def build_results_md(
     # -----------------------------------------------------------------------
     # Section 1 — Header
     # -----------------------------------------------------------------------
-    md = f"""# Week 3 Practical — Task Set D: Results
+    md = f"""# PolicyLens — Chunking & Grounding Evaluation Report
 
-**Domain:** Insurance Claims — Endorsement RAG  
-**Module:** M2 — Retrieval & RAG  
+**Domain:** Homeowners policy endorsements (insurance claims)  
+**Pipeline:** chunking → ChromaDB → retrieval → grounded generation  
 **Generated:** {now}  
 **Model:** openai/gpt-oss-120b via Groq API  
 **Embeddings:** sentence-transformers/all-MiniLM-L6-v2 (local)  
@@ -359,8 +361,8 @@ The structure-aware chunker is defined in `src/chunkers.py` under
 
 def main():
     print("=" * 60)
-    print("Week 3 Practical — Task Set D")
-    print("Insurance Claims RAG: Endorsement Chunking Evaluation")
+    print("PolicyLens — evaluation run")
+    print("Chunking strategies · metadata filters · grounded answers · refusals")
     print("=" * 60)
 
     # Step 1: Ingest

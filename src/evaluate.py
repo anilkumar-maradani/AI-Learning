@@ -1,5 +1,5 @@
 """
-evaluate.py — Evaluation harness for Week 3 Practical Task Set D.
+evaluate.py — Known-answer retrieval harness (hit-in-top-5, both chunkers).
 
 Runs 8 known-answer questions against both chunking strategies (search-only),
 collects per-question hit-in-top-5, and writes the full raw dump.
@@ -11,6 +11,9 @@ import json
 
 sys.path.insert(0, os.path.dirname(__file__))
 from retrieval import hit_in_top5, search, metadata_filter_demo, format_results
+from console import enable_utf8
+
+enable_utf8()
 
 # ---------------------------------------------------------------------------
 # The 8 known-answer questions
