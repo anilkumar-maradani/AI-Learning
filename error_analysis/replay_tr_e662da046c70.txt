@@ -1,0 +1,37 @@
+==============================================================================
+REPLAY OF tr_e662da046c70   (recorded 2026-09-05T15:09:44.991+00:00)
+==============================================================================
+question      : What is exclusion E-11 and how many days of leakage triggers it?
+claim_ref     : [CLAIM_NO:11b374]
+prompt version: claims-v1 (sha 748e912c3377)
+model         : openai/gpt-oss-120b  temp=0.0 top_p=1.0 max_tokens=800 seed=None
+chunks        : ['HO-0304_sa_chunk_006', 'HO-0304_sa_chunk_007', 'HO-0304_sa_chunk_003', 'HO-0308_sa_chunk_008', 'HO-0307_sa_chunk_007']
+scores        : [0.032258, 0.03125, 0.031778, 0.029958, 0.028589]
+
+PREFLIGHT
+  ok — prompt hash, index fingerprint and all chunk_ids match.
+
+------------------------------------------------------------------------------
+ORIGINAL OUTPUT (from the trace)
+------------------------------------------------------------------------------
+COVERED: Exclusion E‑11 is the “Gradual seepage or leakage” exclusion. It applies when any water seeps, leaks, or flows continuously for more than fourteen (14) days (i.e., 14 + days). [SOURCE: HO-0304_sa_chunk_006 | HO-0304 | EXCLUSION-TABLE]
+
+------------------------------------------------------------------------------
+REPLAYED OUTPUT (regenerated from the trace alone)
+------------------------------------------------------------------------------
+COVERED: **Exclusion E‑11** – “Gradual seepage or leakage.”  
+It applies when any water **seeps, leaks, or flows continuously for more than 14 days** (i.e., 14 + days) [ SOURCE: HO-0304_sa_chunk_006 | HO-0304 | EXCLUSION‑TABLE ].
+
+------------------------------------------------------------------------------
+identical: False    similarity: 0.8051
+
+UNIFIED DIFF (original -> replayed)
+--- original
++++ replayed
+@@ -1 +1,2 @@
+-COVERED: Exclusion E‑11 is the “Gradual seepage or leakage” exclusion. It applies when any water seeps, leaks, or flows continuously for more than fourteen (14) days (i.e., 14 + days). [SOURCE: HO-0304_sa_chunk_006 | HO-0304 | EXCLUSION-TABLE]
++COVERED: **Exclusion E‑11** – “Gradual seepage or leakage.”  
++It applies when any water **seeps, leaks, or flows continuously for more than 14 days** (i.e., 14 + days) [ SOURCE: HO-0304_sa_chunk_006 | HO-0304 | EXCLUSION‑TABLE ].
+==============================================================================
+
+written: error_analysis/replay_tr_e662da046c70.json

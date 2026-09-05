@@ -1,0 +1,243 @@
+{
+  "seed": 20260905,
+  "seed_rule": "YYYYMMDD of the day the sample was drawn",
+  "n": 20,
+  "population_size": 106,
+  "population_fingerprint_sha256": "1143f43c1e1573016c319f9a629bb0a3abd7b62bece1f608a5fd40417de4d241",
+  "draw_method": "random.Random(seed).sample(sorted(trace_ids), n) — Python 3.14 Mersenne Twister",
+  "selected_trace_ids": [
+    "tr_b5ba07d1f4cc",
+    "tr_440a391b6301",
+    "tr_148357fb79c3",
+    "tr_e2ea5198b3b4",
+    "tr_aed27ca5c15a",
+    "tr_937f21bc8667",
+    "tr_5741e53e8591",
+    "tr_86e13c9d80bc",
+    "tr_1838e4f935f5",
+    "tr_f8f386127038",
+    "tr_e662da046c70",
+    "tr_cf7a87e727de",
+    "tr_37af7381d522",
+    "tr_0e21144d6d39",
+    "tr_4cfbcfbbec32",
+    "tr_34227f724cb5",
+    "tr_1a7c8f8f738b",
+    "tr_1033eb8e542c",
+    "tr_a79da2f07b09",
+    "tr_36d865b6f3ae"
+  ],
+  "selected": [
+    {
+      "trace_id": "tr_b5ba07d1f4cc",
+      "ts_utc": "2026-09-05T15:00:21.626+00:00",
+      "question": "What does the base homeowners policy say about theft of a bicycle?",
+      "tags": [
+        "topic:out_of_corpus",
+        "population:week_traffic"
+      ]
+    },
+    {
+      "trace_id": "tr_440a391b6301",
+      "ts_utc": "2026-09-05T15:01:37.682+00:00",
+      "question": "Does the named storm deductible stack with the all-peril deductible?",
+      "tags": [
+        "topic:storm",
+        "population:week_traffic"
+      ]
+    },
+    {
+      "trace_id": "tr_148357fb79c3",
+      "ts_utc": "2026-09-05T14:59:22.349+00:00",
+      "question": "What is the NFIP flood policy limit for a single family dwelling?",
+      "tags": [
+        "topic:out_of_corpus",
+        "population:week_traffic"
+      ]
+    },
+    {
+      "trace_id": "tr_e2ea5198b3b4",
+      "ts_utc": "2026-09-05T14:58:59.212+00:00",
+      "question": "What does exclusion E-31 say?",
+      "tags": [
+        "topic:scheduled",
+        "population:week_traffic"
+      ]
+    },
+    {
+      "trace_id": "tr_aed27ca5c15a",
+      "ts_utc": "2026-09-05T15:10:43.853+00:00",
+      "question": "The insured found the leak eleven days after it started. Is that still sudden and accidental?",
+      "tags": [
+        "topic:water",
+        "population:week_traffic"
+      ]
+    },
+    {
+      "trace_id": "tr_937f21bc8667",
+      "ts_utc": "2026-09-05T15:00:27.028+00:00",
+      "question": "The mold was present before the policy started. Which exclusion applies?",
+      "tags": [
+        "topic:mold",
+        "population:week_traffic"
+      ]
+    },
+    {
+      "trace_id": "tr_5741e53e8591",
+      "ts_utc": "2026-09-05T15:01:55.817+00:00",
+      "question": "Is business inventory stored in the garage covered?",
+      "tags": [
+        "topic:business",
+        "population:week_traffic"
+      ]
+    },
+    {
+      "trace_id": "tr_86e13c9d80bc",
+      "ts_utc": "2026-09-05T15:03:31.901+00:00",
+      "question": "E-22 appears in two of our endorsements. What does each one exclude?",
+      "tags": [
+        "topic:cross_form",
+        "population:week_traffic"
+      ]
+    },
+    {
+      "trace_id": "tr_1838e4f935f5",
+      "ts_utc": "2026-09-05T15:14:31.902+00:00",
+      "question": "What does exclusion E-25 say?",
+      "tags": [
+        "topic:mold",
+        "population:week_traffic"
+      ]
+    },
+    {
+      "trace_id": "tr_f8f386127038",
+      "ts_utc": "2026-09-05T15:10:21.089+00:00",
+      "question": "Does E-23 under HO-0306 exclude dry rot as well as wet rot?",
+      "tags": [
+        "topic:mold",
+        "population:week_traffic"
+      ]
+    },
+    {
+      "trace_id": "tr_e662da046c70",
+      "ts_utc": "2026-09-05T15:09:44.991+00:00",
+      "question": "What is exclusion E-11 and how many days of leakage triggers it?",
+      "tags": [
+        "topic:water",
+        "population:week_traffic"
+      ]
+    },
+    {
+      "trace_id": "tr_cf7a87e727de",
+      "ts_utc": "2026-09-05T15:10:55.073+00:00",
+      "question": "Is a pipe under the slab considered a supply line under HO-0304?",
+      "tags": [
+        "topic:water",
+        "population:week_traffic"
+      ]
+    },
+    {
+      "trace_id": "tr_37af7381d522",
+      "ts_utc": "2026-09-05T15:10:33.806+00:00",
+      "question": "Are electronic data and software included in the $2,500 sublimit?",
+      "tags": [
+        "topic:business",
+        "population:week_traffic"
+      ]
+    },
+    {
+      "trace_id": "tr_0e21144d6d39",
+      "ts_utc": "2026-09-05T15:04:59.531+00:00",
+      "question": "When did HO-0305 become effective?",
+      "tags": [
+        "topic:storm",
+        "population:week_traffic"
+      ]
+    },
+    {
+      "trace_id": "tr_4cfbcfbbec32",
+      "ts_utc": "2026-09-05T15:07:36.331+00:00",
+      "question": "Coverage A is $300,000. What is the named storm deductible?",
+      "tags": [
+        "topic:storm",
+        "population:week_traffic"
+      ]
+    },
+    {
+      "trace_id": "tr_34227f724cb5",
+      "ts_utc": "2026-09-05T14:58:29.951+00:00",
+      "question": "Is the E-17 row an exclusion or a confirmation of coverage?",
+      "tags": [
+        "topic:water",
+        "population:week_traffic"
+      ]
+    },
+    {
+      "trace_id": "tr_1a7c8f8f738b",
+      "ts_utc": "2026-09-05T15:08:57.397+00:00",
+      "question": "If the washing machine hose overflowed and the machine is 18 years old, is it covered?",
+      "tags": [
+        "topic:water",
+        "population:week_traffic"
+      ]
+    },
+    {
+      "trace_id": "tr_1033eb8e542c",
+      "ts_utc": "2026-09-05T15:13:57.223+00:00",
+      "question": "Does the 72 hour reporting requirement apply to all water claims under this form?",
+      "tags": [
+        "topic:water",
+        "population:week_traffic"
+      ]
+    },
+    {
+      "trace_id": "tr_a79da2f07b09",
+      "ts_utc": "2026-09-05T15:06:43.680+00:00",
+      "question": "Which authority has to name the storm for the deductible to apply?",
+      "tags": [
+        "topic:storm",
+        "population:week_traffic"
+      ]
+    },
+    {
+      "trace_id": "tr_36d865b6f3ae",
+      "ts_utc": "2026-09-05T15:06:24.530+00:00",
+      "question": "Does the 72 hour reporting rule in HO-0304 also govern the mold sublimit in HO-0306?",
+      "tags": [
+        "topic:cross_form",
+        "population:week_traffic"
+      ]
+    }
+  ],
+  "sampling_frame": {
+    "frame": "completed",
+    "frame_rule": "traces whose provider call returned a completion",
+    "log_size": 130,
+    "frame_size": 106,
+    "excluded": 24,
+    "excluded_reasons": {
+      "RateLimitError": 24
+    },
+    "exclusion_is_content_blind": true,
+    "topic_mix_log_pct": {
+      "business": 12.3,
+      "cross_form": 9.2,
+      "earth": 13.8,
+      "mold": 13.8,
+      "out_of_corpus": 7.7,
+      "scheduled": 12.3,
+      "storm": 13.8,
+      "water": 16.9
+    },
+    "topic_mix_frame_pct": {
+      "business": 12.3,
+      "cross_form": 10.4,
+      "earth": 14.2,
+      "mold": 14.2,
+      "out_of_corpus": 6.6,
+      "scheduled": 13.2,
+      "storm": 12.3,
+      "water": 17.0
+    }
+  }
+}

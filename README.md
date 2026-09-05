@@ -63,6 +63,11 @@ python src/ingest.py
 | `python src/evaluate_w4.py --strategy both` | Runs the 12-question golden set against vector-only and hybrid retrieval, prints hit-rate@3, p50/p90 latency, failure labels and a before/after table. No API key needed. |
 | `python run_all.py` | Full pipeline: re-ingest, evaluate both chunkers on 8 known-answer questions, metadata-filter demo, 3 cited answers, 3 forced refusals. Writes `results.md`. Needs the API key. |
 | `python src/hybrid_retrieval.py` | Smoke-test hybrid search on three sample queries. |
+| `python run_week.py` | Runs the whole week of adjuster traffic (130 questions) through the claims assistant and appends one trace per question to `traces/traces.jsonl`. `--demo` runs the 10 curated review claims into a separate log; `--retry-errors` re-issues only the calls the provider rejected. |
+| `python src/sample_traces.py --seed 20260905 --n 20` | Draws a seeded, reproducible random sample and writes `error_analysis/sample_seed_<seed>.json`. |
+| `python src/render_traces.py --sample <file> --with-chunks` | Renders traces for reading: question, retrieved chunks, the chunk text the model saw, and the raw output. |
+| `python src/replay.py --trace-id tr_xxxx` | Rebuilds one request from its trace alone and prints original vs replayed output. |
+| `python tests/test_redaction_before_write.py` | Proves claimant identifiers are scrubbed before the trace is written, and that the writer refuses a leaking line. |
 
 ---
 
@@ -108,6 +113,36 @@ and `E-15` in embedding space because they share the same table context. BM25
 weights rare exact tokens heavily. Fusing both rank lists fixes the exact-token
 misses that vector-only retrieval produced on the golden set.
 
+### Tracing
+
+Every claim question the assistant handles appends one JSON object to
+`traces/traces.jsonl`. The trace is designed so a request can be rebuilt from
+the line alone, months later, with no access to the process that produced it:
+
+| Field | Why it is there |
+|---|---|
+| `prompt.version` + `system_sha256` + `user_template_sha256` | Resolves back to the exact wording through `src/prompts.py`. The hash detects a prompt edited in place. |
+| `retrieval.chunks[]` | Per chunk: `rank`, `chunk_id`, fused `score`, `vector_rank`, `bm25_rank`, `form_number`, `edition_date`, `clause_id`. |
+| `retrieval.mode` / `rrf_k` / candidate counts | The retrieval parameters that produced that ranking. |
+| `model` | Provider, model name, temperature, top_p, max_tokens, seed, finish reason, token usage. |
+| `output.raw` | The completion before any parsing, plus the chunk_ids it cited. |
+| `index_fingerprint` | SHA-256 over every chunk_id and chunk text in the collection, so a re-ingest that changes the corpus is detectable at replay time instead of silently producing different context. |
+| `error` | Set when the provider call failed. Failed calls are traced too — a log that only records successes understates the failure modes error analysis exists to find. |
+
+### Redaction happens before the write, not after
+
+`TraceRecord.build` runs `src/redaction.py` over the question, loss summary,
+claim number and model output while the record is still in memory.
+`TraceWriter.write` then re-checks the serialised line and **raises rather than
+appends** if any identifier survived. There is deliberately no code path that
+writes a dirty line and cleans the log later.
+
+Identifiers become stable pseudonyms rather than blanks —
+`Margaret Whitfield` → `[CLAIMANT:89cd2c]`, via HMAC-SHA256 under a salt held in
+`POLICYLENS_REDACTION_SALT`. The same person gets the same token in every trace,
+so error analysis can still ask "did this claimant recur?" without the log ever
+holding a name. `python tests/test_redaction_before_write.py` is the evidence.
+
 ---
 
 ## Project layout
@@ -135,7 +170,20 @@ misses that vector-only retrieval produced on the golden set.
     ├── hybrid_retrieval.py    BM25 + vector + RRF
     ├── generation.py          Groq client, grounding prompt, refusal detection
     ├── evaluate.py            8-question chunker comparison
-    └── evaluate_w4.py         golden-set hit-rate@3 + failure labelling
+    ├── evaluate_w4.py         golden-set hit-rate@3 + failure labelling
+    ├── prompts.py             versioned prompt registry (append-only)
+    ├── redaction.py           pre-write identifier scrubbing + leak assertion
+    ├── tracing.py             trace schema, index fingerprint, append-only writer
+    ├── claims_agent.py        retrieve → generate → trace, one call per question
+    ├── sample_traces.py       seeded, fingerprinted random sample
+    ├── render_traces.py       human-readable rendering for open-coding
+    └── replay.py              rebuild one request from its trace alone
+
+run_week.py                    drives a week of adjuster traffic into the log
+traffic/week_traffic.py        the 130-question population + the 10-claim demo set
+tests/                         redaction-before-write evidence
+traces/traces.jsonl            the week's log — one JSON object per question
+error_analysis/                seeded sample, notes.md, taxonomy.md, prediction
 ```
 
 `chroma_db/`, `.venv/`, `.env` and `__pycache__/` are git-ignored and created locally.
@@ -166,6 +214,27 @@ misses that vector-only retrieval produced on the golden set.
   `export GROQ_API_KEY=gsk_...` (bash).
 - **First run is slow** — the `all-MiniLM-L6-v2` embedding model is downloaded
   once (~90 MB) and cached by Hugging Face.
+
+## Week 5 — error analysis deliverables
+
+Everything for the trace-reading exercise is in [`error_analysis/`](error_analysis/):
+
+| File | What is in it |
+|---|---|
+| `taxonomy.md` | Five named failure modes over the 20 sampled traces, each with count, percent, severity and an example trace_id. One screen. |
+| `notes.md` | The 20 verbatim open-coding sentences, the seeded draw and its population fingerprint, the sampling frame, the replay evidence, the redaction evidence, and the benchmark note. |
+| `prediction.md` | The dated falsifiable prediction, committed at `8a8d92a` on 2026-09-05 before any fix. |
+| `bonus_demo_set.md` | The same five modes applied to the ten monthly-review demo claims, and the two frequencies side by side. |
+| `sample_seed_20260905.json` | The draw itself: seed, frame, fingerprint, method, the 20 ids. |
+| `replay_tr_e662da046c70.{txt,json}` | One request rebuilt from its trace alone, original against replayed. |
+
+Reproduce the draw:
+
+```powershell
+python src/sample_traces.py --seed 20260905 --n 20
+```
+
+---
 
 ## Scope
 
