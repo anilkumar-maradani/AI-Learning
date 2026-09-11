@@ -1,0 +1,127 @@
+[
+  {
+    "id": 1,
+    "human_label": "PASS",
+    "notes": "Looks good."
+  },
+  {
+    "id": 2,
+    "human_label": "PASS",
+    "notes": "Looks good."
+  },
+  {
+    "id": 3,
+    "human_label": "FAIL",
+    "notes": "Tone is slightly too informal."
+  },
+  {
+    "id": 4,
+    "human_label": "PASS",
+    "notes": "Looks good."
+  },
+  {
+    "id": 5,
+    "human_label": "PASS",
+    "notes": "Looks good."
+  },
+  {
+    "id": 6,
+    "human_label": "PASS",
+    "notes": "Looks good."
+  },
+  {
+    "id": 7,
+    "human_label": "PASS",
+    "notes": "Looks good."
+  },
+  {
+    "id": 8,
+    "human_label": "FAIL",
+    "notes": "Missed specifying the exact number of days for the leak."
+  },
+  {
+    "id": 9,
+    "human_label": "PASS",
+    "notes": "Looks good."
+  },
+  {
+    "id": 10,
+    "human_label": "PASS",
+    "notes": "Looks good."
+  },
+  {
+    "id": 11,
+    "human_label": "PASS",
+    "notes": "Looks good."
+  },
+  {
+    "id": 12,
+    "human_label": "PASS",
+    "notes": "Looks good."
+  },
+  {
+    "id": 13,
+    "human_label": "FAIL",
+    "notes": "Summary is incomplete or empty."
+  },
+  {
+    "id": 14,
+    "human_label": "PASS",
+    "notes": "Looks good."
+  },
+  {
+    "id": 15,
+    "human_label": "PASS",
+    "notes": "Looks good."
+  },
+  {
+    "id": 16,
+    "human_label": "PASS",
+    "notes": "Looks good."
+  },
+  {
+    "id": 17,
+    "human_label": "PASS",
+    "notes": "Looks good."
+  },
+  {
+    "id": 18,
+    "human_label": "PASS",
+    "notes": "Looks good."
+  },
+  {
+    "id": 19,
+    "human_label": "PASS",
+    "notes": "Looks good."
+  },
+  {
+    "id": 20,
+    "human_label": "PASS",
+    "notes": "Looks good."
+  },
+  {
+    "id": 21,
+    "human_label": "FAIL",
+    "notes": "Summary is incomplete or empty."
+  },
+  {
+    "id": 22,
+    "human_label": "PASS",
+    "notes": "Looks good."
+  },
+  {
+    "id": 23,
+    "human_label": "PASS",
+    "notes": "Looks good."
+  },
+  {
+    "id": 24,
+    "human_label": "FAIL",
+    "notes": "Summary is incomplete or empty."
+  },
+  {
+    "id": 25,
+    "human_label": "PASS",
+    "notes": "Looks good."
+  }
+]

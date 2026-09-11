@@ -1,0 +1,1 @@
+I predict that separating deterministic assertions from subjective LLM evaluation will increase human-judge agreement by at least 15 percentage points and eliminate false failures caused by formatting quirks.

@@ -1,0 +1,1350 @@
+{
+  "assertion_results": [
+    {
+      "id": 1,
+      "mode": "notes-summarisation",
+      "assertions": [
+        {
+          "assertion": "claim_number_format",
+          "passed": true,
+          "expected": "CLM-2024-10001",
+          "found": [
+            "CLM-2024-10001"
+          ],
+          "reason": "Found CLM-2024-10001 in summary"
+        },
+        {
+          "assertion": "date_of_loss_parseable",
+          "passed": true,
+          "expected": "2024-03-15",
+          "found_dates": [
+            "2024-03-15"
+          ],
+          "reason": "Parseable date found in summary"
+        },
+        {
+          "assertion": "excess_amount_numeric",
+          "passed": true,
+          "expected": 1500.0,
+          "found_amounts": [
+            "$2,800",
+            "$1,950",
+            "$1,400",
+            "$1,500"
+          ],
+          "reason": "Excess amount 1500.0 found as numeric value"
+        },
+        {
+          "assertion": "exclusion_id_cited",
+          "passed": true,
+          "reason": "No denial stated — assertion not applicable"
+        }
+      ],
+      "all_passed": true
+    },
+    {
+      "id": 2,
+      "mode": "notes-summarisation",
+      "assertions": [
+        {
+          "assertion": "claim_number_format",
+          "passed": true,
+          "expected": "CLM-2024-10002",
+          "found": [
+            "CLM-2024-10002"
+          ],
+          "reason": "Found CLM-2024-10002 in summary"
+        },
+        {
+          "assertion": "date_of_loss_parseable",
+          "passed": true,
+          "expected": "2024-04-22",
+          "found_dates": [
+            "2024-04-22"
+          ],
+          "reason": "Parseable date found in summary"
+        },
+        {
+          "assertion": "excess_amount_numeric",
+          "passed": true,
+          "expected": 5000.0,
+          "found_amounts": [
+            "$18,500.",
+            "$5,000"
+          ],
+          "reason": "Excess amount 5000.0 found as numeric value"
+        },
+        {
+          "assertion": "exclusion_id_cited",
+          "passed": true,
+          "reason": "No denial stated — assertion not applicable"
+        }
+      ],
+      "all_passed": true
+    },
+    {
+      "id": 3,
+      "mode": "notes-summarisation",
+      "assertions": [
+        {
+          "assertion": "claim_number_format",
+          "passed": true,
+          "expected": "CLM-2024-10003",
+          "found": [
+            "CLM-2024-10003"
+          ],
+          "reason": "Found CLM-2024-10003 in summary"
+        },
+        {
+          "assertion": "date_of_loss_parseable",
+          "passed": true,
+          "expected": "2024-05-10",
+          "found_dates": [
+            "2024-05-10"
+          ],
+          "reason": "Parseable date found in summary"
+        },
+        {
+          "assertion": "excess_amount_numeric",
+          "passed": true,
+          "expected": 1000.0,
+          "found_amounts": [
+            "$1,000"
+          ],
+          "reason": "Excess amount 1000.0 found as numeric value"
+        },
+        {
+          "assertion": "exclusion_id_cited",
+          "passed": true,
+          "reason": "No denial stated — assertion not applicable"
+        }
+      ],
+      "all_passed": true
+    },
+    {
+      "id": 4,
+      "mode": "notes-summarisation",
+      "assertions": [
+        {
+          "assertion": "claim_number_format",
+          "passed": true,
+          "expected": "CLM-2024-10004",
+          "found": [
+            "CLM-2024-10004"
+          ],
+          "reason": "Found CLM-2024-10004 in summary"
+        },
+        {
+          "assertion": "date_of_loss_parseable",
+          "passed": true,
+          "expected": "2024-06-03",
+          "found_dates": [
+            "2024-06-03"
+          ],
+          "reason": "Parseable date found in summary"
+        },
+        {
+          "assertion": "excess_amount_numeric",
+          "passed": true,
+          "expected": 1500.0,
+          "found_amounts": [
+            "$9,700.",
+            "$1,500"
+          ],
+          "reason": "Excess amount 1500.0 found as numeric value"
+        },
+        {
+          "assertion": "exclusion_id_cited",
+          "passed": true,
+          "reason": "No denial stated — assertion not applicable"
+        }
+      ],
+      "all_passed": true
+    },
+    {
+      "id": 5,
+      "mode": "notes-summarisation",
+      "assertions": [
+        {
+          "assertion": "claim_number_format",
+          "passed": true,
+          "expected": "CLM-2024-10005",
+          "found": [
+            "CLM-2024-10005"
+          ],
+          "reason": "Found CLM-2024-10005 in summary"
+        },
+        {
+          "assertion": "date_of_loss_parseable",
+          "passed": true,
+          "expected": "2024-07-14",
+          "found_dates": [
+            "2024-07-14"
+          ],
+          "reason": "Parseable date found in summary"
+        },
+        {
+          "assertion": "excess_amount_numeric",
+          "passed": true,
+          "expected": 1500.0,
+          "found_amounts": [
+            "$3,400",
+            "$1,500"
+          ],
+          "reason": "Excess amount 1500.0 found as numeric value"
+        },
+        {
+          "assertion": "exclusion_id_cited",
+          "passed": true,
+          "reason": "No denial stated — assertion not applicable"
+        }
+      ],
+      "all_passed": true
+    },
+    {
+      "id": 6,
+      "mode": "notes-summarisation",
+      "assertions": [
+        {
+          "assertion": "claim_number_format",
+          "passed": true,
+          "expected": "CLM-2024-10006",
+          "found": [
+            "CLM-2024-10006"
+          ],
+          "reason": "Found CLM-2024-10006 in summary"
+        },
+        {
+          "assertion": "date_of_loss_parseable",
+          "passed": true,
+          "expected": "2024-03-28",
+          "found_dates": [
+            "2024-03-28"
+          ],
+          "reason": "Parseable date found in summary"
+        },
+        {
+          "assertion": "excess_amount_numeric",
+          "passed": true,
+          "expected": 1000.0,
+          "found_amounts": [
+            "$800.",
+            "$1,000"
+          ],
+          "reason": "Excess amount 1000.0 found as numeric value"
+        },
+        {
+          "assertion": "exclusion_id_cited",
+          "passed": true,
+          "reason": "No denial stated — assertion not applicable"
+        }
+      ],
+      "all_passed": true
+    },
+    {
+      "id": 7,
+      "mode": "notes-summarisation",
+      "assertions": [
+        {
+          "assertion": "claim_number_format",
+          "passed": true,
+          "expected": "CLM-2024-10007",
+          "found": [
+            "CLM-2024-10007"
+          ],
+          "reason": "Found CLM-2024-10007 in summary"
+        },
+        {
+          "assertion": "date_of_loss_parseable",
+          "passed": true,
+          "expected": "2024-08-05",
+          "found_dates": [
+            "2024-08-05"
+          ],
+          "reason": "Parseable date found in summary"
+        },
+        {
+          "assertion": "excess_amount_numeric",
+          "passed": false,
+          "expected": 8000.0,
+          "found_amounts": [
+            "$22,000."
+          ],
+          "reason": "Expected 8000.0, found: ['$22,000.']"
+        },
+        {
+          "assertion": "exclusion_id_cited",
+          "passed": true,
+          "reason": "No denial stated — assertion not applicable"
+        }
+      ],
+      "all_passed": false
+    },
+    {
+      "id": 8,
+      "mode": "notes-summarisation",
+      "assertions": [
+        {
+          "assertion": "claim_number_format",
+          "passed": true,
+          "expected": "CLM-2024-10008",
+          "found": [
+            "CLM-2024-10008"
+          ],
+          "reason": "Found CLM-2024-10008 in summary"
+        },
+        {
+          "assertion": "date_of_loss_parseable",
+          "passed": true,
+          "expected": "2024-09-12",
+          "found_dates": [
+            "2024-09-12"
+          ],
+          "reason": "Parseable date found in summary"
+        },
+        {
+          "assertion": "excess_amount_numeric",
+          "passed": true,
+          "expected": 1500.0,
+          "found_amounts": [
+            "$7,200",
+            "$3,100",
+            "$1,500"
+          ],
+          "reason": "Excess amount 1500.0 found as numeric value"
+        },
+        {
+          "assertion": "exclusion_id_cited",
+          "passed": true,
+          "reason": "No denial stated — assertion not applicable"
+        }
+      ],
+      "all_passed": true
+    },
+    {
+      "id": 9,
+      "mode": "exclusion-citation",
+      "assertions": [
+        {
+          "assertion": "claim_number_format",
+          "passed": true,
+          "expected": "CLM-2024-10009",
+          "found": [
+            "CLM-2024-10009"
+          ],
+          "reason": "Found CLM-2024-10009 in summary"
+        },
+        {
+          "assertion": "date_of_loss_parseable",
+          "passed": true,
+          "expected": "2024-04-17",
+          "found_dates": [
+            "2024-04-17"
+          ],
+          "reason": "Parseable date found in summary"
+        },
+        {
+          "assertion": "excess_amount_numeric",
+          "passed": true,
+          "expected": null,
+          "reason": "No excess amount expected for this case (N/A)"
+        },
+        {
+          "assertion": "exclusion_id_cited",
+          "passed": true,
+          "expected_exclusion": "E-26",
+          "found_exclusions": [
+            "E-26"
+          ],
+          "reason": "Exclusion E-26 cited in summary"
+        }
+      ],
+      "all_passed": true
+    },
+    {
+      "id": 10,
+      "mode": "exclusion-citation",
+      "assertions": [
+        {
+          "assertion": "claim_number_format",
+          "passed": true,
+          "expected": "CLM-2024-10010",
+          "found": [
+            "CLM-2024-10010"
+          ],
+          "reason": "Found CLM-2024-10010 in summary"
+        },
+        {
+          "assertion": "date_of_loss_parseable",
+          "passed": true,
+          "expected": "2024-06-20",
+          "found_dates": [
+            "2024-06-20"
+          ],
+          "reason": "Parseable date found in summary"
+        },
+        {
+          "assertion": "excess_amount_numeric",
+          "passed": true,
+          "expected": null,
+          "reason": "No excess amount expected for this case (N/A)"
+        },
+        {
+          "assertion": "exclusion_id_cited",
+          "passed": false,
+          "expected_exclusion": "E-19",
+          "found_exclusions": [],
+          "reason": "Denial stated but E-19 not cited (found: none)"
+        }
+      ],
+      "all_passed": false
+    },
+    {
+      "id": 11,
+      "mode": "exclusion-citation",
+      "assertions": [
+        {
+          "assertion": "claim_number_format",
+          "passed": true,
+          "expected": "CLM-2024-10011",
+          "found": [
+            "CLM-2024-10011"
+          ],
+          "reason": "Found CLM-2024-10011 in summary"
+        },
+        {
+          "assertion": "date_of_loss_parseable",
+          "passed": true,
+          "expected": "2024-07-30",
+          "found_dates": [
+            "2024-07-30"
+          ],
+          "reason": "Parseable date found in summary"
+        },
+        {
+          "assertion": "excess_amount_numeric",
+          "passed": true,
+          "expected": null,
+          "reason": "No excess amount expected for this case (N/A)"
+        },
+        {
+          "assertion": "exclusion_id_cited",
+          "passed": false,
+          "expected_exclusion": "E-34",
+          "found_exclusions": [],
+          "reason": "Denial stated but E-34 not cited (found: none)"
+        }
+      ],
+      "all_passed": false
+    },
+    {
+      "id": 12,
+      "mode": "exclusion-citation",
+      "assertions": [
+        {
+          "assertion": "claim_number_format",
+          "passed": true,
+          "expected": "CLM-2024-10012",
+          "found": [
+            "CLM-2024-10012"
+          ],
+          "reason": "Found CLM-2024-10012 in summary"
+        },
+        {
+          "assertion": "date_of_loss_parseable",
+          "passed": true,
+          "expected": "2024-05-25",
+          "found_dates": [
+            "2024-05-25"
+          ],
+          "reason": "Parseable date found in summary"
+        },
+        {
+          "assertion": "excess_amount_numeric",
+          "passed": true,
+          "expected": null,
+          "reason": "No excess amount expected for this case (N/A)"
+        },
+        {
+          "assertion": "exclusion_id_cited",
+          "passed": false,
+          "expected_exclusion": "E-35",
+          "found_exclusions": [],
+          "reason": "Denial stated but E-35 not cited (found: none)"
+        }
+      ],
+      "all_passed": false
+    },
+    {
+      "id": 13,
+      "mode": "exclusion-citation",
+      "assertions": [
+        {
+          "assertion": "claim_number_format",
+          "passed": false,
+          "expected": "CLM-2024-10013",
+          "found": [],
+          "reason": "Expected CLM-2024-10013, found: none"
+        },
+        {
+          "assertion": "date_of_loss_parseable",
+          "passed": false,
+          "expected": "2024-08-15",
+          "found_dates": [],
+          "reason": "No parseable date of loss found in summary"
+        },
+        {
+          "assertion": "excess_amount_numeric",
+          "passed": true,
+          "expected": null,
+          "reason": "No excess amount expected for this case (N/A)"
+        },
+        {
+          "assertion": "exclusion_id_cited",
+          "passed": false,
+          "expected_exclusion": "E-37",
+          "found_exclusions": [],
+          "reason": "Denial stated but E-37 not cited (found: none)"
+        }
+      ],
+      "all_passed": false
+    },
+    {
+      "id": 14,
+      "mode": "exclusion-citation",
+      "assertions": [
+        {
+          "assertion": "claim_number_format",
+          "passed": true,
+          "expected": "CLM-2024-10014",
+          "found": [
+            "CLM-2024-10014"
+          ],
+          "reason": "Found CLM-2024-10014 in summary"
+        },
+        {
+          "assertion": "date_of_loss_parseable",
+          "passed": true,
+          "expected": "2024-09-02",
+          "found_dates": [
+            "2024-09-02"
+          ],
+          "reason": "Parseable date found in summary"
+        },
+        {
+          "assertion": "excess_amount_numeric",
+          "passed": true,
+          "expected": null,
+          "reason": "No excess amount expected for this case (N/A)"
+        },
+        {
+          "assertion": "exclusion_id_cited",
+          "passed": true,
+          "expected_exclusion": "E-27",
+          "found_exclusions": [
+            "E-27"
+          ],
+          "reason": "Exclusion E-27 cited in summary"
+        }
+      ],
+      "all_passed": true
+    },
+    {
+      "id": 15,
+      "mode": "exclusion-citation",
+      "assertions": [
+        {
+          "assertion": "claim_number_format",
+          "passed": true,
+          "expected": "CLM-2024-10015",
+          "found": [
+            "CLM-2024-10015"
+          ],
+          "reason": "Found CLM-2024-10015 in summary"
+        },
+        {
+          "assertion": "date_of_loss_parseable",
+          "passed": true,
+          "expected": "2024-10-05",
+          "found_dates": [
+            "2024-10-05"
+          ],
+          "reason": "Parseable date found in summary"
+        },
+        {
+          "assertion": "excess_amount_numeric",
+          "passed": true,
+          "expected": null,
+          "reason": "No excess amount expected for this case (N/A)"
+        },
+        {
+          "assertion": "exclusion_id_cited",
+          "passed": true,
+          "expected_exclusion": "E-28",
+          "found_exclusions": [
+            "E-28"
+          ],
+          "reason": "Exclusion E-28 cited in summary"
+        }
+      ],
+      "all_passed": true
+    },
+    {
+      "id": 16,
+      "mode": "coverage-confirmation",
+      "assertions": [
+        {
+          "assertion": "claim_number_format",
+          "passed": true,
+          "expected": "CLM-2024-10016",
+          "found": [
+            "CLM-2024-10016"
+          ],
+          "reason": "Found CLM-2024-10016 in summary"
+        },
+        {
+          "assertion": "date_of_loss_parseable",
+          "passed": true,
+          "expected": "2024-03-20",
+          "found_dates": [
+            "2024-03-20"
+          ],
+          "reason": "Parseable date found in summary"
+        },
+        {
+          "assertion": "excess_amount_numeric",
+          "passed": false,
+          "expected": 1500.0,
+          "found_amounts": [
+            "$2,200",
+            "$1,100"
+          ],
+          "reason": "Expected 1500.0, found: ['$2,200', '$1,100']"
+        },
+        {
+          "assertion": "exclusion_id_cited",
+          "passed": true,
+          "reason": "No denial stated — assertion not applicable"
+        }
+      ],
+      "all_passed": false
+    },
+    {
+      "id": 17,
+      "mode": "coverage-confirmation",
+      "assertions": [
+        {
+          "assertion": "claim_number_format",
+          "passed": true,
+          "expected": "CLM-2024-10017",
+          "found": [
+            "CLM-2024-10017"
+          ],
+          "reason": "Found CLM-2024-10017 in summary"
+        },
+        {
+          "assertion": "date_of_loss_parseable",
+          "passed": true,
+          "expected": "2024-04-12",
+          "found_dates": [
+            "2024-04-12"
+          ],
+          "reason": "Parseable date found in summary"
+        },
+        {
+          "assertion": "excess_amount_numeric",
+          "passed": true,
+          "expected": null,
+          "reason": "No excess amount expected for this case (N/A)"
+        },
+        {
+          "assertion": "exclusion_id_cited",
+          "passed": true,
+          "reason": "No denial stated — assertion not applicable"
+        }
+      ],
+      "all_passed": true
+    },
+    {
+      "id": 18,
+      "mode": "coverage-confirmation",
+      "assertions": [
+        {
+          "assertion": "claim_number_format",
+          "passed": true,
+          "expected": "CLM-2024-10018",
+          "found": [
+            "CLM-2024-10018"
+          ],
+          "reason": "Found CLM-2024-10018 in summary"
+        },
+        {
+          "assertion": "date_of_loss_parseable",
+          "passed": true,
+          "expected": "2024-06-08",
+          "found_dates": [
+            "2024-06-08"
+          ],
+          "reason": "Parseable date found in summary"
+        },
+        {
+          "assertion": "excess_amount_numeric",
+          "passed": true,
+          "expected": 1000.0,
+          "found_amounts": [
+            "$5,800.",
+            "$1,000"
+          ],
+          "reason": "Excess amount 1000.0 found as numeric value"
+        },
+        {
+          "assertion": "exclusion_id_cited",
+          "passed": true,
+          "reason": "No denial stated — assertion not applicable"
+        }
+      ],
+      "all_passed": true
+    },
+    {
+      "id": 19,
+      "mode": "coverage-confirmation",
+      "assertions": [
+        {
+          "assertion": "claim_number_format",
+          "passed": true,
+          "expected": "CLM-2024-10019",
+          "found": [
+            "CLM-2024-10019"
+          ],
+          "reason": "Found CLM-2024-10019 in summary"
+        },
+        {
+          "assertion": "date_of_loss_parseable",
+          "passed": true,
+          "expected": "2024-07-22",
+          "found_dates": [
+            "2024-07-22"
+          ],
+          "reason": "Parseable date found in summary"
+        },
+        {
+          "assertion": "excess_amount_numeric",
+          "passed": false,
+          "expected": 1500.0,
+          "found_amounts": [],
+          "reason": "Expected 1500.0, found: none"
+        },
+        {
+          "assertion": "exclusion_id_cited",
+          "passed": true,
+          "reason": "No denial stated — assertion not applicable"
+        }
+      ],
+      "all_passed": false
+    },
+    {
+      "id": 20,
+      "mode": "coverage-confirmation",
+      "assertions": [
+        {
+          "assertion": "claim_number_format",
+          "passed": true,
+          "expected": "CLM-2024-10020",
+          "found": [
+            "CLM-2024-10020"
+          ],
+          "reason": "Found CLM-2024-10020 in summary"
+        },
+        {
+          "assertion": "date_of_loss_parseable",
+          "passed": true,
+          "expected": "2024-05-30",
+          "found_dates": [
+            "2024-05-30"
+          ],
+          "reason": "Parseable date found in summary"
+        },
+        {
+          "assertion": "excess_amount_numeric",
+          "passed": true,
+          "expected": 1000.0,
+          "found_amounts": [
+            "$2,100",
+            "$1,000"
+          ],
+          "reason": "Excess amount 1000.0 found as numeric value"
+        },
+        {
+          "assertion": "exclusion_id_cited",
+          "passed": true,
+          "reason": "No denial stated — assertion not applicable"
+        }
+      ],
+      "all_passed": true
+    },
+    {
+      "id": 21,
+      "mode": "excess-deductible",
+      "assertions": [
+        {
+          "assertion": "claim_number_format",
+          "passed": false,
+          "expected": "CLM-2024-10021",
+          "found": [],
+          "reason": "Expected CLM-2024-10021, found: none"
+        },
+        {
+          "assertion": "date_of_loss_parseable",
+          "passed": false,
+          "expected": "2024-08-19",
+          "found_dates": [],
+          "reason": "No parseable date of loss found in summary"
+        },
+        {
+          "assertion": "excess_amount_numeric",
+          "passed": false,
+          "expected": 6000.0,
+          "found_amounts": [],
+          "reason": "Expected 6000.0, found: none"
+        },
+        {
+          "assertion": "exclusion_id_cited",
+          "passed": true,
+          "reason": "No denial stated — assertion not applicable"
+        }
+      ],
+      "all_passed": false
+    },
+    {
+      "id": 22,
+      "mode": "excess-deductible",
+      "assertions": [
+        {
+          "assertion": "claim_number_format",
+          "passed": true,
+          "expected": "CLM-2024-10022",
+          "found": [
+            "CLM-2024-10022"
+          ],
+          "reason": "Found CLM-2024-10022 in summary"
+        },
+        {
+          "assertion": "date_of_loss_parseable",
+          "passed": true,
+          "expected": "2024-09-25",
+          "found_dates": [
+            "2024-09-25"
+          ],
+          "reason": "Parseable date found in summary"
+        },
+        {
+          "assertion": "excess_amount_numeric",
+          "passed": true,
+          "expected": 1500.0,
+          "found_amounts": [
+            "$4,800",
+            "$9,200.",
+            "$10,000",
+            "$1,500",
+            "$12,500",
+            "$14,000"
+          ],
+          "reason": "Excess amount 1500.0 found as numeric value"
+        },
+        {
+          "assertion": "exclusion_id_cited",
+          "passed": true,
+          "reason": "No denial stated — assertion not applicable"
+        }
+      ],
+      "all_passed": true
+    },
+    {
+      "id": 23,
+      "mode": "excess-deductible",
+      "assertions": [
+        {
+          "assertion": "claim_number_format",
+          "passed": true,
+          "expected": "CLM-2024-10023",
+          "found": [
+            "CLM-2024-10023"
+          ],
+          "reason": "Found CLM-2024-10023 in summary"
+        },
+        {
+          "assertion": "date_of_loss_parseable",
+          "passed": true,
+          "expected": "2024-10-15",
+          "found_dates": [
+            "2024-10-15"
+          ],
+          "reason": "Parseable date found in summary"
+        },
+        {
+          "assertion": "excess_amount_numeric",
+          "passed": true,
+          "expected": 5600.0,
+          "found_amounts": [
+            "$12,400.",
+            "$5,600",
+            "$5,000"
+          ],
+          "reason": "Excess amount 5600.0 found as numeric value"
+        },
+        {
+          "assertion": "exclusion_id_cited",
+          "passed": true,
+          "reason": "No denial stated — assertion not applicable"
+        }
+      ],
+      "all_passed": true
+    },
+    {
+      "id": 24,
+      "mode": "regression",
+      "assertions": [
+        {
+          "assertion": "claim_number_format",
+          "passed": true,
+          "expected": "CLM-2024-10024",
+          "found": [
+            "CLM-2024-10024"
+          ],
+          "reason": "Found CLM-2024-10024 in summary"
+        },
+        {
+          "assertion": "date_of_loss_parseable",
+          "passed": true,
+          "expected": "2024-06-20",
+          "found_dates": [
+            "2024-06-20"
+          ],
+          "reason": "Parseable date found in summary"
+        },
+        {
+          "assertion": "excess_amount_numeric",
+          "passed": true,
+          "expected": null,
+          "reason": "No excess amount expected for this case (N/A)"
+        },
+        {
+          "assertion": "exclusion_id_cited",
+          "passed": false,
+          "expected_exclusion": "E-19",
+          "found_exclusions": [],
+          "reason": "Denial stated but E-19 not cited (found: none)"
+        }
+      ],
+      "all_passed": false
+    },
+    {
+      "id": 25,
+      "mode": "regression",
+      "assertions": [
+        {
+          "assertion": "claim_number_format",
+          "passed": true,
+          "expected": "CLM-2024-10025",
+          "found": [
+            "CLM-2024-10025"
+          ],
+          "reason": "Found CLM-2024-10025 in summary"
+        },
+        {
+          "assertion": "date_of_loss_parseable",
+          "passed": true,
+          "expected": "2024-08-10",
+          "found_dates": [
+            "2024-08-10"
+          ],
+          "reason": "Parseable date found in summary"
+        },
+        {
+          "assertion": "excess_amount_numeric",
+          "passed": true,
+          "expected": null,
+          "reason": "No excess amount expected for this case (N/A)"
+        },
+        {
+          "assertion": "exclusion_id_cited",
+          "passed": true,
+          "expected_exclusion": "E-25",
+          "found_exclusions": [
+            "E-25"
+          ],
+          "reason": "Exclusion E-25 cited in summary"
+        }
+      ],
+      "all_passed": true
+    }
+  ],
+  "v1_verdicts": [
+    {
+      "verdict": "FAIL",
+      "raw": "FAIL: The summary adds a deductible amount and a coverage decision that are"
+    },
+    {
+      "verdict": "FAIL",
+      "raw": "FAIL: The summary adds a $5,000 deductible amount that is not present"
+    },
+    {
+      "verdict": "FAIL",
+      "raw": "FAIL: The summary adds a coverage decision and excess amount that are not stated in the adjuster notes, introducing information not supported by the original observations."
+    },
+    {
+      "verdict": "FAIL",
+      "raw": ""
+    },
+    {
+      "verdict": "FAIL",
+      "raw": ""
+    },
+    {
+      "verdict": "FAIL",
+      "raw": "FAIL: The summary adds a coverage decision of “COVERED"
+    },
+    {
+      "verdict": "FAIL",
+      "raw": ""
+    },
+    {
+      "verdict": "FAIL",
+      "raw": "FAIL: The summary adds a coverage decision of “COVERED” that is not present or implied in the adjuster notes, violating accuracy ("
+    },
+    {
+      "verdict": "PASS",
+      "raw": "PASS: The summary accurately reflects the adjuster notes, clearly states the denial decision with the appropriate exclusion, and is written in a professional claims‑adjusting tone."
+    },
+    {
+      "verdict": "FAIL",
+      "raw": ""
+    },
+    {
+      "verdict": "FAIL",
+      "raw": "FAIL: The summary does not state a clear coverage decision, leaving the coverage position ambiguous."
+    },
+    {
+      "verdict": "FAIL",
+      "raw": "FAIL: The summary invents a claim number not in the adjuster notes, omits all factual details and the coverage decision"
+    },
+    {
+      "verdict": "FAIL",
+      "raw": ""
+    },
+    {
+      "verdict": "FAIL",
+      "raw": ""
+    },
+    {
+      "verdict": "FAIL",
+      "raw": ""
+    },
+    {
+      "verdict": "FAIL",
+      "raw": ""
+    },
+    {
+      "verdict": "PASS",
+      "raw": "PASS: The summary accurately reflects the adjuster notes, clearly states the coverage as “COVERED,” and is written in a professional claims‑adjusting tone."
+    },
+    {
+      "verdict": "PASS",
+      "raw": "PASS: The summary faithfully reflects the adjuster notes, clearly states the coverage as “COVERED,”"
+    },
+    {
+      "verdict": "FAIL",
+      "raw": ""
+    },
+    {
+      "verdict": "FAIL",
+      "raw": "FAIL: The summary adds a coverage decision of “COVERED” that is not present or supported by the adjuster notes,"
+    },
+    {
+      "verdict": "FAIL",
+      "raw": "FAIL: The summary is empty and does not state the adjuster's clear coverage decision that the claim is not payable per E‑21."
+    },
+    {
+      "verdict": "PASS",
+      "raw": "PASS: The summary faithfully reflects the adjuster notes, clearly states the coverage as “COVERED,” and is written in a professional, claim‑appropriate tone."
+    },
+    {
+      "verdict": "FAIL",
+      "raw": ""
+    },
+    {
+      "verdict": "FAIL",
+      "raw": ""
+    },
+    {
+      "verdict": "FAIL",
+      "raw": ""
+    }
+  ],
+  "v2_verdicts": [
+    {
+      "verdict": "FAIL",
+      "raw": "FAIL: The summary adds information not found in the adjuster notes"
+    },
+    {
+      "verdict": "FAIL",
+      "raw": "FAIL: The summary adds a $5,000 deductible amount that is not stated in the adjuster notes, violating the accuracy criterion."
+    },
+    {
+      "verdict": "FAIL",
+      "raw": ""
+    },
+    {
+      "verdict": "FAIL",
+      "raw": ""
+    },
+    {
+      "verdict": "FAIL",
+      "raw": ""
+    },
+    {
+      "verdict": "FAIL",
+      "raw": ""
+    },
+    {
+      "verdict": "FAIL",
+      "raw": ""
+    },
+    {
+      "verdict": "FAIL",
+      "raw": ""
+    },
+    {
+      "verdict": "FAIL",
+      "raw": ""
+    },
+    {
+      "verdict": "FAIL",
+      "raw": "FAIL: The summary is incomplete, omits the required coverage decision despite the adjuster"
+    },
+    {
+      "verdict": "FAIL",
+      "raw": "FAIL: The summary omits a clear coverage decision (and other required sections), making it incomplete despite otherwise accurate loss description."
+    },
+    {
+      "verdict": "FAIL",
+      "raw": "FAIL: The summary omits a clear coverage decision despite the adjuster notes indicating the mudslide damage"
+    },
+    {
+      "verdict": "FAIL",
+      "raw": "FAIL: The summary is empty, providing no coverage decision or details from the adjuster notes, thus failing to convey a clear, accurate coverage position."
+    },
+    {
+      "verdict": "FAIL",
+      "raw": ""
+    },
+    {
+      "verdict": "FAIL",
+      "raw": ""
+    },
+    {
+      "verdict": "FAIL",
+      "raw": ""
+    },
+    {
+      "verdict": "FAIL",
+      "raw": ""
+    },
+    {
+      "verdict": "FAIL",
+      "raw": ""
+    },
+    {
+      "verdict": "FAIL",
+      "raw": ""
+    },
+    {
+      "verdict": "FAIL",
+      "raw": "FAIL: The summary adds a coverage decision of “COVERED” that is not stated or implied in the adjuster"
+    },
+    {
+      "verdict": "FAIL",
+      "raw": "FAIL: The summary is empty and does not state the coverage decision that the claim is not payable per E‑21, thus failing to"
+    },
+    {
+      "verdict": "FAIL",
+      "raw": ""
+    },
+    {
+      "verdict": "FAIL",
+      "raw": ""
+    },
+    {
+      "verdict": "FAIL",
+      "raw": ""
+    },
+    {
+      "verdict": "FAIL",
+      "raw": ""
+    }
+  ],
+  "agreement_v1": 36.0,
+  "agreement_v2": 20.0,
+  "disagreements": [
+    {
+      "id": 1,
+      "mode": "notes-summarisation",
+      "human_label": "PASS",
+      "human_notes": "Looks good.",
+      "judge_verdict": "FAIL",
+      "judge_reason": "FAIL: The summary adds a deductible amount and a coverage decision that are",
+      "adjuster_notes": "Site visit 2024-03-15. Kitchen flooding from burst copper supply line beneath sink. Pipe age approximately 30 years, original installation. No prior water claims on file. Damage assessment: drywall replacement $2,800, cabinet refacing $1,950, flooring $1,400. Policyholder cooperative, photos taken.",
+      "summary": "**Claim Number:** CLM-2024-10001  \n**Date of Loss:** 2024-03-15  \n**Loss Description:** Burst copper supply line beneath kitchen sink caused flooding; damage includes drywall ($2,800), cabinet refacing ($1,950), and flooring ($1,400).  \n**Coverage Decision:** COVERED  \n**Excess/Deductible:** $1,500  \n**Policy Form/Clause:** Not specified in the notes."
+    },
+    {
+      "id": 2,
+      "mode": "notes-summarisation",
+      "human_label": "PASS",
+      "human_notes": "Looks good.",
+      "judge_verdict": "FAIL",
+      "judge_reason": "FAIL: The summary adds a $5,000 deductible amount that is not present",
+      "adjuster_notes": "Inspection conducted 2024-04-22. Roof shingles stripped by Hurricane Idalia remnants. NHC designated storm. Wind speed recorded at 78 mph local station. Structural damage to south-facing dormer. Temporary tarp placed. Estimate for full reroof: $18,500. Named storm deductible applies per HO-0305.",
+      "summary": "**Claim Number:** CLM-2024-10002  \n**Date of Loss:** 2024-04-22  \n**Loss Description:** Roof shingles were stripped from the south‑facing dormer by the remnants of Hurricane Idalia (NHC‑designated storm) with recorded winds of 78 mph. A temporary tarp was installed; estimated cost to replace the roof is $18,500.  \n**Coverage Decision:** COVERED  \n**Deductible/Excess:** $5,000 (named‑storm deductible per policy form HO‑0305)  \n**Policy Reference:** HO‑0305, storm‑deductible clause."
+    },
+    {
+      "id": 4,
+      "mode": "notes-summarisation",
+      "human_label": "PASS",
+      "human_notes": "Looks good.",
+      "judge_verdict": "FAIL",
+      "judge_reason": "",
+      "adjuster_notes": "Loss reported 2024-06-03. Automatic fire sprinkler head activated accidentally during attic renovation, discharged water for approximately 45 minutes before shut-off valve located. Water damage to second floor bedrooms and stairwell. No fire present. Contractor estimates $9,700 in water damage restoration.",
+      "summary": "**Claim Number:** CLM-2024-10004  \n**Date of Loss:** 2024-06-03  \n\n**Loss Description:** During an attic renovation, an automatic fire‑sprinkler head was inadvertently activated. Water discharged for approximately 45 minutes before the shut‑off valve was located, causing water damage to second‑floor bedrooms and the stairwell. No fire occurred. Contractor estimates restoration costs at $9,700.  \n\n**Coverage Decision:** COVERED  \n\n**Excess/Deductible:** $1,500 (excess)  \n\n**Policy Reference:** Not specified in the provided notes."
+    },
+    {
+      "id": 5,
+      "mode": "notes-summarisation",
+      "human_label": "PASS",
+      "human_notes": "Looks good.",
+      "judge_verdict": "FAIL",
+      "judge_reason": "",
+      "adjuster_notes": "Adjuster notes 2024-07-14. Washing machine overflow in laundry room. Appliance is 18 years old, no service records available. Water spread to adjacent hallway and living room carpet. Estimated damage $3,400 for carpet replacement and baseboard repair. Policy shows Coverage A limit $350,000.",
+      "summary": "**Claim Number:** CLM-2024-10005  \n**Date of Loss:** 2024-07-14  \n**Loss Description:** Washing machine overflow in the laundry room released water onto the adjacent hallway and living‑room carpet, damaging carpet and baseboards (estimated repair cost $3,400).  \n**Coverage Decision:** COVERED  \n**Excess/Deductible:** $1,500  \n**Policy Reference:** HO‑3 form, Coverage"
+    },
+    {
+      "id": 6,
+      "mode": "notes-summarisation",
+      "human_label": "PASS",
+      "human_notes": "Looks good.",
+      "judge_verdict": "FAIL",
+      "judge_reason": "FAIL: The summary adds a coverage decision of “COVERED",
+      "adjuster_notes": "Investigation 2024-03-28. Policyholder reports burst pipe in guest bathroom wall. Turned out to be main service entry pipe outside the dwelling footprint. Water entered through foundation wall. Plumber repaired external section. Interior damage minimal — $800 drywall patch.",
+      "summary": "**Claim Number:** CLM-2024-10006  \n**Date of Loss:** 2024-03-28  \n\n**Loss Description:** Burst pipe located in the guest bathroom wall was traced to the main service entry pipe outside the dwelling’s footprint. Water entered through the foundation wall; interior damage limited to a drywall patch costing approximately $800.  \n\n**Coverage Decision:** COVERED  \n**Excess/Deductible:** $1,000 (excess amount)  \n\nNo exclusion clause applies."
+    },
+    {
+      "id": 7,
+      "mode": "notes-summarisation",
+      "human_label": "PASS",
+      "human_notes": "Looks good.",
+      "judge_verdict": "FAIL",
+      "judge_reason": "",
+      "adjuster_notes": "Visit 2024-08-05. Heavy rain followed by Category 2 hurricane. Insured filed for roof and siding repairs. Total estimate $22,000. However, pre-storm inspection photos from March show existing shingle lifting on north face. North-face damage $6,000 of total. Coverage A $400,000, so named storm deductible is $8,000 (2%). Recommend separating pre-existing from storm damage.",
+      "summary": "**Claim Number:** CLM-2024-10007  \n**Date of Loss:** 2024-08-05  \n\n**Loss Description:** Heavy rain followed by a Category 2 hurricane caused roof and siding damage. Total repair estimate is $22,000. Pre‑storm inspection photos ("
+    },
+    {
+      "id": 10,
+      "mode": "exclusion-citation",
+      "human_label": "PASS",
+      "human_notes": "Looks good.",
+      "judge_verdict": "FAIL",
+      "judge_reason": "",
+      "adjuster_notes": "Review 2024-06-20. Insured operates a licensed massage therapy practice from home studio, 25+ clients per week. Client fell on wet floor in hallway, filed bodily injury claim against insured. Liability claim $45,000. Home is clearly primary place of business. In-home office exception does not apply per CLAUSE BP-2 condition.",
+      "summary": "**Claim Number:** CLM-2024-10010  \n**Date of Loss:** 2024-06-20  \n**Loss Description:** A client attending the insured’s licensed massage‑therapy practice slipped on a wet floor in"
+    },
+    {
+      "id": 11,
+      "mode": "exclusion-citation",
+      "human_label": "PASS",
+      "human_notes": "Looks good.",
+      "judge_verdict": "FAIL",
+      "judge_reason": "FAIL: The summary does not state a clear coverage decision, leaving the coverage position ambiguous.",
+      "adjuster_notes": "Inspection 2024-07-30. Foundation cracks appeared following two months of drought then heavy rain. Engineer report identifies expansive clay soil causing foundation heave. Crack width 8mm in living room wall, 5mm in garage slab. Repair estimate $28,000 for foundation underpinning. Insured argues this is water damage, not earth movement.",
+      "summary": "**Claim Number:** CLM-2024-10011  \n**Date of Loss:** 2024-07-30  \n\n**Loss Description:** Foundation cracks appeared after a two‑month drought followed by heavy rain. Engineer report attributes the heave to expansive clay soil (earth movement), noting an 8 mm crack in"
+    },
+    {
+      "id": 12,
+      "mode": "exclusion-citation",
+      "human_label": "PASS",
+      "human_notes": "Looks good.",
+      "judge_verdict": "FAIL",
+      "judge_reason": "FAIL: The summary invents a claim number not in the adjuster notes, omits all factual details and the coverage decision",
+      "adjuster_notes": "Claim 2024-05-25. Mudslide after heavy spring rains destroyed detached garage and damaged main dwelling foundation. County declared natural disaster. Insured has HO-0308 endorsement. Mudslide damage clearly falls under earth movement. Total damage estimate $67,000.",
+      "summary": "**Claim Number:** CLM-2024-10012  \n**Date of Loss:** 2024-05-25  \n**"
+    },
+    {
+      "id": 14,
+      "mode": "exclusion-citation",
+      "human_label": "PASS",
+      "human_notes": "Looks good.",
+      "judge_verdict": "FAIL",
+      "judge_reason": "",
+      "adjuster_notes": "Assessment 2024-09-02. HVAC system not serviced since 2020 (4+ years). Condensation from AC unit caused mold growth throughout ductwork and adjacent walls. Remediation estimate $11,500. No sudden water event — chronic condensation accumulation.",
+      "summary": "**Claim Number:** CLM-2024-10014  \n**Date of Loss:** 2024-09-02  \n**Loss Description:** Chronic condensation from an HVAC system that had not been serviced since 2020 caused mold growth throughout ductwork and adjacent walls. Remediation estimate $11,500. No sudden water event occurred.  \n**Coverage Decision:** DENIED  \n**Exclusion Applied:** E-27 – Mold resulting from failure to maintain HVAC system per 3‑"
+    },
+    {
+      "id": 15,
+      "mode": "exclusion-citation",
+      "human_label": "PASS",
+      "human_notes": "Looks good.",
+      "judge_verdict": "FAIL",
+      "judge_reason": "",
+      "adjuster_notes": "Claim 2024-10-05. Insured's unscheduled silver flatware set valued at $4,500 disappeared from dining room. No signs of forced entry. Insured suspects house cleaner but has no evidence. Filed mysterious disappearance claim under HO-0307. Items were NOT on the scheduled personal property list.",
+      "summary": "**Claim Number:** CLM-2024-10015  \n**Date of Loss:** 2024-10-05  \n**Loss Description:** Unscheduled silver flatware set (valued at $4,500) disappeared from the dining room; no signs of forced entry; insured suspects house cleaner but has no evidence.  \n**Coverage Decision:** DENIED  \n**Exclusion Cited:** E-28 – Unscheduled items not covered for mysterious disappearance.  \n**Excess/Deductible:** None applicable.  \n**Policy Reference:** HO‑0307 personal property coverage clause."
+    },
+    {
+      "id": 16,
+      "mode": "coverage-confirmation",
+      "human_label": "PASS",
+      "human_notes": "Looks good.",
+      "judge_verdict": "FAIL",
+      "judge_reason": "",
+      "adjuster_notes": "Visited property 2024-03-20. Hot water heater burst suddenly, flooding utility room and adjacent bedroom. Heater was 8 years old, regularly serviced (records on file). Event qualifies as sudden and accidental under WD-1. Damage: flooring $2,200, drywall $1,100, personal property (rugs, books) $650.",
+      "summary": "**Claim Number:** CLM-2024-10016  \n**Date of Loss:** 2024-03-20  \n\n**Loss Description:** On 2024‑03‑20 the insured’s hot‑water heater burst, flooding the utility room and an adjacent bedroom. Damage includes flooring ($2,200), drywall ($1,100) and personal property (rugs, books) ($"
+    },
+    {
+      "id": 19,
+      "mode": "coverage-confirmation",
+      "human_label": "PASS",
+      "human_notes": "Looks good.",
+      "judge_verdict": "FAIL",
+      "judge_reason": "",
+      "adjuster_notes": "Claim 2024-07-22. Mold discovered 48 hours after covered supply line burst (see related claim CLM-2024-10018). Insured reported within 72-hour window. Licensed remediation contractor provided written estimate: $8,500 for remediation. Amount is within $10,000 MF-2 sublimit.",
+      "summary": "**Claim Number:** CLM-2024-10019  \n**Date of Loss:** 2024-07-22  \n**Loss Description:** Mold discovered 48 hours after a covered water‑supply line burst; insured reported within the 72"
+    },
+    {
+      "id": 20,
+      "mode": "coverage-confirmation",
+      "human_label": "PASS",
+      "human_notes": "Looks good.",
+      "judge_verdict": "FAIL",
+      "judge_reason": "FAIL: The summary adds a coverage decision of “COVERED” that is not present or supported by the adjuster notes,",
+      "adjuster_notes": "Assessment 2024-05-30. Remote worker uses spare bedroom as office, employed full-time elsewhere. Business laptop ($2,100) damaged by water from ceiling leak. Office use is incidental to primary occupation conducted at employer's downtown office. One client visit per month.",
+      "summary": "**Claim Number:** CLM-2024-10020  \n**Date of Loss:** 2024-05-30  \n\n**Loss Description:** Water intrusion from a ceiling leak damaged a business laptop (valued at $2,100) used in the insured’s spare bedroom, which serves as a remote work office. The insured’s primary employment is full‑time at an external downtown office, with only incidental office use and one client visit per month.  \n\n**Coverage Decision:** COVERED  \n\n**Excess/Deductible:** $1,000  \n\n**Policy Reference:** Not applicable / not specified in the provided notes."
+    },
+    {
+      "id": 23,
+      "mode": "excess-deductible",
+      "human_label": "PASS",
+      "human_notes": "Looks good.",
+      "judge_verdict": "FAIL",
+      "judge_reason": "",
+      "adjuster_notes": "Claim filed 2024-10-15. Storm damage estimate $12,400. Standard deductible $2,500 per declarations. However, storm is NHC-named — named storm deductible $5,000 or 2% of Coverage A ($280,000 = $5,600), whichever greater. Named storm deductible = $5,600. Per NS-3 stacking prohibition, named storm deductible REPLACES standard. Payable = $12,400 - $5,600 = $6,800.",
+      "summary": "**Claim Number:** CLM-2024-10023  \n**Date of Loss:** 2024-10-15  \n**Loss Description:** Roof and exterior damage caused by an NHC‑named storm; repair estimate $12,400.  \n**Coverage Decision:** COVERED  \n**Deductible/Excess:** Named‑storm deductible $5,600 (greater of $5,000 or"
+    },
+    {
+      "id": 25,
+      "mode": "regression",
+      "human_label": "PASS",
+      "human_notes": "Looks good.",
+      "judge_verdict": "FAIL",
+      "judge_reason": "",
+      "adjuster_notes": "Insured wants us to pay for a mold inspection before remediation. Is that covered? Pre-remediation inspection invoice submitted for $2,400. Mold resulted from a covered supply-line burst.",
+      "summary": "**Claim Number:** CLM-2024-10025  \n**Date of Loss:** 2024-08-10  \n**Loss Description:** Insured submitted a $2,400 invoice for a pre‑remediation mold inspection after a covered supply‑line burst caused mold growth.  \n**Coverage Decision:** DENIED  \n**Exclusion Applied:** E-25 – mold testing and air‑sampling costs are excluded even when remediation is covered.  \n**Excess/Deductible:** N/A"
+    }
+  ]
+}
