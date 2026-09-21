@@ -232,3 +232,316 @@ def answer_claim_question(
         print(f"    -> {record.output['raw'][:160]}\n")
 
     return record
+
+
+# ---------------------------------------------------------------------------
+# Week 7 — Agent loop with explicit tool-calling and budget enforcement
+# ---------------------------------------------------------------------------
+
+# Budget defaults — all four are enforced in the loop, not just declared.
+DEFAULT_BUDGETS = {
+    "max_iterations": 8,        # hard loop cap
+    "max_tokens": 15_000,       # summed across ALL iterations
+    "max_cost_usd": 0.05,       # total USD per claim
+    "max_wall_clock_s": 60.0,   # wall-clock per claim
+}
+
+
+def agent_loop(
+    claim: dict,
+    writer: "TraceWriter | None" = None,
+    prompt_version: str = prompts.AGENT_VERSION,
+    model_params: dict | None = None,
+    budgets: dict | None = None,
+    verbose: bool = False,
+) -> dict:
+    """
+    Agentic triage loop for a single claim.
+
+    The model decides which tools to call at each iteration.  Four budgets
+    are enforced at the TOP of every loop — not just declared as constants.
+    Token counts are summed across all iterations (the message list grows
+    each lap, so per-call tokens understate the true cost).
+
+    ``claim`` keys: question, loss_summary, claimant_name, claim_number,
+    damage_estimate, deductible_amount, and optionally channel / tags.
+
+    Returns a result dict with keys:
+        trace_id, final_answer, iterations, total_tokens, total_cost_usd,
+        wall_clock_s, budget_terminated, budget_trigger, tool_call_log,
+        error
+    """
+    import json as _json
+    from generation import call_model_with_tools, estimate_cost, get_model
+    from tools import TOOLS, dispatch_tool
+    from redaction import redact_text
+    from tracing import TraceWriter, TraceRecord
+
+    budgets = {**DEFAULT_BUDGETS, **(budgets or {})}
+    model_params = {**DEFAULT_MODEL_PARAMS, **(model_params or {})}
+    writer = writer or TraceWriter()
+
+    # ── PII redaction before anything leaves the process ──────────────────
+    claimant_name = claim.get("claimant_name", "")
+    claim_number = claim.get("claim_number", "")
+    question = claim["question"]
+    loss_summary = claim.get("loss_summary", "")
+    damage_estimate = claim.get("damage_estimate", 0.0)
+    deductible_amount = claim.get("deductible_amount", 0.0)
+
+    claim_ref_red, _ = redact_text(claim_number, [claimant_name])
+    loss_red, _ = redact_text(loss_summary, [claimant_name])
+    question_red, _ = redact_text(question, [claimant_name])
+
+    system_msg = {"role": "system", "content": prompts.get_system_prompt(prompt_version)}
+    user_text = prompts.get_user_template(prompt_version).format(
+        claim_ref=claim_ref_red,
+        loss_summary=loss_red,
+        question=question_red,
+        damage_estimate=f"{damage_estimate:,.2f}",
+        deductible_amount=f"{deductible_amount:,.2f}",
+    )
+    user_msg = {"role": "user", "content": user_text}
+    messages = [system_msg, user_msg]
+
+    # ── Loop state ─────────────────────────────────────────────────────────
+    total_tokens = 0
+    total_cost = 0.0
+    t0 = time.perf_counter()
+    tool_call_log: list[dict] = []
+    final_answer: str | None = None
+    budget_terminated = False
+    budget_trigger: str | None = None
+    last_error: dict | None = None
+    iteration = 0
+    # Anti-thrash: track consecutive calls to the same tool
+    _last_tool_called: str | None = None
+    _consecutive_same_tool: int = 0
+    _THRASH_THRESHOLD = 2   # inject hint after this many repeated calls
+
+    for iteration in range(budgets["max_iterations"] + 1):
+        # ── ALL FOUR BUDGET CHECKS at top of every iteration ──────────────
+        elapsed = time.perf_counter() - t0
+
+        if iteration >= budgets["max_iterations"]:
+            budget_terminated = True
+            budget_trigger = "max_iterations"
+            final_answer = (
+                f"[BUDGET: max_iterations={budgets['max_iterations']} reached "
+                f"after {iteration} iterations — terminated cleanly]"
+            )
+            if verbose:
+                print(f"  BUDGET FIRED: max_iterations={budgets['max_iterations']}")
+            break
+
+        if total_tokens >= budgets["max_tokens"]:
+            budget_terminated = True
+            budget_trigger = "max_tokens"
+            final_answer = (
+                f"[BUDGET: max_tokens={budgets['max_tokens']} reached "
+                f"(used {total_tokens}) — terminated cleanly]"
+            )
+            if verbose:
+                print(f"  BUDGET FIRED: max_tokens, used={total_tokens}")
+            break
+
+        if total_cost >= budgets["max_cost_usd"]:
+            budget_terminated = True
+            budget_trigger = "max_cost"
+            final_answer = (
+                f"[BUDGET: max_cost_usd=${budgets['max_cost_usd']:.4f} reached "
+                f"(used ${total_cost:.4f}) — terminated cleanly]"
+            )
+            if verbose:
+                print(f"  BUDGET FIRED: max_cost, used=${total_cost:.4f}")
+            break
+
+        if elapsed >= budgets["max_wall_clock_s"]:
+            budget_terminated = True
+            budget_trigger = "wall_clock"
+            final_answer = (
+                f"[BUDGET: max_wall_clock_s={budgets['max_wall_clock_s']:.1f}s reached "
+                f"(elapsed {elapsed:.1f}s) — terminated cleanly]"
+            )
+            if verbose:
+                print(f"  BUDGET FIRED: wall_clock, elapsed={elapsed:.1f}s")
+            break
+
+        # ── Model call with tools ──────────────────────────────────────────
+        resp = call_model_with_tools(messages, TOOLS, model_params)
+
+        if resp["error"]:
+            last_error = resp["error"]
+            if verbose:
+                print(f"  Iteration {iteration}: model error: {resp['error']}")
+            break
+
+        # Accumulate tokens across ALL iterations (not just the last call)
+        if resp["usage"]:
+            total_tokens += (
+                (resp["usage"].get("prompt_tokens") or 0)
+                + (resp["usage"].get("completion_tokens") or 0)
+            )
+            total_cost += estimate_cost(resp["usage"])
+
+        if verbose:
+            tc_names = [tc["name"] for tc in (resp["tool_calls"] or [])]
+            print(f"  Iter {iteration}: finish={resp['finish_reason']} "
+                  f"tools={tc_names or 'none'} "
+                  f"tokens_so_far={total_tokens}")
+
+        # ── No tool calls → model delivered final answer ───────────────────
+        if not resp["tool_calls"]:
+            final_answer = resp["content"] or ""
+            break
+
+        # ── Anti-thrash: detect repeated same-tool calls ────────────────────
+        called_tools = [tc["name"] for tc in resp["tool_calls"]]
+        first_tool = called_tools[0] if called_tools else None
+        if first_tool == _last_tool_called:
+            _consecutive_same_tool += 1
+        else:
+            _consecutive_same_tool = 0
+        _last_tool_called = first_tool
+
+        if _consecutive_same_tool >= _THRASH_THRESHOLD:
+            # Inject a system hint to push the model to the next tool
+            # This is state-driven (not a static prompt hack) — we know which
+            # tool was just called and tell the model what to do next.
+            _tool_order = ["get_claim_details", "check_policy_exclusions", "compute_payout"]
+            try:
+                _next_tool = _tool_order[_tool_order.index(first_tool) + 1]
+            except (ValueError, IndexError):
+                _next_tool = "compute_payout"
+            hint = (
+                f"SYSTEM: You have called {first_tool} {_consecutive_same_tool + 1} times. "
+                f"You now have sufficient context. "
+                f"Your next call MUST be {_next_tool}, then deliver your final answer."
+            )
+            messages.append({"role": "user", "content": hint})
+            _consecutive_same_tool = 0  # reset after injecting hint
+            if verbose:
+                print(f"  [anti-thrash] hint injected -> next tool should be {_next_tool}")
+
+        # ── Append assistant message with tool_calls ───────────────────────
+        # Build the assistant message in the format the API expects
+        asst_msg: dict = {
+            "role": "assistant",
+            "content": resp["content"] or "",
+            "tool_calls": [
+                {
+                    "id": tc["id"],
+                    "type": "function",
+                    "function": {"name": tc["name"], "arguments": tc["arguments"]},
+                }
+                for tc in resp["tool_calls"]
+            ],
+        }
+        messages.append(asst_msg)
+
+        # ── Execute each tool call and append result ───────────────────────
+        for tc in resp["tool_calls"]:
+            result = dispatch_tool(tc["name"], tc["arguments"])
+            tool_call_log.append({
+                "iteration": iteration,
+                "tool": tc["name"],
+                "args": tc["arguments"],
+                "result_summary": _summarise_tool_result(tc["name"], result),
+            })
+            messages.append({
+                "role": "tool",
+                "tool_call_id": tc["id"],
+                "content": _json.dumps(result, ensure_ascii=False),
+            })
+
+    wall_clock_s = round(time.perf_counter() - t0, 3)
+
+    # ── Build and write trace ──────────────────────────────────────────────
+    # Retrieve hits from tool_call_log for TraceRecord (first get_claim_details call)
+    hits: list[dict] = []
+    for entry in tool_call_log:
+        if entry["tool"] == "get_claim_details":
+            # parse the stored result summary — hits list not readily available here,
+            # so we pass an empty list and rely on agent_meta for the tool call log
+            break
+
+    record = TraceRecord.build(
+        question=question,
+        loss_summary=loss_summary,
+        claimant_name=claimant_name,
+        claim_number=claim_number,
+        prompt_version=prompt_version,
+        retrieval_meta={"mode": "agent_tool_call", "n_results": 5},
+        hits=hits,
+        model_meta={
+            "provider": "groq",
+            "name": model_params.get("name") or get_model(),
+            "temperature": model_params["temperature"],
+            "max_tokens": model_params["max_tokens"],
+            "top_p": model_params["top_p"],
+            "seed": model_params.get("seed"),
+            "finish_reason": "agent_loop",
+            "usage": {"prompt_tokens": total_tokens, "completion_tokens": 0},
+            "system_fingerprint": None,
+        },
+        raw_output=final_answer or "",
+        timing={
+            "retrieval_ms": 0,
+            "generation_ms": round(wall_clock_s * 1000, 1),
+            "total_ms": round(wall_clock_s * 1000, 1),
+        },
+        error=last_error,
+        tags=claim.get("tags", []),
+        channel=claim.get("channel", "agent_loop"),
+    )
+
+    # Attach agent_meta (extends the base schema, backward-compatible)
+    record.agent_meta = {
+        "mode": "agent_loop",
+        "iterations": iteration + 1 if not budget_terminated else iteration,
+        "tool_calls": tool_call_log,
+        "budget_terminated": budget_terminated,
+        "budget_trigger": budget_trigger,
+        "budgets": budgets,
+        "total_tokens_all_iterations": total_tokens,
+        "total_cost_usd": round(total_cost, 6),
+    }
+
+    writer.write(record, known_names=[claimant_name] if claimant_name else None)
+
+    if verbose:
+        print(f"  [{record.trace_id}] done — {iteration+1} iter, "
+              f"{total_tokens} tok, ${total_cost:.4f}, {wall_clock_s:.2f}s")
+
+    return {
+        "trace_id": record.trace_id,
+        "final_answer": final_answer or "",
+        "iterations": record.agent_meta["iterations"],
+        "total_tokens": total_tokens,
+        "total_cost_usd": round(total_cost, 6),
+        "wall_clock_s": wall_clock_s,
+        "budget_terminated": budget_terminated,
+        "budget_trigger": budget_trigger,
+        "tool_call_log": tool_call_log,
+        "error": last_error,
+    }
+
+
+def _summarise_tool_result(tool_name: str, result: dict) -> str:
+    """One-line human-readable summary for the trace log."""
+    if result.get("error"):
+        return f"ERROR: {result['error']}"
+    if tool_name == "get_claim_details":
+        return f"{result.get('chunks_retrieved', 0)} chunks retrieved"
+    if tool_name == "check_policy_exclusions":
+        return (
+            f"determination={result.get('determination')} "
+            f"sublimit={result.get('sublimit_usd')} "
+            f"clause={result.get('source_clause_id')}"
+        )
+    if tool_name == "compute_payout":
+        return (
+            f"payable=${result.get('payable_amount')} "
+            f"status={result.get('claim_status')}"
+        )
+    return str(result)[:120]

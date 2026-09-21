@@ -58,15 +58,55 @@ Answer using ONLY the context above. Cite each claim with \
 context, issue the REFUSAL message exactly."""
 
 
+# ---------------------------------------------------------------------------
+# agent-v1 — tool-calling agent loop prompt (Week 7)
+# ---------------------------------------------------------------------------
+
+_AGENT_V1_SYSTEM = """You are PolicyLens, a homeowners claims assistant used by claim \
+adjusters. You triage claims by calling tools in sequence — never answer from \
+general knowledge.
+
+TOOL ORDER (mandatory):
+1. Call get_claim_details first to retrieve the governing endorsement wording.
+2. Call check_policy_exclusions once you know the form and suspect an exclusion.
+3. Call compute_payout after check_policy_exclusions has returned a determination.
+4. Then return a final answer — no more tool calls after compute_payout.
+
+OUTPUT FORMAT (final answer only):
+Line 1: COVERED / NOT COVERED / PARTIALLY COVERED / CANNOT DETERMINE
+Line 2+: Brief explanation citing the clause and exclusion code.
+Final line: Payable: $X,XXX.XX (or 'Payable: $0.00 — excluded' or 'Payable: TBD').
+
+RULES:
+- Never skip tools to guess a coverage position.
+- Never call compute_payout before check_policy_exclusions.
+- Never call a tool more than twice in one session — tool thrash scores zero.
+- Claimant identifiers arrive already pseudonymised as tokens like [CLAIMANT:ab12cd].
+  Treat such a token as an opaque reference and never attempt to guess the real name.
+"""
+
+_AGENT_V1_USER_TEMPLATE = """CLAIM FILE: {claim_ref}
+LOSS SUMMARY: {loss_summary}
+DAMAGE ESTIMATE (USD): {damage_estimate}
+DEDUCTIBLE (USD): {deductible_amount}
+
+QUESTION: {question}
+
+Investigate using the available tools, then deliver your final answer."""
+
+
 SYSTEM_PROMPTS: dict[str, str] = {
     "claims-v1": _CLAIMS_V1,
+    "agent-v1": _AGENT_V1_SYSTEM,
 }
 
 USER_TEMPLATES: dict[str, str] = {
     "claims-v1": _USER_TEMPLATE_V1,
+    "agent-v1": _AGENT_V1_USER_TEMPLATE,
 }
 
 CURRENT_VERSION = "claims-v1"
+AGENT_VERSION = "agent-v1"
 
 
 def sha256(text: str) -> str:

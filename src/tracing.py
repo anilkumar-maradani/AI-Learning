@@ -112,6 +112,20 @@ class TraceRecord:
     redaction: dict
     error: dict | None = None
     tags: list = field(default_factory=list)
+    # Week 7: agent loop metadata — None for single-call traces (backward-compat)
+    agent_meta: dict | None = None
+    # agent_meta schema:
+    # {
+    #   "mode": "agent_loop" | "fixed_workflow",
+    #   "iterations": int,
+    #   "tool_calls": [{"iteration": int, "tool": str, "args": dict, "result_summary": str}],
+    #   "budget_terminated": bool,
+    #   "budget_trigger": str | None,   # "max_iterations"|"max_tokens"|"max_cost"|"wall_clock"
+    #   "budgets": {"max_iter": int, "max_tokens": int, "max_cost": float, "max_wall_clock_s": float},
+    #   "total_tokens_all_iterations": int,
+    #   "total_cost_usd": float,
+    # }
+
 
     @staticmethod
     def build(
