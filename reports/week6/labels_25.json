@@ -1,0 +1,230 @@
+{
+  "labeller": "Anil Kumar",
+  "labels": [
+    {
+      "id": 1,
+      "claim_number": "CLM-2026-10001",
+      "human_label": "FAIL",
+      "reason": "Invents a second event not in the file",
+      "summary_sha256": "1bd8afcea90186fc29de4638098294ee646dc86bcc6d53c724d373a6fd60a4bd",
+      "view": "decision_note",
+      "labelled_utc": "2026-09-30T18:50:14+00:00"
+    },
+    {
+      "id": 2,
+      "claim_number": "CLM-2026-10002",
+      "human_label": "PASS",
+      "reason": "Consistent with the adjuster",
+      "summary_sha256": "a405dd436c7b325ef3da8c6fead32887b9bce7270824dc266e8ad5d206f0bbdc",
+      "view": "decision_note",
+      "labelled_utc": "2026-09-30T18:50:14+00:00"
+    },
+    {
+      "id": 3,
+      "claim_number": "CLM-2026-10003",
+      "human_label": "PASS",
+      "reason": "Matches",
+      "summary_sha256": "15ae66f68d102bb8b783dcfb3145e985764e56dfb8740c98371b4426d94b653b",
+      "view": "decision_note",
+      "labelled_utc": "2026-09-30T18:50:14+00:00"
+    },
+    {
+      "id": 4,
+      "claim_number": "CLM-2026-10004",
+      "human_label": "FAIL",
+      "reason": "Unsupported fact added about the cause",
+      "summary_sha256": "43b2bf4eeb4b72b77cc4daa9c083c9a401d7ab1aaac27eaff1acb595ab2468bf",
+      "view": "decision_note",
+      "labelled_utc": "2026-09-30T18:50:14+00:00"
+    },
+    {
+      "id": 5,
+      "claim_number": "CLM-2026-10005",
+      "human_label": "PASS",
+      "reason": "Outcome correct",
+      "summary_sha256": "5ab2d90e58c5d3b9e87a6103ecd4e5d1f102ef216ccb4fa8f6d3835559c85801",
+      "view": "decision_note",
+      "labelled_utc": "2026-09-30T18:50:14+00:00"
+    },
+    {
+      "id": 6,
+      "claim_number": "CLM-2026-10006",
+      "human_label": "FAIL",
+      "reason": "Invents a coverage outcome not in the notes",
+      "summary_sha256": "454434c7532b505d9d88b5b9fc9a82b2d3b3c1588efc7bc01140fca3b5c5af05",
+      "view": "decision_note",
+      "labelled_utc": "2026-09-30T18:50:14+00:00"
+    },
+    {
+      "id": 7,
+      "claim_number": "CLM-2026-10007",
+      "human_label": "PASS",
+      "reason": "Amount and outcome right",
+      "summary_sha256": "84f92be0b52828e94b1df423d1525721e4fe3ace52afcc3953513bb6bd12c984",
+      "view": "decision_note",
+      "labelled_utc": "2026-09-30T18:50:14+00:00"
+    },
+    {
+      "id": 8,
+      "claim_number": "CLM-2026-10008",
+      "human_label": "PASS",
+      "reason": "Matches",
+      "summary_sha256": "f7778e808fd44acd72149c08be9231ca6c309afd9dc51debd40b6396371862d9",
+      "view": "decision_note",
+      "labelled_utc": "2026-09-30T18:50:14+00:00"
+    },
+    {
+      "id": 9,
+      "claim_number": "CLM-2026-10009",
+      "human_label": "FAIL",
+      "reason": "Summary contradicts the decision on coverage",
+      "summary_sha256": "9a646e8eff0f2a6e155757c85d0bba016b15773fbb23aaf12580884a52c73522",
+      "view": "decision_note",
+      "labelled_utc": "2026-09-30T18:50:14+00:00"
+    },
+    {
+      "id": 10,
+      "claim_number": "CLM-2026-10010",
+      "human_label": "PASS",
+      "reason": "It is correct",
+      "summary_sha256": "e9c7dd647287e4bdd36c22a8b07d1f580541f089c840ed793396b351448e0397",
+      "view": "decision_note",
+      "labelled_utc": "2026-09-30T18:43:03+00:00"
+    },
+    {
+      "id": 11,
+      "claim_number": "CLM-2026-10011",
+      "human_label": "FAIL",
+      "reason": "Amount differs from what was approved",
+      "summary_sha256": "dfba3c8480a08f71257e1db876702f13892e462ae999e3e74a47234b8bd7ac43",
+      "view": "decision_note",
+      "labelled_utc": "2026-09-30T18:50:14+00:00"
+    },
+    {
+      "id": 12,
+      "claim_number": "CLM-2026-10012",
+      "human_label": "PASS",
+      "reason": "Faithful",
+      "summary_sha256": "7c31b272c6b9d7e72eaddbb345fae5ed2dcae4f624069e5893982bfed0961ee9",
+      "view": "decision_note",
+      "labelled_utc": "2026-09-30T18:50:14+00:00"
+    },
+    {
+      "id": 13,
+      "claim_number": "CLM-2026-10013",
+      "human_label": "PASS",
+      "reason": "Right call",
+      "summary_sha256": "50e8562a37d5257fe4ae022859d74f9966af9df4aecf342b2feee29a120fe055",
+      "view": "decision_note",
+      "labelled_utc": "2026-09-30T18:50:14+00:00"
+    },
+    {
+      "id": 14,
+      "claim_number": "CLM-2026-10014",
+      "human_label": "PASS",
+      "reason": "Matches the adjuster's decision",
+      "summary_sha256": "6cbf38fa4e82d6e0fadab0e8bc734cc39ac3b7b7c706d805c723915627a05f46",
+      "view": "decision_note",
+      "labelled_utc": "2026-09-30T18:50:14+00:00"
+    },
+    {
+      "id": 15,
+      "claim_number": "CLM-2026-10015",
+      "human_label": "PASS",
+      "reason": "Reads the same as the decision note",
+      "summary_sha256": "8485ca3a407db68b8ee0bb52dd313ce0c4260cb1dfb6e470646b73bab8adb701",
+      "view": "decision_note",
+      "labelled_utc": "2026-09-30T18:50:14+00:00"
+    },
+    {
+      "id": 16,
+      "claim_number": "CLM-2026-10017",
+      "human_label": "PASS",
+      "reason": "Correct",
+      "summary_sha256": "cec37e240eb92d68d90a303e4d111b2cc6fa25a33b0276ef6c0abf610bdd693c",
+      "view": "decision_note",
+      "labelled_utc": "2026-09-30T18:50:14+00:00"
+    },
+    {
+      "id": 17,
+      "claim_number": "CLM-2026-10018",
+      "human_label": "PASS",
+      "reason": "Correct outcome, amount matches",
+      "summary_sha256": "42a81f32f943f955a676efd666a3893293754e08b77cdf42586a38160430d990",
+      "view": "decision_note",
+      "labelled_utc": "2026-09-30T18:50:14+00:00"
+    },
+    {
+      "id": 18,
+      "claim_number": "CLM-2026-10019",
+      "human_label": "FAIL",
+      "reason": "Summary states a payout the adjuster never decided",
+      "summary_sha256": "0516fb33498b64709864cae9fdddb84a04394f2de1d36389028ce4929ed2da05",
+      "view": "decision_note",
+      "labelled_utc": "2026-09-30T18:50:14+00:00"
+    },
+    {
+      "id": 19,
+      "claim_number": "CLM-2026-10020",
+      "human_label": "PASS",
+      "reason": "Faithful to the note",
+      "summary_sha256": "22c98bf6f147a7f0a4f47ad0d05162180f52845dcc92bf8f4155eae00c7aa31b",
+      "view": "decision_note",
+      "labelled_utc": "2026-09-30T18:50:14+00:00"
+    },
+    {
+      "id": 20,
+      "claim_number": "CLM-2026-10021",
+      "human_label": "FAIL",
+      "reason": "Missing the denial outcome entirely",
+      "summary_sha256": "076a5c53e77636d6a32a958ff440ecbfbbfc73c14ae9b130cd8eeafe2be270d1",
+      "view": "decision_note",
+      "labelled_utc": "2026-09-30T18:50:14+00:00"
+    },
+    {
+      "id": 21,
+      "claim_number": "CLM-2026-10022",
+      "human_label": "FAIL",
+      "reason": "Says covered when the decision was a denial",
+      "summary_sha256": "f50006e6fdfada72b47e77d83918d2b24452255dc1d780a8dece7eef3e3c1a20",
+      "view": "decision_note",
+      "labelled_utc": "2026-09-30T18:50:14+00:00"
+    },
+    {
+      "id": 22,
+      "claim_number": "CLM-2026-10023",
+      "human_label": "PASS",
+      "reason": "Faithful to the claim file",
+      "summary_sha256": "93e3228183a28750177e514b39494b5531aa543b63d5d0d28488e01f2425ad20",
+      "view": "decision_note",
+      "labelled_utc": "2026-09-30T18:50:14+00:00"
+    },
+    {
+      "id": 23,
+      "claim_number": "CLM-2026-10024",
+      "human_label": "PASS",
+      "reason": "Matches decision note",
+      "summary_sha256": "1bb6af9a78a52c040c15cdee6291b1c3243e9b1f6044539094ec9595f2be7e40",
+      "view": "decision_note",
+      "labelled_utc": "2026-09-30T18:50:14+00:00"
+    },
+    {
+      "id": 24,
+      "claim_number": "CLM-2026-10025",
+      "human_label": "PASS",
+      "reason": "Outcome and amount both match the file",
+      "summary_sha256": "6a64cf5e3c21a4ba3ae63fa0dd7c00d39eb65ec34131e95c7db9600448a8689f",
+      "view": "decision_note",
+      "labelled_utc": "2026-09-30T18:50:14+00:00"
+    },
+    {
+      "id": 25,
+      "claim_number": "CLM-2026-10029",
+      "human_label": "PASS",
+      "reason": "Same decision as the note",
+      "summary_sha256": "00f468f21a7cb3fe46165cf76223e3dc12e05776e672922b4f1ae404882abbf6",
+      "view": "decision_note",
+      "labelled_utc": "2026-09-30T18:50:14+00:00"
+    }
+  ]
+}
