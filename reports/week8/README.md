@@ -76,8 +76,8 @@ The outcome eval passes it: partially covered, $7,500 payable. The path it took:
                   "deductible_basis": "all_peril", "sublimit": 7500}
 ```
 
-It read both forms twice (`redundant_lookup`). That cost 15,967 tokens, 2.6×
-the next most expensive claim. The cause is in the tool: with `form_number`
+It read both forms twice (`redundant_lookup`). That cost 15,967 tokens, 2.5×
+the next most expensive claim (6,417). The cause is in the tool: with `form_number`
 set, search_policy returned the top 4 ranked chunks, and on NG-1103 two of the
 four were the form's header. The sublimit clause MR-2 was not among them, so
 the agent searched again. On a form with a longer exclusion table, the same
