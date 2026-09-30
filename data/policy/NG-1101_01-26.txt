@@ -1,0 +1,57 @@
+HOMEOWNERS ENDORSEMENT
+Form Number: NG-1101
+Edition Date: 01-26
+Policy Line: homeowners
+Effective Date: January 1, 2026
+Title: Escape of Water Endorsement
+
+Issued by Northgate Mutual Insurance Company. This endorsement changes the
+Northgate Homeowners Policy. Read it together with the Declarations, which
+show the all-peril deductible and the Coverage A limit.
+
+SECTION I — WHAT THIS ENDORSEMENT COVERS
+
+CLAUSE WE-1 — SUDDEN ESCAPE OF WATER
+We cover direct physical damage to the dwelling and to personal property
+caused by the sudden and accidental escape of water or steam from a plumbing,
+heating, air conditioning or fire sprinkler system, or from a household
+appliance. An escape is "sudden" only if it continued for fewer than ten (10)
+days before it was discovered. An escape that continued for ten days or more
+is treated as seepage under exclusion E-41.
+
+CLAUSE WE-2 — ACCESS AND TEAR-OUT
+When a covered escape of water happens inside a wall, floor or ceiling, we
+also pay the reasonable cost to open and restore that part of the building so
+the system can be reached. Access and tear-out is limited to a sublimit of
+$5,000 per occurrence.
+
+CLAUSE WE-3 — HOW WE PAY
+The all-peril deductible shown in the Declarations applies once per
+occurrence. We subtract the deductible from the covered loss first. Where a
+sublimit applies, we then cap the result at that sublimit.
+
+SECTION II — EXCLUSIONS
+The codes below apply to this endorsement. A loss matching any row is not
+covered, except where the row says otherwise.
+
+EXCLUSION TABLE — NG-1101 ed. 01-26
+
+| Code | Excluded Peril                        | Scope                                                                 |
+|------|---------------------------------------|-----------------------------------------------------------------------|
+| E-41 | Continuous or repeated seepage        | Water that escaped for 10 or more days before discovery, and any rot, |
+|      |                                       | rust or deterioration it caused                                       |
+| E-42 | Surface water and flood               | Flood, rising water, storm surge, or runoff entering from outside     |
+| E-43 | Sewer and drain backup                | Water or sewage backing up through sewers, drains or a sump pump,     |
+|      |                                       | including backup from a municipal line                                |
+| E-44 | Freezing in an unoccupied dwelling    | Freezing of a system while the dwelling was unoccupied for more than  |
+|      |                                       | 30 days, unless heat was kept on or the system was drained            |
+| E-45 | The part that failed                  | The cost to repair or replace the pipe, fitting or appliance itself;  |
+|      |                                       | the water damage it caused stays covered under WE-1                   |
+| E-46 | Groundwater                           | Water below the ground surface seeping through foundations, basement  |
+|      |                                       | walls or floors                                                       |
+
+SECTION III — YOUR DUTIES AFTER A LOSS
+You must shut off the water supply as soon as you discover the escape and
+report the loss to us promptly. Keep the failed part for our inspection.
+
+END OF ENDORSEMENT NG-1101 ed. 01-26

@@ -1,0 +1,38 @@
+HOMEOWNERS ENDORSEMENT
+Form Number: NG-1103
+Edition Date: 02-26
+Policy Line: homeowners
+Effective Date: February 1, 2026
+Title: Mold and Wet Rot Limited Coverage Endorsement
+
+Issued by Northgate Mutual Insurance Company. The base Northgate Homeowners
+Policy excludes mold. This endorsement gives back a limited amount of cover.
+
+SECTION I — WHAT THIS ENDORSEMENT COVERS
+
+CLAUSE MR-1 — WHEN MOLD IS COVERED
+We cover mold, fungi and wet rot only when both of these are true:
+(a) the mold came from a water loss that is itself covered by the policy,
+such as a sudden escape of water under NG-1101 WE-1; and
+(b) you began drying the affected area within seventy-two (72) hours of
+discovering the water.
+
+CLAUSE MR-2 — MOLD SUBLIMIT
+The most we pay for all mold, fungi and wet rot in one policy period is
+$7,500. This sublimit includes testing, removal, tear-out and rebuilding.
+We subtract the all-peril deductible from the covered mold loss first, then
+cap the result at $7,500.
+
+SECTION II — EXCLUSIONS
+
+EXCLUSION TABLE — NG-1103 ed. 02-26
+
+| Code | Excluded Peril                        | Scope                                                                 |
+|------|---------------------------------------|-----------------------------------------------------------------------|
+| E-61 | Mold from seepage or humidity         | Mold caused by long-term seepage (see NG-1101 E-41), condensation,    |
+|      |                                       | or high indoor humidity                                               |
+| E-62 | Mold that existed before the policy   | Mold present, or known to you, before the policy start date           |
+| E-63 | Mold after late drying                | Mold where drying did not begin within 72 hours of discovering the    |
+|      |                                       | water, as required by MR-1(b)                                         |
+
+END OF ENDORSEMENT NG-1103 ed. 02-26

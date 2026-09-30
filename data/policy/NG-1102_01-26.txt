@@ -1,0 +1,46 @@
+HOMEOWNERS ENDORSEMENT
+Form Number: NG-1102
+Edition Date: 01-26
+Policy Line: homeowners
+Effective Date: January 1, 2026
+Title: Windstorm, Hurricane and Hail Endorsement
+
+Issued by Northgate Mutual Insurance Company. This endorsement changes the
+Northgate Homeowners Policy for loss caused by windstorm, hurricane or hail.
+
+SECTION I — WHAT THIS ENDORSEMENT COVERS
+
+CLAUSE WH-1 — HURRICANE DEDUCTIBLE
+When the loss is caused by a hurricane that the National Hurricane Center has
+given a name, the hurricane deductible replaces the all-peril deductible. The
+hurricane deductible is two percent (2%) of the Coverage A limit shown in the
+Declarations and applies once per hurricane. For any other windstorm or hail
+loss the all-peril deductible applies.
+
+CLAUSE WH-2 — RAIN THAT ENTERS THE HOME
+We cover damage to the inside of the dwelling from rain, snow or sleet only if
+wind or hail first made an opening in the roof or an outside wall and the
+water came in through that opening.
+
+CLAUSE WH-3 — OLDER ROOF SURFACES
+If the roof surface was more than fifteen (15) years old on the date of loss,
+we pay the actual cash value of the roof surface, not its replacement cost.
+The adjuster records the actual cash value on the claim file. Damage to the
+rest of the dwelling is still paid at replacement cost.
+
+SECTION II — EXCLUSIONS
+
+EXCLUSION TABLE — NG-1102 ed. 01-26
+
+| Code | Excluded Peril                        | Scope                                                                 |
+|------|---------------------------------------|-----------------------------------------------------------------------|
+| E-51 | Cosmetic hail damage to metal roofing | Dents or marks on metal roofing or siding that do not let water in    |
+|      |                                       | and do not shorten the life of the material                           |
+| E-52 | Rain without a storm-made opening     | Rain entering through open windows, existing gaps, or worn flashing   |
+| E-53 | Storm surge                           | Water pushed ashore by a storm, even when the storm is a hurricane    |
+| E-54 | Tree removal with no damage           | Removing a fallen tree that did not damage a covered structure        |
+
+SECTION III — HOW WE PAY
+We subtract the deductible that applies under WH-1 from the covered loss.
+
+END OF ENDORSEMENT NG-1102 ed. 01-26
