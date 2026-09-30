@@ -6,7 +6,7 @@ Week 6 — validate the claim-summary judge before trusting its number.
     python evals/week6.py produce         # "production" run over the 30 closed claims, traced
     python evals/week6.py select          # build the 25-case eval set (2+ regression cases from failed traces)
     python evals/week6.py summarise       # frozen summaries for the 25 cases
-    python evals/week6.py label           # blind hand-labelling (human only)
+    python evals/week6.py label           # blind hand-labelling (human only); --full shows whole claim files
     python evals/week6.py judge --version v1
     python evals/week6.py iterate         # judge_v2 from 2 of v1's own disagreements
     python evals/week6.py judge --version v2
@@ -191,7 +191,7 @@ def cmd_summarise(_args):
 # label (human, blind)
 # ---------------------------------------------------------------------------
 
-def cmd_label(_args):
+def cmd_label(args):
     if any(f.startswith("judge_results") for f in os.listdir(REPORT)):
         sys.exit("A judge result already exists. Labels written now would not be blind.")
     summaries = {s["id"]: s for s in _load(SUMMARIES)["summaries"]}
@@ -210,14 +210,21 @@ def cmd_label(_args):
         s = summaries[cid]
         claim = get_claim(s["claim_number"])
         print("=" * 78)
-        print(f"Summary {n}/{len(order)}  (case id {cid})\n")
-        print(render_claim_file(claim))
+        print(f"Summary {n}/{len(order)}  (case id {cid})  {claim['claim_number']}\n")
+        if args.full:
+            print(render_claim_file(claim))
+        else:
+            decision = claim["adjuster_notes"][-1]
+            print(f"ADJUSTER'S DECISION [{decision['date']}]:\n  {decision['text']}")
         print("\n--- SUMMARY ---")
         print(s["summary"])
         print("-" * 78)
         verdict = ""
         while verdict not in ("P", "F"):
-            verdict = input("PASS or FAIL? [p/f]: ").strip().upper()[:1]
+            prompt = "PASS or FAIL? [p/f]: " if args.full else "PASS or FAIL? [p/f, m = show full claim file]: "
+            verdict = input(prompt).strip().upper()[:1]
+            if verdict == "M":
+                print("\n" + render_claim_file(claim) + "\n")
         reason = ""
         while not reason:
             reason = input("One-line reason (required): ").strip()
@@ -225,6 +232,7 @@ def cmd_label(_args):
             "id": cid, "claim_number": s["claim_number"],
             "human_label": "PASS" if verdict == "P" else "FAIL",
             "reason": reason, "summary_sha256": s["summary_sha256"],
+            "view": "full" if args.full else "decision_note",
             "labelled_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         })
         labels["labels"].sort(key=lambda l: l["id"])
@@ -365,6 +373,8 @@ def main():
     ap.add_argument("cmd", nargs="?", default="run",
                     choices=["run", "produce", "select", "summarise", "label", "judge", "iterate"])
     ap.add_argument("--version", default="v1")
+    ap.add_argument("--full", action="store_true",
+                    help="label: show the whole claim file for every case (default shows the decision note)")
     args = ap.parse_args()
     {"run": cmd_run, "produce": cmd_produce, "select": cmd_select, "summarise": cmd_summarise,
      "label": cmd_label, "judge": cmd_judge, "iterate": cmd_iterate}[args.cmd](args)
