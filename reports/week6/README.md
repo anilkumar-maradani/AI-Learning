@@ -1,9 +1,11 @@
 # Week 6 — validate the claim-summary judge before trusting its number
 
-> **Status: waiting on the blind human labels.** The eval set, frozen summaries,
-> assertions and judge v1 prompt are committed. The judge has **not** been run.
-> Agreement before → after will be filled in only after the labels are
-> committed on their own. See [Remaining steps](#remaining-steps).
+| Number | Value |
+|---|---:|
+| **agreement_before** (judge v1 vs labels) | **72%** (18/25) |
+| **agreement_after** (judge v2 vs labels) | **64%** (16/25); 65% on the 23 cases not used as examples |
+| Assertions vs judged criteria | **4 vs 1** |
+| Pass rate, all 25 (assertions AND judge v2) | 16% |
 
 The app under test is `src/summariser.py`. It writes the closing summary for a
 closed claim from the claim file (policy terms, estimate, dated adjuster notes
@@ -15,18 +17,23 @@ ending in the decision), and runs on the small model `openai/gpt-oss-20b`.
 .\.venv\Scripts\python.exe evals\week6.py
 ```
 
-Current output (assertions only; the judge column fills in once it has run):
+```
+Week 6 eval — 25 cases, 4 assertions + 1 judged criterion, judge v2
 
-```
 mode                              n  assertions    judge  pass rate
-citation-not-machine-readable     5      1/5           -          -
-decisive-fact-buried              4      1/4           -          -
-position-contradicts-body         5      1/5           -          -
-rule-not-applied                  5      1/5           -          -
-wrong-form-or-clause              6      1/6           -          -
-regression                        2      0/2           -          -
-ALL                              25      5/25          -          -
+citation-not-machine-readable     5      1/5         5/5        20%
+decisive-fact-buried              4      1/4         4/4        25%
+position-contradicts-body         5      1/5         3/5        20%
+rule-not-applied                  5      1/5         4/5         0%
+wrong-form-or-clause              6      1/6         6/6        17%
+regression                        2      0/2         1/2         0%
+ALL                              25      5/25      22/25        16%
+
+pass = all assertions pass AND judge says PASS
 ```
+
+The low pass rate comes from the assertions, not the judge: most summaries
+write codes and dates with a non-breaking hyphen (see section 2).
 
 ## 1. Eval set: 25 cases, each tagged with one Week 5 mode, 2 real regressions
 
@@ -91,17 +98,90 @@ the cases were drawn from.)
 | `judge` | refuses unless `labels_25.json` is **committed and unmodified**; writes the labels commit hash into `judge_results_v1.json`; refuses if any summary changed after it was labelled |
 | `iterate` | refuses unless `prediction.txt` is committed |
 
-## Remaining steps
+## 4. Ordering evidence
 
-1. **Label (human, about 25 minutes):** `.\.venv\Scripts\python.exe evals\week6.py label`
-2. Commit the labels alone:
-   `git add reports/week6/labels_25.json` then `git commit -m "week 6 blind labels"`
-3. `python evals/week6.py judge --version v1` → **agreement_before**
-4. Write one sentence in `reports/week6/prediction.txt` saying what the
-   iteration will fix, then commit it alone.
-5. `python evals/week6.py iterate` → `judge_v2.txt`, built from two of v1's own
-   disagreements (one too lenient, one too strict when both exist)
-6. `python evals/week6.py judge --version v2` → **agreement_after**, also
-   reported on the 23 cases that were not used as examples
-7. Commit, then write up the 2 disagreements (who was right) and score the
-   prediction here.
+```
+8197651  2026-10-01 00:22:55 +0530  week 6 labels            <- labels_25.json, alone
+4dfebe9  2026-10-01 00:28:28 +0530  week 6 judge v1 run
+ebd43af  2026-10-01 00:29:23 +0530  week 6 prediction        <- before any iteration
+e84367a  2026-10-01 00:29:32 +0530  week 6 judge v2 prompt
+```
+
+`judge_results_v1.json` records `labels_commit: 8197651...`. The judge
+command refused to run until that commit existed.
+
+**How the labels were entered.** The labels file records a time for each
+label. Case 10 was entered through the labelling tool at 18:43:03 UTC. The
+other 24 all carry the same second, 18:50:14 UTC, and appear in case-id order,
+not the tool's shuffled order. So they were not entered one by one in the
+tool. They are committed before any judge run, and that is what the ordering
+above proves.
+
+## 5. Agreement before → after
+
+| | Agreement | Disagreements |
+|---|---:|---|
+| judge v1 | **72%** (18/25) | 7, all "judge PASS, label FAIL": cases 1, 4, 6, 9, 18, 20, 21 |
+| judge v2 | **64%** (16/25) | 9: cases 1, 5, 6, 9, 11, 18, 20, 21, 25 |
+| judge v2, excluding the 2 few-shot cases | 65% (15/23) | |
+
+**How v2 was built** (`python evals/week6.py iterate`): v1 had no "too strict"
+disagreements, so v2 takes the first two "too lenient" ones, cases 1 and 4.
+It appends them to the v1 prompt as worked examples ("your earlier verdict:
+PASS; correct verdict: FAIL", with the label's reason). Diff:
+`git diff 4dfebe9 e84367a -- reports/week6/`.
+
+**What changed between v1 and v2:**
+
+| Case | Label | v1 | v2 | What the claim file shows |
+|---|---|---|---|---|
+| 1 | FAIL | PASS | PASS | was a few-shot example; the judge still passed it, and the summary does match the decision ($3,600) |
+| 4 | FAIL | PASS | **FAIL** | was a few-shot example; v2 now fails it for "adds Hurricane Delia, not in the file", but the adjuster note names Hurricane Delia |
+| 5 | PASS | PASS | **FAIL** | v2 says the insured never reported rain entering; the first notice of loss says exactly that |
+| 11 | FAIL | FAIL | **PASS** | summary matches the decision (laptop denied under E-93, printer $800); v1's reason was wrong |
+| 25 | PASS | PASS | **FAIL** | v2 objects to "the $1,000 deductible applies"; the decision note lists the $1,000 deductible |
+
+Net effect: v2 became stricter, and 3 of its new FAILs (cases 4, 5, 25) rest
+on reasons the claim file contradicts. Agreement moved 2 cases in the wrong
+direction.
+
+## 6. Two disagreements: who was right
+
+**Case 21, CLM-2026-10022 (scheduled painting): label FAIL, judge PASS in v1
+and v2. The judge was right.** The label says "says covered when the decision
+was a denial". The adjuster's decision is "covered under VA-1, repair cost
+$2,300 paid in full, deductible $0". The summary says covered under VA-1, no
+deductible, $2,300 payable. They match, so the label is wrong.
+
+**Case 4, CLM-2026-10004 (hurricane roof): label FAIL, judge PASS in v1, FAIL
+in v2. v1 was right; the label and v2 are wrong.** The label says "unsupported
+fact added about the cause". The summary's cause (Hurricane Delia, shingles
+and flashing lost on the west slope, no water inside), its $6,000 hurricane
+deductible and its $7,200 payable all appear in the adjuster notes. v2
+reproduced the label because the label was one of its few-shot examples, and
+it invented a reason ("Hurricane Delia is not stated in the claim file") to
+get there.
+
+Checked against the claim file, **all 7 of v1's disagreements are cases where
+the summary matches the adjuster's decision.** The label's reason does not fit
+the file in each one (the table in section 5 and the per-case reasons in
+`judge_results_v1.json`). This is the common mistake the task warns about,
+from the other side. When the ruler is wrong, teaching the judge the ruler's
+answers makes the judge worse, and agreement still did not go up.
+
+## 7. Prediction, scored
+
+`prediction.txt` (committed at `ebd43af`, before the iteration):
+
+> 2 will agree with me more because it sees two cases it got wrong
+
+**It was wrong.** Agreement went down, from 72% to 64% (65% on the 23 cases that
+were not examples). Where it went wrong:
+
+- Showing the judge two cases did not make it copy them: case 1 stayed PASS.
+- Where the judge did adopt the example's verdict (case 4), it generalised to
+  "be stricter". That created 2 new disagreements (cases 5 and 25) on
+  summaries the label had passed, and flipped case 11 from agree to disagree.
+- The prediction assumed the labels were the right answers. On the evidence
+  in section 6, the disagreements were label errors, so no judge change could
+  have fixed them. The fix is in the labels.
