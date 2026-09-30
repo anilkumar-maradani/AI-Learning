@@ -50,10 +50,12 @@ SEARCH_POLICY = {
     "function": {
         "name": "search_policy",
         "description": (
-            "Search the wording of the endorsement forms (coverage clauses, exclusion "
-            "table rows, deductible and sublimit rules) and return the best matching "
-            "passages with their form number and clause id. It knows nothing about any "
-            "particular claim; describe the peril or cause of loss you need wording for."
+            "Read endorsement wording (coverage clauses, exclusion table rows, deductible "
+            "and sublimit rules). With form_number, returns that form's COMPLETE wording: "
+            "every clause and its whole exclusion table, so one call per form is enough "
+            "and repeating it returns nothing new. Without form_number, returns the best "
+            "matching passages across all forms for the query. It knows nothing about "
+            "any particular claim."
         ),
         "parameters": {
             "type": "object",
@@ -137,10 +139,21 @@ def search_policy(query: str, form_number: str | None = None, n_results: int = 4
     from hybrid_retrieval import hybrid_search
     if form_number and not FORM_RE.match(form_number):
         return {"error": f"'{form_number}' is not a form number (expected NG-NNNN)"}
-    q = f"{form_number} {query}" if form_number else query
-    hits = hybrid_search(q, n_results=12 if form_number else n_results)
     if form_number:
-        hits = [h for h in hits if h["metadata"].get("form_number") == form_number][:n_results]
+        # Week 8 mitigation: the whole form, in document order, minus header chunks.
+        # Before, 4 ranked slots were often spent on PREAMBLE chunks and the agent
+        # re-searched the same form to find the clause it still needed.
+        from hybrid_retrieval import _get_bm25_index
+        hits = sorted(
+            (c for c in _get_bm25_index().chunks
+             if c["metadata"].get("form_number") == form_number
+             and c["metadata"].get("clause_id") != "PREAMBLE"),
+            key=lambda c: c["metadata"]["chunk_index"],
+        )
+        if not hits:
+            return {"error": f"No form {form_number} in the policy library"}
+    else:
+        hits = hybrid_search(query, n_results=n_results)
     return {
         "passages": [
             {

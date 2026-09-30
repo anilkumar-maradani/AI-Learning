@@ -119,6 +119,7 @@ def check_args(run: dict, case: dict) -> list[dict]:
     for field in ("exclusion_ids", "clauses"):
         for ref in ans.get(field) or []:
             r = str(ref).replace("‑", "-").strip()
+            r = re.sub(r"^NG-\d{4}\s*[:/ ]\s*", "", r)  # "NG-1103:CLAUSE-MR-1"
             r = re.sub(r"^CLAUSE[-\s]+", "", r, flags=re.I)
             rec("final_answer", field, r, r in real,
                 "" if r in real else "does not exist in the corpus")
@@ -146,7 +147,13 @@ def failure_modes(run: dict, case: dict, spec: dict, matched: list[str] | None,
     if len(calls) != len(set(calls)):
         modes.append("repeated_identical_call")
     if matched is None and not modes:
-        modes.append("unneeded_detour")
+        forms_seen, revisit = set(), False
+        for t in toks:
+            pol = {x for x in t if x.startswith("policy:")}
+            if pol and pol <= forms_seen:
+                revisit = True
+            forms_seen |= pol
+        modes.append("redundant_lookup" if revisit else "unneeded_detour")
     if any(not c["valid"] for c in arg_checks):
         modes.append("invalid_argument")
     return modes

@@ -16,7 +16,6 @@ import json
 import os
 import statistics
 import sys
-import time
 from collections import Counter
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -34,7 +33,7 @@ SPECS = os.path.join(ROOT, "evals", "cases", "trajectory_10.jsonl")
 RACE = os.path.join(ROOT, "evals", "cases", "race_10.jsonl")
 
 MODES = ["skipped_required_lookup", "payout_before_lookup", "payout_without_facts",
-         "repeated_identical_call", "unneeded_detour", "invalid_argument",
+         "repeated_identical_call", "redundant_lookup", "unneeded_detour", "invalid_argument",
          "stopped_without_answer", "wrong_outcome"]
 
 
@@ -116,7 +115,7 @@ def print_score(res: dict, label: str):
     print("per claim:")
     for r in res["rows"]:
         print(f"  {r['claim_number']}  outcome={'P' if r['outcome_pass'] else 'F'} "
-              f"traj={'P' if r['trajectory_pass'] else 'F'}  {' → '.join(r['tools'])}  {r['modes'] or ''}")
+              f"traj={'P' if r['trajectory_pass'] else 'F'}  {' → '.join(t or 'error' for t in r['tools'])}  {r['modes'] or ''}")
     print("modes:", {k: v for k, v in s["mode_counts"].items() if v})
 
 
