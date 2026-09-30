@@ -4,8 +4,8 @@ search, fused with Reciprocal Rank Fusion (RRF).
 
 Motivation
     Dense embeddings capture meaning ("broken supply line" ≈ "burst pipe") but
-    blur rare identifiers: "E-17" embeds almost identically to "E-11" or
-    "E-15" because they all live in the same exclusion-table context. BM25
+    blur rare identifiers: "E-43" embeds almost identically to "E-41" or
+    "E-45" because they all live in the same exclusion-table context. BM25
     is the opposite — it rewards rare exact tokens heavily. Fusing the two
     rank lists gives us both behaviours.
 
@@ -45,30 +45,30 @@ def _tokenize(text: str) -> list[str]:
 
     BM25 works on a list of tokens (words). We:
     1. Lowercase everything
-    2. Keep SHORT hyphenated codes intact: "E-17" → "e-17", "HO-0304" → "ho-0304"
+    2. Keep SHORT hyphenated codes intact: "E-43" → "e-43", "NG-1101" → "ng-1101"
     3. Split LONG hyphenated compounds (clause_id prefixes like
-       EXCLUSION-TABLE-E-11-E-12-E-13-...-E-17-E-18) into their short parts.
+       EXCLUSION-TABLE-E-41-E-42-E-43-...-E-46) into their short parts.
 
     WHY this matters:
         The structure-aware chunker prepends a clause_id like
-        "EXCLUSION-TABLE-E-11-E-12-...-E-17-E-18" to every chunk's text.
+        "EXCLUSION-TABLE-E-41-E-42-...-E-46" to every chunk's text.
         If we allow unlimited hyphens, this entire string becomes ONE token:
-        "exclusion-table-e-11-e-12-...-e-17-e-18" — and BM25 cannot match
-        the query token "e-17" against it.
+        "exclusion-table-e-41-e-42-...-e-46" — and BM25 cannot match
+        the query token "e-43" against it.
 
         By limiting to ONE hyphen per token, we split the compound into:
-        ["exclusion-table", "e-11", "e-12", ..., "e-17", "e-18"]
-        Now "e-17" appears as a separate token in the clause_id prefix AND
+        ["exclusion-table", "e-41", "e-42", ..., "e-46"]
+        Now "e-43" appears as a separate token in the clause_id prefix AND
         again in the exclusion table body — TF=2, which correctly boosts
-        the EXCLUSION-TABLE chunk's BM25 score for "e-17" queries.
+        the EXCLUSION-TABLE chunk's BM25 score for "e-43" queries.
 
     Example:
-        "E-17 burst supply line"              → ["e-17", "burst", "supply", "line"]
-        "EXCLUSION-TABLE-E-11-E-12-...-E-17"  → ["exclusion-table", "e-11", ..., "e-17"]
-        "HO-0304 ed. 03-24"                   → ["ho-0304", "ed", "03-24"]
+        "E-43 sewer drain backup"             → ["e-43", "sewer", "drain", "backup"]
+        "EXCLUSION-TABLE-E-41-E-42-...-E-46"  → ["exclusion-table", "e-41", ..., "e-46"]
+        "NG-1101 ed. 01-26"                   → ["ng-1101", "ed", "01-26"]
     """
     # Max ONE hyphen per token → splits long clause_id compounds correctly
-    # while keeping short codes like e-17, ho-0304, 03-24 intact.
+    # while keeping short codes like e-43, ng-1101, 01-26 intact.
     tokens = re.findall(r"[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)?", text.lower())
     return tokens
 
@@ -268,7 +268,7 @@ def hybrid_search(
         query, strategy="structure_aware", n_results=vector_candidates
     )
 
-    # Step 2: BM25 search (keyword — finds exact tokens like "E-17")
+    # Step 2: BM25 search (keyword — finds exact tokens like "E-43")
     bm25_index = _get_bm25_index()
     bm25_results = bm25_index.search(query, n_results=bm25_candidates)
 
@@ -345,8 +345,8 @@ if __name__ == "__main__":
     print("Testing hybrid search...\n")
 
     test_queries = [
-        "Does exclusion E-17 apply under HO-0304 ed. 03-24?",
-        "What is the named storm deductible under HO-0305?",
+        "Does exclusion E-43 apply under NG-1101 ed. 01-26?",
+        "What is the hurricane deductible under NG-1102?",
         "Is mold covered after a burst pipe?",
     ]
 

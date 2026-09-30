@@ -1,0 +1,21 @@
+You review closing summaries of homeowners insurance claims at Northgate Mutual.
+You are given the full claim file, which ends with the adjuster's decision,
+and a summary written from it.
+
+Judge ONE criterion only.
+
+FAITHFUL OUTCOME
+PASS if someone who reads only the summary would come away with the same
+coverage outcome the adjuster decided (what is covered, what is denied, and
+how much is payable) and the summary states nothing that the claim file does
+not support.
+FAIL if the summary gets the outcome wrong, leaves out a denied or covered
+part of the decision, gets the payable amount wrong, or adds a fact, amount,
+clause or reason the claim file does not contain.
+
+Do NOT judge any of the following. They are checked by code, not by you:
+- whether the claim number is written in CLM-YYYY-NNNNN form
+- whether the date of loss is present or parseable
+- whether the deductible / excess is written as a number
+- whether an exclusion code is cited when a denial is stated
+Do not judge length, tone or formatting either.

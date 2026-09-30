@@ -1,5 +1,5 @@
 """
-ingest.py — Ingest the 6 endorsements into TWO separate ChromaDB collections:
+ingest.py — Ingest the policy forms in data/policy/ into TWO separate ChromaDB collections:
   • 'endorsements_naive'          — Strategy A chunks
   • 'endorsements_structure_aware' — Strategy B chunks
 
@@ -26,45 +26,30 @@ enable_utf8()
 # Config
 # ---------------------------------------------------------------------------
 
-ENDORSEMENTS_DIR = os.path.join(os.path.dirname(__file__), "..", "endorsements")
+ENDORSEMENTS_DIR = os.path.join(os.path.dirname(__file__), "..", "data", "policy")
 CHROMA_DB_PATH = os.path.join(os.path.dirname(__file__), "..", "chroma_db")
 
 COLLECTION_NAIVE = "endorsements_naive"
 COLLECTION_SA = "endorsements_structure_aware"
 
-# Metadata extracted from filenames like "HO-0304_03-24.txt"
-ENDORSEMENT_META = {
-    "HO-0304_03-24.txt": {
-        "form_number": "HO-0304",
-        "edition_date": "03-24",
-        "policy_line": "homeowners",
-    },
-    "HO-0305_03-24.txt": {
-        "form_number": "HO-0305",
-        "edition_date": "03-24",
-        "policy_line": "homeowners",
-    },
-    "HO-0306_04-24.txt": {
-        "form_number": "HO-0306",
-        "edition_date": "04-24",
-        "policy_line": "homeowners",
-    },
-    "HO-0307_04-24.txt": {
-        "form_number": "HO-0307",
-        "edition_date": "04-24",
-        "policy_line": "homeowners",
-    },
-    "HO-0308_05-24.txt": {
-        "form_number": "HO-0308",
-        "edition_date": "05-24",
-        "policy_line": "homeowners",
-    },
-    "HO-0309_05-24.txt": {
-        "form_number": "HO-0309",
-        "edition_date": "05-24",
-        "policy_line": "homeowners",
-    },
+_HEADER_FIELDS = {
+    "Form Number": "form_number",
+    "Edition Date": "edition_date",
+    "Policy Line": "policy_line",
 }
+
+
+def read_form_metadata(text: str) -> dict:
+    """Pull form_number / edition_date / policy_line out of the form's header block."""
+    meta = {}
+    for line in text.splitlines()[:10]:
+        key, _, value = line.partition(":")
+        if key.strip() in _HEADER_FIELDS and value.strip():
+            meta[_HEADER_FIELDS[key.strip()]] = value.strip()
+    missing = set(_HEADER_FIELDS.values()) - set(meta)
+    if missing:
+        raise ValueError(f"form header is missing {sorted(missing)}")
+    return meta
 
 
 # ---------------------------------------------------------------------------
@@ -123,19 +108,16 @@ def ingest_all(reset: bool = True) -> dict:
     )
 
     for filename in endorsement_files:
-        if filename not in ENDORSEMENT_META:
-            print(f"  WARNING: No metadata mapping for {filename}, skipping.")
-            stats["failed_files"].append(filename)
-            continue
-
         filepath = os.path.join(ENDORSEMENTS_DIR, filename)
         with open(filepath, "r", encoding="utf-8") as fh:
             text = fh.read()
 
-        base_meta = {
-            "source_file": filename,
-            **ENDORSEMENT_META[filename],
-        }
+        try:
+            base_meta = {"source_file": filename, **read_form_metadata(text)}
+        except ValueError as exc:
+            print(f"  WARNING: {filename}: {exc}, skipping.")
+            stats["failed_files"].append(filename)
+            continue
 
         # --- Naive chunks ---
         naive_chunks = naive_chunker(text, base_meta)

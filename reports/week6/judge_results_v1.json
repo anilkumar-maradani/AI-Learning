@@ -1,0 +1,360 @@
+{
+  "version": "v1",
+  "run_utc": "2026-09-30T18:54:39+00:00",
+  "labels_commit": "819765189879f8e96ec7d51464859cfbbdf983e9",
+  "judge_prompt_sha256": "aa9faccf310f91293f0f144724c86d282ce628b3e3146c7865e7423e2ec2dcc6",
+  "agreement": 0.72,
+  "agreement_excluding_fewshot": null,
+  "rows": [
+    {
+      "id": 1,
+      "claim_number": "CLM-2026-10001",
+      "judge": "PASS",
+      "human": "FAIL",
+      "agree": false,
+      "judge_reason": "The summary accurately reflects the adjuster's decision on coverage, loss amount, deductible, and payable amount.",
+      "usage": {
+        "prompt": 646,
+        "completion": 127,
+        "total": 773
+      },
+      "error": null
+    },
+    {
+      "id": 2,
+      "claim_number": "CLM-2026-10002",
+      "judge": "PASS",
+      "human": "PASS",
+      "agree": true,
+      "judge_reason": "The summary accurately reflects the denial, exclusion, and $0 payable as stated in the adjuster's decision.",
+      "usage": {
+        "prompt": 625,
+        "completion": 145,
+        "total": 770
+      },
+      "error": null
+    },
+    {
+      "id": 3,
+      "claim_number": "CLM-2026-10003",
+      "judge": "PASS",
+      "human": "PASS",
+      "agree": true,
+      "judge_reason": "The summary accurately reflects the adjuster's decision on coverage, denial, and payable amount without adding unsupported information.",
+      "usage": {
+        "prompt": 680,
+        "completion": 164,
+        "total": 844
+      },
+      "error": null
+    },
+    {
+      "id": 4,
+      "claim_number": "CLM-2026-10004",
+      "judge": "PASS",
+      "human": "FAIL",
+      "agree": false,
+      "judge_reason": "The summary accurately reflects the adjuster's decision on coverage, deductible, and payable amount without adding unsupported information.",
+      "usage": {
+        "prompt": 661,
+        "completion": 164,
+        "total": 825
+      },
+      "error": null
+    },
+    {
+      "id": 5,
+      "claim_number": "CLM-2026-10005",
+      "judge": "PASS",
+      "human": "PASS",
+      "agree": true,
+      "judge_reason": "The summary accurately reflects the denial, exclusion, deductible, damage estimate, and $0 payment.",
+      "usage": {
+        "prompt": 642,
+        "completion": 118,
+        "total": 760
+      },
+      "error": null
+    },
+    {
+      "id": 6,
+      "claim_number": "CLM-2026-10006",
+      "judge": "PASS",
+      "human": "FAIL",
+      "agree": false,
+      "judge_reason": "The summary accurately reflects the adjuster's decision, coverage, deductible exemption, and payable amount.",
+      "usage": {
+        "prompt": 617,
+        "completion": 122,
+        "total": 739
+      },
+      "error": null
+    },
+    {
+      "id": 7,
+      "claim_number": "CLM-2026-10007",
+      "judge": "PASS",
+      "human": "PASS",
+      "agree": true,
+      "judge_reason": "The summary accurately reflects the adjuster's denial, the applicable exclusion, deductible, and $0 payable.",
+      "usage": {
+        "prompt": 594,
+        "completion": 121,
+        "total": 715
+      },
+      "error": null
+    },
+    {
+      "id": 8,
+      "claim_number": "CLM-2026-10008",
+      "judge": "PASS",
+      "human": "PASS",
+      "agree": true,
+      "judge_reason": "The summary accurately reflects the denial, code, deductible, and $0 payable as stated in the claim file.",
+      "usage": {
+        "prompt": 674,
+        "completion": 113,
+        "total": 787
+      },
+      "error": null
+    },
+    {
+      "id": 9,
+      "claim_number": "CLM-2026-10009",
+      "judge": "PASS",
+      "human": "FAIL",
+      "agree": false,
+      "judge_reason": "The summary accurately reflects the denial, exclusion code, estimate, deductible, and $0 payable as in the adjuster's decision.",
+      "usage": {
+        "prompt": 621,
+        "completion": 122,
+        "total": 743
+      },
+      "error": null
+    },
+    {
+      "id": 10,
+      "claim_number": "CLM-2026-10010",
+      "judge": "PASS",
+      "human": "PASS",
+      "agree": true,
+      "judge_reason": "The summary accurately reflects the adjuster's decision, coverage, exclusion, and payable amount.",
+      "usage": {
+        "prompt": 644,
+        "completion": 102,
+        "total": 746
+      },
+      "error": null
+    },
+    {
+      "id": 11,
+      "claim_number": "CLM-2026-10011",
+      "judge": "FAIL",
+      "human": "FAIL",
+      "agree": true,
+      "judge_reason": "The summary incorrectly states the damage was to the insured’s equipment, but the laptop belongs to the employer, not the insured.",
+      "usage": {
+        "prompt": 643,
+        "completion": 492,
+        "total": 1135
+      },
+      "error": null
+    },
+    {
+      "id": 12,
+      "claim_number": "CLM-2026-10012",
+      "judge": "PASS",
+      "human": "PASS",
+      "agree": true,
+      "judge_reason": "The summary accurately reflects the adjuster's decision, including the denial of candle stock, coverage of the sewing machine, deductible application, and $800 payable.",
+      "usage": {
+        "prompt": 614,
+        "completion": 133,
+        "total": 747
+      },
+      "error": null
+    },
+    {
+      "id": 13,
+      "claim_number": "CLM-2026-10013",
+      "judge": "PASS",
+      "human": "PASS",
+      "agree": true,
+      "judge_reason": "The summary correctly states the denial, exclusion, and $0 payable as in the adjuster's decision.",
+      "usage": {
+        "prompt": 628,
+        "completion": 119,
+        "total": 747
+      },
+      "error": null
+    },
+    {
+      "id": 14,
+      "claim_number": "CLM-2026-10014",
+      "judge": "PASS",
+      "human": "PASS",
+      "agree": true,
+      "judge_reason": "The summary accurately reflects the denial under E-46, the deductible, and $0 payable as in the adjuster's decision.",
+      "usage": {
+        "prompt": 601,
+        "completion": 119,
+        "total": 720
+      },
+      "error": null
+    },
+    {
+      "id": 15,
+      "claim_number": "CLM-2026-10015",
+      "judge": "PASS",
+      "human": "PASS",
+      "agree": true,
+      "judge_reason": "The summary accurately reflects the adjuster's denial, exclusion, deductible, and $0 payable without adding unsupported information.",
+      "usage": {
+        "prompt": 610,
+        "completion": 121,
+        "total": 731
+      },
+      "error": null
+    },
+    {
+      "id": 16,
+      "claim_number": "CLM-2026-10017",
+      "judge": "PASS",
+      "human": "PASS",
+      "agree": true,
+      "judge_reason": "The summary accurately reflects the covered items, denial, deductible, and payable amount as stated in the adjuster's decision.",
+      "usage": {
+        "prompt": 677,
+        "completion": 202,
+        "total": 879
+      },
+      "error": null
+    },
+    {
+      "id": 17,
+      "claim_number": "CLM-2026-10018",
+      "judge": "PASS",
+      "human": "PASS",
+      "agree": true,
+      "judge_reason": "The summary accurately reflects the adjuster's denial, exclusion, deductible, and $0 payable without adding unsupported information.",
+      "usage": {
+        "prompt": 620,
+        "completion": 135,
+        "total": 755
+      },
+      "error": null
+    },
+    {
+      "id": 18,
+      "claim_number": "CLM-2026-10019",
+      "judge": "PASS",
+      "human": "FAIL",
+      "agree": false,
+      "judge_reason": "The summary accurately reflects the adjuster's decision on coverage, deductible, payable amount, and denial.",
+      "usage": {
+        "prompt": 649,
+        "completion": 151,
+        "total": 800
+      },
+      "error": null
+    },
+    {
+      "id": 19,
+      "claim_number": "CLM-2026-10020",
+      "judge": "PASS",
+      "human": "PASS",
+      "agree": true,
+      "judge_reason": "The summary accurately reflects the denial, exclusion, deductible, estimate, and $0 payable as stated in the claim file.",
+      "usage": {
+        "prompt": 618,
+        "completion": 180,
+        "total": 798
+      },
+      "error": null
+    },
+    {
+      "id": 20,
+      "claim_number": "CLM-2026-10021",
+      "judge": "PASS",
+      "human": "FAIL",
+      "agree": false,
+      "judge_reason": "The summary accurately reflects the adjuster's decision, including the denial, deductible, and $0 payable.",
+      "usage": {
+        "prompt": 642,
+        "completion": 195,
+        "total": 837
+      },
+      "error": null
+    },
+    {
+      "id": 21,
+      "claim_number": "CLM-2026-10022",
+      "judge": "PASS",
+      "human": "FAIL",
+      "agree": false,
+      "judge_reason": "The summary accurately reflects the adjuster's decision, coverage, deductible exemption, and payable amount.",
+      "usage": {
+        "prompt": 632,
+        "completion": 113,
+        "total": 745
+      },
+      "error": null
+    },
+    {
+      "id": 22,
+      "claim_number": "CLM-2026-10023",
+      "judge": "PASS",
+      "human": "PASS",
+      "agree": true,
+      "judge_reason": "The summary accurately reflects the denial, exclusion, deductible, and $0 payable as stated in the adjuster's decision.",
+      "usage": {
+        "prompt": 613,
+        "completion": 125,
+        "total": 738
+      },
+      "error": null
+    },
+    {
+      "id": 23,
+      "claim_number": "CLM-2026-10024",
+      "judge": "PASS",
+      "human": "PASS",
+      "agree": true,
+      "judge_reason": "The summary accurately reflects the adjuster's decision on coverage, deductible, sublimit, and total payable amount.",
+      "usage": {
+        "prompt": 731,
+        "completion": 169,
+        "total": 900
+      },
+      "error": null
+    },
+    {
+      "id": 24,
+      "claim_number": "CLM-2026-10025",
+      "judge": "PASS",
+      "human": "PASS",
+      "agree": true,
+      "judge_reason": "The summary correctly states the denial, the applicable deductible, and that no payment is due, matching the adjuster's decision.",
+      "usage": {
+        "prompt": 680,
+        "completion": 113,
+        "total": 793
+      },
+      "error": null
+    },
+    {
+      "id": 25,
+      "claim_number": "CLM-2026-10029",
+      "judge": "PASS",
+      "human": "PASS",
+      "agree": true,
+      "judge_reason": "The summary accurately reflects the denial under E‑41, the deductible, and $0 payable as in the adjuster's decision.",
+      "usage": {
+        "prompt": 646,
+        "completion": 112,
+        "total": 758
+      },
+      "error": null
+    }
+  ]
+}

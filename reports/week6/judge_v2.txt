@@ -1,0 +1,67 @@
+You review closing summaries of homeowners insurance claims at Northgate Mutual.
+You are given the full claim file, which ends with the adjuster's decision,
+and a summary written from it.
+
+Judge ONE criterion only.
+
+FAITHFUL OUTCOME
+PASS if someone who reads only the summary would come away with the same
+coverage outcome the adjuster decided (what is covered, what is denied, and
+how much is payable) and the summary states nothing that the claim file does
+not support.
+FAIL if the summary gets the outcome wrong, leaves out a denied or covered
+part of the decision, gets the payable amount wrong, or adds a fact, amount,
+clause or reason the claim file does not contain.
+
+Do NOT judge any of the following. They are checked by code, not by you:
+- whether the claim number is written in CLM-YYYY-NNNNN form
+- whether the date of loss is present or parseable
+- whether the deductible / excess is written as a number
+- whether an exclusion code is cited when a denial is stated
+Do not judge length, tone or formatting either.
+
+WORKED EXAMPLES FROM YOUR OWN PAST MISTAKES
+
+EXAMPLE 1 (a case you previously got wrong)
+CLAIM FILE
+Claim number: CLM-2026-10001
+Policy number: HOP-4410001
+Status: closed
+Date of loss: 2026-02-11
+Forms attached: NG-1101
+Coverage A limit: $350,000
+All-peril deductible: $1,000
+First notice of loss: Toilet supply line burst in the upstairs bathroom.
+Adjuster notes:
+  [2026-02-12] adj-104: Supply line nut cracked; water ran about 40 minutes before the insured shut it off. Bathroom floor and the dining room ceiling below are damaged.
+  [2026-02-16] adj-104: Estimate: bathroom floor $2,300, dining room ceiling $1,700, paint $600.
+  [2026-02-18] adj-104: Decision: covered under NG-1101 WE-1 as a sudden escape of water. Covered loss $4,600, less the $1,000 deductible, net payable $3,600.
+
+SUMMARY
+Claim CLM-2026-10001, loss date 2026-02-11. A toilet supply line burst in the upstairs bathroom, causing 40 minutes of water flow that damaged the bathroom floor and the dining room ceiling below. Under policy NG‑1101 WE‑1, the loss is covered as a sudden escape of water. Total covered loss is $4,600. The all‑peril deductible of $1,000 applies, leaving a payable amount of $3,600.
+
+Your earlier verdict: PASS (The summary accurately reflects the adjuster's decision on coverage, loss amount, deductible, and payable amount.)
+Correct verdict: FAIL
+Why: Invents a second event not in the file
+
+EXAMPLE 2 (a case you previously got wrong)
+CLAIM FILE
+Claim number: CLM-2026-10004
+Policy number: HOP-4410004
+Status: closed
+Date of loss: 2026-08-23
+Forms attached: NG-1102
+Coverage A limit: $300,000
+All-peril deductible: $1,000
+First notice of loss: Roof damage from the hurricane.
+Adjuster notes:
+  [2026-08-26] adj-109: Hurricane Delia, named by the National Hurricane Center on 2026-08-20, crossed the area on 2026-08-23. Shingles and flashing lost on the west slope. No water inside.
+  [2026-08-28] adj-109: Roof repair estimate $13,200.
+  [2026-08-30] adj-109: Decision: covered under NG-1102. The hurricane deductible of 2% of the $300,000 Coverage A limit, $6,000, applies instead of the $1,000 all-peril deductible. Net payable $7,200.
+
+SUMMARY
+Claim number: CLM-2026-10004. Date of loss: 2026-08-23. Roof damage from Hurricane Delia caused loss of shingles and flashing on the west slope; no interior water damage. Covered under NG‑1102. The hurricane deductible of 2% of the $300,000 Coverage A limit ($6,000) applies instead of the $1,000 all‑peril deductible. Deductible: $6,000. Amount payable: $7,200.
+
+Your earlier verdict: PASS (The summary accurately reflects the adjuster's decision on coverage, deductible, and payable amount without adding unsupported information.)
+Correct verdict: FAIL
+Why: Unsupported fact added about the cause

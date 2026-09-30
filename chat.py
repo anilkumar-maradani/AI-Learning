@@ -9,7 +9,7 @@ contain the answer.
 Retrieval modes
     hybrid  (default)  BM25 keyword search + dense vector search, fused with
                        Reciprocal Rank Fusion. Handles exact tokens such as
-                       "E-17" or "HO-0304 ed. 03-24" reliably.
+                       "E-43" or "NG-1101 ed. 01-26" reliably.
     vector             Dense-only search over the structure-aware collection.
 
 Usage
@@ -54,15 +54,15 @@ BOLD    = "\033[1m"
 DIM     = "\033[2m"
 RESET   = "\033[0m"
 
-INDEXED_FORMS = ["HO-0304", "HO-0305", "HO-0306", "HO-0307", "HO-0308", "HO-0309"]
+INDEXED_FORMS = ["NG-1101", "NG-1102", "NG-1103", "NG-1104", "NG-1105", "NG-1106"]
 
 EXAMPLE_QUESTIONS = [
-    "What is the named storm deductible under HO-0305?",
-    "Does E-17 apply under HO-0304 ed. 03-24?",
-    "Is mold damage excluded by HO-0306?",
-    "How does HO-0304 define 'sudden and accidental'?",
-    "Does HO-0308 exclude earthquake damage?",
-    "What does HO-0309 say about business pursuits?",
+    "What is the hurricane deductible under NG-1102?",
+    "Does E-43 apply under NG-1101 ed. 01-26?",
+    "How much does NG-1103 pay for mold?",
+    "How does NG-1101 define a 'sudden' escape of water?",
+    "Does NG-1105 exclude earthquake damage?",
+    "What business property does NG-1106 cover away from home?",
 ]
 
 RULE = f"{DIM}{'·' * 66}{RESET}"

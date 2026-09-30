@@ -1,0 +1,10 @@
+{"claim_number": "CLM-2026-20101", "required_forms": ["NG-1101"], "optional_forms": ["NG-1103"], "payout": "required", "why": "sudden escape: WE-1 wording needed; the mold form is attached, so reading it is allowed but not needed"}
+{"claim_number": "CLM-2026-20102", "required_forms": ["NG-1101"], "optional_forms": [], "payout": "optional", "why": "E-41 seepage row must be read; excluded, so a $0 compute_payout call is allowed but not needed"}
+{"claim_number": "CLM-2026-20103", "required_forms": ["NG-1105"], "optional_forms": ["NG-1101"], "payout": "optional", "why": "notes reveal ground movement: NG-1105 must be opened; reading NG-1101 before OR after it is equally valid"}
+{"claim_number": "CLM-2026-20104", "required_forms": ["NG-1102"], "optional_forms": [], "payout": "required", "why": "hurricane deductible WH-1 must be read before the payout"}
+{"claim_number": "CLM-2026-20105", "required_forms": ["NG-1103"], "optional_forms": ["NG-1101"], "payout": "required", "why": "mold: MR-1/MR-2 needed; checking the underlying water loss in NG-1101 first or second is valid"}
+{"claim_number": "CLM-2026-20106", "required_forms": ["NG-1101"], "optional_forms": [], "payout": "optional", "why": "E-43 sewer backup row must be read"}
+{"claim_number": "CLM-2026-20107", "required_forms": ["NG-1104"], "optional_forms": [], "payout": "required", "why": "scheduled article: VA-1/VA-2 needed for agreed value and no deductible"}
+{"claim_number": "CLM-2026-20108", "required_forms": ["NG-1102"], "optional_forms": [], "payout": "optional", "why": "E-51 cosmetic hail row must be read"}
+{"claim_number": "CLM-2026-20109", "required_forms": ["NG-1106"], "optional_forms": [], "payout": "required", "why": "HB-1 sublimit and E-92 data exclusion needed"}
+{"claim_number": "CLM-2026-20110", "required_forms": [], "optional_forms": ["NG-1101"], "payout": "forbidden", "why": "no adjuster notes: must stop at needs_info; looking up wording is harmless, computing a payout is not"}

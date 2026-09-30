@@ -1,0 +1,33 @@
+CLM-2026-20101  (3 accepted)  sudden escape: WE-1 wording needed; the mold form is attached, so reading it is allowed but not needed
+    claim → policy:NG-1101 → payout
+    claim → policy:NG-1101 → policy:NG-1103 → payout
+    claim → policy:NG-1103 → policy:NG-1101 → payout
+CLM-2026-20102  (2 accepted)  E-41 seepage row must be read; excluded, so a $0 compute_payout call is allowed but not needed
+    claim → policy:NG-1101 → payout
+    claim → policy:NG-1101
+CLM-2026-20103  (6 accepted)  notes reveal ground movement: NG-1105 must be opened; reading NG-1101 before OR after it is equally valid
+    claim → policy:NG-1105 → payout
+    claim → policy:NG-1105
+    claim → policy:NG-1105 → policy:NG-1101 → payout
+    claim → policy:NG-1105 → policy:NG-1101
+    claim → policy:NG-1101 → policy:NG-1105 → payout
+    claim → policy:NG-1101 → policy:NG-1105
+CLM-2026-20104  (1 accepted)  hurricane deductible WH-1 must be read before the payout
+    claim → policy:NG-1102 → payout
+CLM-2026-20105  (3 accepted)  mold: MR-1/MR-2 needed; checking the underlying water loss in NG-1101 first or second is valid
+    claim → policy:NG-1103 → payout
+    claim → policy:NG-1103 → policy:NG-1101 → payout
+    claim → policy:NG-1101 → policy:NG-1103 → payout
+CLM-2026-20106  (2 accepted)  E-43 sewer backup row must be read
+    claim → policy:NG-1101 → payout
+    claim → policy:NG-1101
+CLM-2026-20107  (1 accepted)  scheduled article: VA-1/VA-2 needed for agreed value and no deductible
+    claim → policy:NG-1104 → payout
+CLM-2026-20108  (2 accepted)  E-51 cosmetic hail row must be read
+    claim → policy:NG-1102 → payout
+    claim → policy:NG-1102
+CLM-2026-20109  (1 accepted)  HB-1 sublimit and E-92 data exclusion needed
+    claim → policy:NG-1106 → payout
+CLM-2026-20110  (2 accepted)  no adjuster notes: must stop at needs_info; looking up wording is harmless, computing a payout is not
+    claim
+    claim → policy:NG-1101

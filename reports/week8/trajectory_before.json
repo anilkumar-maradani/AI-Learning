@@ -1,0 +1,786 @@
+{
+  "summary": {
+    "n": 10,
+    "tool_choice_accuracy": 0.8,
+    "argument_validity": 1.0,
+    "n_arguments_checked": 57,
+    "step_efficiency": 1.25,
+    "cost_p50": 0.0013265,
+    "cost_max": 0.003653,
+    "cost_mean": 0.0013988,
+    "tokens_per_claim": 6221.6,
+    "latency_p50": 4.755000000000001,
+    "outcome_pass_rate": 0.9,
+    "trajectory_pass_rate": 0.8,
+    "mode_counts": {
+      "skipped_required_lookup": 0,
+      "payout_before_lookup": 0,
+      "payout_without_facts": 0,
+      "repeated_identical_call": 0,
+      "redundant_lookup": 1,
+      "unneeded_detour": 0,
+      "invalid_argument": 0,
+      "invented_tool_name": 1,
+      "stopped_without_answer": 0,
+      "wrong_outcome": 1
+    },
+    "gap": 0.09999999999999998
+  },
+  "rows": [
+    {
+      "claim_number": "CLM-2026-20101",
+      "path": [
+        [
+          "claim"
+        ],
+        [
+          "policy:NG-1101"
+        ],
+        [
+          "payout"
+        ]
+      ],
+      "tools": [
+        "get_claim",
+        "search_policy",
+        "compute_payout"
+      ],
+      "matched_path": [
+        "claim",
+        "policy:NG-1101",
+        "payout"
+      ],
+      "tool_choice_ok": true,
+      "arg_checks": [
+        {
+          "tool": "get_claim",
+          "arg": "claim_number",
+          "value": "CLM-2026-20101",
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "search_policy",
+          "arg": "form_number",
+          "value": "NG-1101",
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "compute_payout",
+          "arg": "claim_number",
+          "value": "CLM-2026-20101",
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "compute_payout",
+          "arg": "covered_amount",
+          "value": 6300.0,
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "final_answer",
+          "arg": "clauses",
+          "value": "WE-1",
+          "valid": true,
+          "why": ""
+        }
+      ],
+      "steps_taken": 3,
+      "steps_needed": 3,
+      "outcome_pass": true,
+      "outcome_why": "ok",
+      "trajectory_pass": true,
+      "modes": [],
+      "cost_usd": 0.001326,
+      "tokens": 6265,
+      "latency_s": 7.13
+    },
+    {
+      "claim_number": "CLM-2026-20102",
+      "path": [
+        [
+          "claim"
+        ],
+        [
+          "policy:NG-1101"
+        ]
+      ],
+      "tools": [
+        "get_claim",
+        "search_policy"
+      ],
+      "matched_path": [
+        "claim",
+        "policy:NG-1101"
+      ],
+      "tool_choice_ok": true,
+      "arg_checks": [
+        {
+          "tool": "get_claim",
+          "arg": "claim_number",
+          "value": "CLM-2026-20102",
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "search_policy",
+          "arg": "form_number",
+          "value": "NG-1101",
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "final_answer",
+          "arg": "exclusion_ids",
+          "value": "E-41",
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "final_answer",
+          "arg": "clauses",
+          "value": "WE-1",
+          "valid": true,
+          "why": ""
+        }
+      ],
+      "steps_taken": 2,
+      "steps_needed": 2,
+      "outcome_pass": true,
+      "outcome_why": "ok",
+      "trajectory_pass": true,
+      "modes": [],
+      "cost_usd": 0.000984,
+      "tokens": 4302,
+      "latency_s": 3.102
+    },
+    {
+      "claim_number": "CLM-2026-20103",
+      "path": [
+        [
+          "claim"
+        ],
+        [
+          "policy:NG-1105"
+        ],
+        [
+          "payout"
+        ]
+      ],
+      "tools": [
+        "get_claim",
+        "search_policy",
+        "compute_payout"
+      ],
+      "matched_path": [
+        "claim",
+        "policy:NG-1105",
+        "payout"
+      ],
+      "tool_choice_ok": true,
+      "arg_checks": [
+        {
+          "tool": "get_claim",
+          "arg": "claim_number",
+          "value": "CLM-2026-20103",
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "search_policy",
+          "arg": "form_number",
+          "value": "NG-1105",
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "compute_payout",
+          "arg": "claim_number",
+          "value": "CLM-2026-20103",
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "compute_payout",
+          "arg": "covered_amount",
+          "value": 0.0,
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "final_answer",
+          "arg": "exclusion_ids",
+          "value": "E-83",
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "final_answer",
+          "arg": "clauses",
+          "value": "EXCLUSION-TABLE",
+          "valid": true,
+          "why": ""
+        }
+      ],
+      "steps_taken": 3,
+      "steps_needed": 2,
+      "outcome_pass": true,
+      "outcome_why": "ok",
+      "trajectory_pass": true,
+      "modes": [],
+      "cost_usd": 0.001519,
+      "tokens": 6417,
+      "latency_s": 8.072
+    },
+    {
+      "claim_number": "CLM-2026-20104",
+      "path": [
+        [
+          "claim"
+        ],
+        [
+          "policy:NG-1102"
+        ],
+        [
+          "payout"
+        ]
+      ],
+      "tools": [
+        "get_claim",
+        "search_policy",
+        "compute_payout"
+      ],
+      "matched_path": [
+        "claim",
+        "policy:NG-1102",
+        "payout"
+      ],
+      "tool_choice_ok": true,
+      "arg_checks": [
+        {
+          "tool": "get_claim",
+          "arg": "claim_number",
+          "value": "CLM-2026-20104",
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "search_policy",
+          "arg": "form_number",
+          "value": "NG-1102",
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "compute_payout",
+          "arg": "claim_number",
+          "value": "CLM-2026-20104",
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "compute_payout",
+          "arg": "covered_amount",
+          "value": 16800.0,
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "compute_payout",
+          "arg": "deductible_basis",
+          "value": "hurricane",
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "final_answer",
+          "arg": "clauses",
+          "value": "WH-1",
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "final_answer",
+          "arg": "clauses",
+          "value": "SECTION-III",
+          "valid": true,
+          "why": ""
+        }
+      ],
+      "steps_taken": 3,
+      "steps_needed": 3,
+      "outcome_pass": true,
+      "outcome_why": "ok",
+      "trajectory_pass": true,
+      "modes": [],
+      "cost_usd": 0.001443,
+      "tokens": 6265,
+      "latency_s": 4.288
+    },
+    {
+      "claim_number": "CLM-2026-20105",
+      "path": [
+        [
+          "claim"
+        ],
+        [
+          "policy:NG-1101"
+        ],
+        [
+          "policy:NG-1103"
+        ],
+        [
+          "policy:NG-1101"
+        ],
+        [
+          "policy:NG-1103"
+        ],
+        [
+          "payout"
+        ]
+      ],
+      "tools": [
+        "get_claim",
+        "search_policy",
+        "search_policy",
+        "search_policy",
+        "search_policy",
+        "compute_payout"
+      ],
+      "matched_path": null,
+      "tool_choice_ok": false,
+      "arg_checks": [
+        {
+          "tool": "get_claim",
+          "arg": "claim_number",
+          "value": "CLM-2026-20105",
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "search_policy",
+          "arg": "form_number",
+          "value": "NG-1101",
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "search_policy",
+          "arg": "form_number",
+          "value": "NG-1103",
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "search_policy",
+          "arg": "form_number",
+          "value": "NG-1101",
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "search_policy",
+          "arg": "form_number",
+          "value": "NG-1103",
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "compute_payout",
+          "arg": "claim_number",
+          "value": "CLM-2026-20105",
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "compute_payout",
+          "arg": "covered_amount",
+          "value": 11200.0,
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "compute_payout",
+          "arg": "sublimit",
+          "value": 7500.0,
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "final_answer",
+          "arg": "clauses",
+          "value": "WE-1",
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "final_answer",
+          "arg": "clauses",
+          "value": "MR-1",
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "final_answer",
+          "arg": "clauses",
+          "value": "MR-2",
+          "valid": true,
+          "why": ""
+        }
+      ],
+      "steps_taken": 6,
+      "steps_needed": 3,
+      "outcome_pass": true,
+      "outcome_why": "ok",
+      "trajectory_pass": false,
+      "modes": [
+        "redundant_lookup"
+      ],
+      "cost_usd": 0.003653,
+      "tokens": 15967,
+      "latency_s": 58.057
+    },
+    {
+      "claim_number": "CLM-2026-20106",
+      "path": [
+        [
+          "claim"
+        ],
+        [
+          "policy:NG-1101"
+        ],
+        [
+          "payout"
+        ]
+      ],
+      "tools": [
+        "get_claim",
+        "search_policy",
+        "compute_payout"
+      ],
+      "matched_path": [
+        "claim",
+        "policy:NG-1101",
+        "payout"
+      ],
+      "tool_choice_ok": true,
+      "arg_checks": [
+        {
+          "tool": "get_claim",
+          "arg": "claim_number",
+          "value": "CLM-2026-20106",
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "search_policy",
+          "arg": "form_number",
+          "value": "NG-1101",
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "compute_payout",
+          "arg": "claim_number",
+          "value": "CLM-2026-20106",
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "compute_payout",
+          "arg": "covered_amount",
+          "value": 0.0,
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "final_answer",
+          "arg": "exclusion_ids",
+          "value": "E-43",
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "final_answer",
+          "arg": "clauses",
+          "value": "EXCLUSION-TABLE",
+          "valid": true,
+          "why": ""
+        }
+      ],
+      "steps_taken": 3,
+      "steps_needed": 2,
+      "outcome_pass": true,
+      "outcome_why": "ok",
+      "trajectory_pass": true,
+      "modes": [],
+      "cost_usd": 0.001327,
+      "tokens": 6012,
+      "latency_s": 7.447
+    },
+    {
+      "claim_number": "CLM-2026-20107",
+      "path": [
+        [
+          "claim"
+        ],
+        [
+          "policy:NG-1104"
+        ],
+        [
+          "payout"
+        ]
+      ],
+      "tools": [
+        "get_claim",
+        "search_policy",
+        "compute_payout"
+      ],
+      "matched_path": [
+        "claim",
+        "policy:NG-1104",
+        "payout"
+      ],
+      "tool_choice_ok": true,
+      "arg_checks": [
+        {
+          "tool": "get_claim",
+          "arg": "claim_number",
+          "value": "CLM-2026-20107",
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "search_policy",
+          "arg": "form_number",
+          "value": "NG-1104",
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "compute_payout",
+          "arg": "claim_number",
+          "value": "CLM-2026-20107",
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "compute_payout",
+          "arg": "covered_amount",
+          "value": 8500.0,
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "final_answer",
+          "arg": "clauses",
+          "value": "VA-1",
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "final_answer",
+          "arg": "clauses",
+          "value": "VA-2",
+          "valid": true,
+          "why": ""
+        }
+      ],
+      "steps_taken": 3,
+      "steps_needed": 3,
+      "outcome_pass": true,
+      "outcome_why": "ok",
+      "trajectory_pass": true,
+      "modes": [],
+      "cost_usd": 0.001182,
+      "tokens": 5802,
+      "latency_s": 3.91
+    },
+    {
+      "claim_number": "CLM-2026-20108",
+      "path": [
+        [
+          "claim"
+        ],
+        [
+          "policy:NG-1102"
+        ]
+      ],
+      "tools": [
+        "get_claim",
+        "search_policy"
+      ],
+      "matched_path": [
+        "claim",
+        "policy:NG-1102"
+      ],
+      "tool_choice_ok": true,
+      "arg_checks": [
+        {
+          "tool": "get_claim",
+          "arg": "claim_number",
+          "value": "CLM-2026-20108",
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "search_policy",
+          "arg": "form_number",
+          "value": "NG-1102",
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "final_answer",
+          "arg": "exclusion_ids",
+          "value": "E-51",
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "final_answer",
+          "arg": "clauses",
+          "value": "EXCLUSION-TABLE",
+          "valid": true,
+          "why": ""
+        }
+      ],
+      "steps_taken": 2,
+      "steps_needed": 2,
+      "outcome_pass": true,
+      "outcome_why": "ok",
+      "trajectory_pass": true,
+      "modes": [],
+      "cost_usd": 0.000903,
+      "tokens": 4055,
+      "latency_s": 3.756
+    },
+    {
+      "claim_number": "CLM-2026-20109",
+      "path": [
+        [
+          "claim"
+        ],
+        [
+          "policy:NG-1106"
+        ],
+        [
+          "payout"
+        ]
+      ],
+      "tools": [
+        "get_claim",
+        "search_policy",
+        "compute_payout"
+      ],
+      "matched_path": [
+        "claim",
+        "policy:NG-1106",
+        "payout"
+      ],
+      "tool_choice_ok": true,
+      "arg_checks": [
+        {
+          "tool": "get_claim",
+          "arg": "claim_number",
+          "value": "CLM-2026-20109",
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "search_policy",
+          "arg": "form_number",
+          "value": "NG-1106",
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "compute_payout",
+          "arg": "claim_number",
+          "value": "CLM-2026-20109",
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "compute_payout",
+          "arg": "covered_amount",
+          "value": 4300.0,
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "compute_payout",
+          "arg": "sublimit",
+          "value": 2500.0,
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "final_answer",
+          "arg": "exclusion_ids",
+          "value": "E-92",
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "final_answer",
+          "arg": "clauses",
+          "value": "HB-1",
+          "valid": true,
+          "why": ""
+        }
+      ],
+      "steps_taken": 3,
+      "steps_needed": 3,
+      "outcome_pass": true,
+      "outcome_why": "ok",
+      "trajectory_pass": true,
+      "modes": [],
+      "cost_usd": 0.001481,
+      "tokens": 6227,
+      "latency_s": 5.222
+    },
+    {
+      "claim_number": "CLM-2026-20110",
+      "path": [
+        [
+          "claim"
+        ],
+        [
+          "error"
+        ]
+      ],
+      "tools": [
+        "get_claim",
+        null
+      ],
+      "matched_path": null,
+      "tool_choice_ok": false,
+      "arg_checks": [
+        {
+          "tool": "get_claim",
+          "arg": "claim_number",
+          "value": "CLM-2026-20110",
+          "valid": true,
+          "why": ""
+        }
+      ],
+      "steps_taken": 2,
+      "steps_needed": 1,
+      "outcome_pass": false,
+      "outcome_why": "no parseable final answer",
+      "trajectory_pass": false,
+      "modes": [
+        "invented_tool_name",
+        "wrong_outcome"
+      ],
+      "cost_usd": 0.00017,
+      "tokens": 904,
+      "latency_s": 4.066
+    }
+  ],
+  "source_runs": "reports/week7/agent_runs.jsonl"
+}

@@ -1,0 +1,40 @@
+HOMEOWNERS ENDORSEMENT
+Form Number: NG-1105
+Edition Date: 03-26
+Policy Line: homeowners
+Effective Date: March 1, 2026
+Title: Earth Movement Exclusion Endorsement
+
+Issued by Northgate Mutual Insurance Company. This endorsement defines earth
+movement and explains how it interacts with other covered causes of loss.
+
+SECTION I — DEFINITIONS AND RULES
+
+CLAUSE GM-1 — WHAT EARTH MOVEMENT MEANS
+Earth movement means earthquake, landslide, mudflow, sinkhole collapse,
+subsidence, and the sinking, rising or shifting of the ground, whether it
+happens naturally or is caused by people.
+
+CLAUSE GM-2 — LOSS THAT FOLLOWS EARTH MOVEMENT
+If earth movement causes a fire or an explosion, we cover the damage done by
+that fire or explosion.
+
+CLAUSE GM-3 — MORE THAN ONE CAUSE
+A loss caused by earth movement is excluded even when another cause, such as
+an escape of water or a windstorm, contributed at the same time or in any
+order. This includes water that escapes from a pipe that broke because the
+ground moved.
+
+SECTION II — EXCLUSIONS
+
+EXCLUSION TABLE — NG-1105 ed. 03-26
+
+| Code | Excluded Peril                        | Scope                                                                 |
+|------|---------------------------------------|-----------------------------------------------------------------------|
+| E-81 | Earth movement                        | Any loss caused by earth movement as defined in GM-1                  |
+| E-82 | Settling and cracking                 | Settling, cracking, shrinking or bulging of foundations, walls,       |
+|      |                                       | floors or ceilings                                                    |
+| E-83 | Water escape caused by earth movement | Water from a plumbing system that broke because the ground moved,     |
+|      |                                       | even though NG-1101 WE-1 would otherwise cover the escape             |
+
+END OF ENDORSEMENT NG-1105 ed. 03-26
