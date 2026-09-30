@@ -34,7 +34,7 @@ RACE = os.path.join(ROOT, "evals", "cases", "race_10.jsonl")
 
 MODES = ["skipped_required_lookup", "payout_before_lookup", "payout_without_facts",
          "repeated_identical_call", "redundant_lookup", "unneeded_detour", "invalid_argument",
-         "stopped_without_answer", "wrong_outcome"]
+         "invented_tool_name", "stopped_without_answer", "wrong_outcome"]
 
 
 def _jsonl(path):

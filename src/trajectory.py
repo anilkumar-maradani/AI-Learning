@@ -133,7 +133,10 @@ def failure_modes(run: dict, case: dict, spec: dict, matched: list[str] | None,
     toks = [step_tokens(s) for s in run["steps"]]
     seen = set().union(*toks) if toks else set()
     if run["stop_reason"] != "final_answer":
-        modes.append("stopped_without_answer")
+        err = str([st.get("error") for st in run["steps"] if st.get("error")])
+        # the model tried to hand back its answer through a tool that does not exist
+        modes.append("invented_tool_name" if "not in request.tools" in err
+                     else "stopped_without_answer")
     if any(f"policy:{f}" not in seen for f in spec["required_forms"]):
         modes.append("skipped_required_lookup")
     if spec["payout"] == "forbidden" and "payout" in seen:

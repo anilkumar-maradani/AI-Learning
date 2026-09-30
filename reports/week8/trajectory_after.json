@@ -1,30 +1,30 @@
 {
   "summary": {
     "n": 10,
-    "tool_choice_accuracy": 0.8,
+    "tool_choice_accuracy": 0.7,
     "argument_validity": 1.0,
-    "n_arguments_checked": 57,
-    "step_efficiency": 1.25,
-    "cost_p50": 0.0013265,
-    "cost_max": 0.003653,
-    "cost_mean": 0.0013988,
-    "tokens_per_claim": 6221.6,
-    "latency_p50": 4.755000000000001,
-    "outcome_pass_rate": 0.9,
-    "trajectory_pass_rate": 0.8,
+    "n_arguments_checked": 50,
+    "step_efficiency": 1.2916666666666667,
+    "cost_p50": 0.001203,
+    "cost_max": 0.002247,
+    "cost_mean": 0.0012761,
+    "tokens_per_claim": 5817.0,
+    "latency_p50": 8.699000000000002,
+    "outcome_pass_rate": 0.7,
+    "trajectory_pass_rate": 0.7,
     "mode_counts": {
       "skipped_required_lookup": 0,
       "payout_before_lookup": 0,
       "payout_without_facts": 0,
       "repeated_identical_call": 0,
-      "redundant_lookup": 1,
+      "redundant_lookup": 0,
       "unneeded_detour": 0,
       "invalid_argument": 0,
-      "invented_tool_name": 1,
+      "invented_tool_name": 3,
       "stopped_without_answer": 0,
-      "wrong_outcome": 1
+      "wrong_outcome": 3
     },
-    "gap": 0.09999999999999998
+    "gap": 0.0
   },
   "rows": [
     {
@@ -86,6 +86,13 @@
           "value": "WE-1",
           "valid": true,
           "why": ""
+        },
+        {
+          "tool": "final_answer",
+          "arg": "clauses",
+          "value": "WE-3",
+          "valid": true,
+          "why": ""
         }
       ],
       "steps_taken": 3,
@@ -94,9 +101,9 @@
       "outcome_why": "ok",
       "trajectory_pass": true,
       "modes": [],
-      "cost_usd": 0.001326,
-      "tokens": 6265,
-      "latency_s": 7.13
+      "cost_usd": 0.001704,
+      "tokens": 7165,
+      "latency_s": 14.087
     },
     {
       "claim_number": "CLM-2026-20102",
@@ -138,13 +145,6 @@
           "value": "E-41",
           "valid": true,
           "why": ""
-        },
-        {
-          "tool": "final_answer",
-          "arg": "clauses",
-          "value": "WE-1",
-          "valid": true,
-          "why": ""
         }
       ],
       "steps_taken": 2,
@@ -153,15 +153,18 @@
       "outcome_why": "ok",
       "trajectory_pass": true,
       "modes": [],
-      "cost_usd": 0.000984,
-      "tokens": 4302,
-      "latency_s": 3.102
+      "cost_usd": 0.000964,
+      "tokens": 4485,
+      "latency_s": 8.957
     },
     {
       "claim_number": "CLM-2026-20103",
       "path": [
         [
           "claim"
+        ],
+        [
+          "policy:NG-1101"
         ],
         [
           "policy:NG-1105"
@@ -173,10 +176,12 @@
       "tools": [
         "get_claim",
         "search_policy",
+        "search_policy",
         "compute_payout"
       ],
       "matched_path": [
         "claim",
+        "policy:NG-1101",
         "policy:NG-1105",
         "payout"
       ],
@@ -186,6 +191,13 @@
           "tool": "get_claim",
           "arg": "claim_number",
           "value": "CLM-2026-20103",
+          "valid": true,
+          "why": ""
+        },
+        {
+          "tool": "search_policy",
+          "arg": "form_number",
+          "value": "NG-1101",
           "valid": true,
           "why": ""
         },
@@ -220,20 +232,20 @@
         {
           "tool": "final_answer",
           "arg": "clauses",
-          "value": "EXCLUSION-TABLE",
+          "value": "GM-3",
           "valid": true,
           "why": ""
         }
       ],
-      "steps_taken": 3,
+      "steps_taken": 4,
       "steps_needed": 2,
       "outcome_pass": true,
       "outcome_why": "ok",
       "trajectory_pass": true,
       "modes": [],
-      "cost_usd": 0.001519,
-      "tokens": 6417,
-      "latency_s": 8.072
+      "cost_usd": 0.002247,
+      "tokens": 10463,
+      "latency_s": 16.748
     },
     {
       "claim_number": "CLM-2026-20104",
@@ -305,7 +317,7 @@
         {
           "tool": "final_answer",
           "arg": "clauses",
-          "value": "SECTION-III",
+          "value": "WH-2",
           "valid": true,
           "why": ""
         }
@@ -316,21 +328,15 @@
       "outcome_why": "ok",
       "trajectory_pass": true,
       "modes": [],
-      "cost_usd": 0.001443,
-      "tokens": 6265,
-      "latency_s": 4.288
+      "cost_usd": 0.00159,
+      "tokens": 6836,
+      "latency_s": 8.441
     },
     {
       "claim_number": "CLM-2026-20105",
       "path": [
         [
           "claim"
-        ],
-        [
-          "policy:NG-1101"
-        ],
-        [
-          "policy:NG-1103"
         ],
         [
           "policy:NG-1101"
@@ -346,31 +352,20 @@
         "get_claim",
         "search_policy",
         "search_policy",
-        "search_policy",
-        "search_policy",
         "compute_payout"
       ],
-      "matched_path": null,
-      "tool_choice_ok": false,
+      "matched_path": [
+        "claim",
+        "policy:NG-1101",
+        "policy:NG-1103",
+        "payout"
+      ],
+      "tool_choice_ok": true,
       "arg_checks": [
         {
           "tool": "get_claim",
           "arg": "claim_number",
           "value": "CLM-2026-20105",
-          "valid": true,
-          "why": ""
-        },
-        {
-          "tool": "search_policy",
-          "arg": "form_number",
-          "value": "NG-1101",
-          "valid": true,
-          "why": ""
-        },
-        {
-          "tool": "search_policy",
-          "arg": "form_number",
-          "value": "NG-1103",
           "valid": true,
           "why": ""
         },
@@ -431,17 +426,15 @@
           "why": ""
         }
       ],
-      "steps_taken": 6,
+      "steps_taken": 4,
       "steps_needed": 3,
       "outcome_pass": true,
       "outcome_why": "ok",
-      "trajectory_pass": false,
-      "modes": [
-        "redundant_lookup"
-      ],
-      "cost_usd": 0.003653,
-      "tokens": 15967,
-      "latency_s": 58.057
+      "trajectory_pass": true,
+      "modes": [],
+      "cost_usd": 0.002221,
+      "tokens": 10355,
+      "latency_s": 10.823
     },
     {
       "claim_number": "CLM-2026-20106",
@@ -453,20 +446,16 @@
           "policy:NG-1101"
         ],
         [
-          "payout"
+          "error"
         ]
       ],
       "tools": [
         "get_claim",
         "search_policy",
-        "compute_payout"
+        null
       ],
-      "matched_path": [
-        "claim",
-        "policy:NG-1101",
-        "payout"
-      ],
-      "tool_choice_ok": true,
+      "matched_path": null,
+      "tool_choice_ok": false,
       "arg_checks": [
         {
           "tool": "get_claim",
@@ -481,45 +470,20 @@
           "value": "NG-1101",
           "valid": true,
           "why": ""
-        },
-        {
-          "tool": "compute_payout",
-          "arg": "claim_number",
-          "value": "CLM-2026-20106",
-          "valid": true,
-          "why": ""
-        },
-        {
-          "tool": "compute_payout",
-          "arg": "covered_amount",
-          "value": 0.0,
-          "valid": true,
-          "why": ""
-        },
-        {
-          "tool": "final_answer",
-          "arg": "exclusion_ids",
-          "value": "E-43",
-          "valid": true,
-          "why": ""
-        },
-        {
-          "tool": "final_answer",
-          "arg": "clauses",
-          "value": "EXCLUSION-TABLE",
-          "valid": true,
-          "why": ""
         }
       ],
       "steps_taken": 3,
       "steps_needed": 2,
-      "outcome_pass": true,
-      "outcome_why": "ok",
-      "trajectory_pass": true,
-      "modes": [],
-      "cost_usd": 0.001327,
-      "tokens": 6012,
-      "latency_s": 7.447
+      "outcome_pass": false,
+      "outcome_why": "no parseable final answer",
+      "trajectory_pass": false,
+      "modes": [
+        "invented_tool_name",
+        "wrong_outcome"
+      ],
+      "cost_usd": 0.00038,
+      "tokens": 2081,
+      "latency_s": 3.911
     },
     {
       "claim_number": "CLM-2026-20107",
@@ -532,19 +496,19 @@
         ],
         [
           "payout"
+        ],
+        [
+          "error"
         ]
       ],
       "tools": [
         "get_claim",
         "search_policy",
-        "compute_payout"
+        "compute_payout",
+        null
       ],
-      "matched_path": [
-        "claim",
-        "policy:NG-1104",
-        "payout"
-      ],
-      "tool_choice_ok": true,
+      "matched_path": null,
+      "tool_choice_ok": false,
       "arg_checks": [
         {
           "tool": "get_claim",
@@ -573,31 +537,20 @@
           "value": 8500.0,
           "valid": true,
           "why": ""
-        },
-        {
-          "tool": "final_answer",
-          "arg": "clauses",
-          "value": "VA-1",
-          "valid": true,
-          "why": ""
-        },
-        {
-          "tool": "final_answer",
-          "arg": "clauses",
-          "value": "VA-2",
-          "valid": true,
-          "why": ""
         }
       ],
-      "steps_taken": 3,
+      "steps_taken": 4,
       "steps_needed": 3,
-      "outcome_pass": true,
-      "outcome_why": "ok",
-      "trajectory_pass": true,
-      "modes": [],
-      "cost_usd": 0.001182,
-      "tokens": 5802,
-      "latency_s": 3.91
+      "outcome_pass": false,
+      "outcome_why": "no parseable final answer",
+      "trajectory_pass": false,
+      "modes": [
+        "invented_tool_name",
+        "wrong_outcome"
+      ],
+      "cost_usd": 0.000795,
+      "tokens": 4018,
+      "latency_s": 2.707
     },
     {
       "claim_number": "CLM-2026-20108",
@@ -607,17 +560,22 @@
         ],
         [
           "policy:NG-1102"
+        ],
+        [
+          "payout"
+        ],
+        [
+          "error"
         ]
       ],
       "tools": [
         "get_claim",
-        "search_policy"
+        "search_policy",
+        "compute_payout",
+        null
       ],
-      "matched_path": [
-        "claim",
-        "policy:NG-1102"
-      ],
-      "tool_choice_ok": true,
+      "matched_path": null,
+      "tool_choice_ok": false,
       "arg_checks": [
         {
           "tool": "get_claim",
@@ -634,29 +592,32 @@
           "why": ""
         },
         {
-          "tool": "final_answer",
-          "arg": "exclusion_ids",
-          "value": "E-51",
+          "tool": "compute_payout",
+          "arg": "claim_number",
+          "value": "CLM-2026-20108",
           "valid": true,
           "why": ""
         },
         {
-          "tool": "final_answer",
-          "arg": "clauses",
-          "value": "EXCLUSION-TABLE",
+          "tool": "compute_payout",
+          "arg": "covered_amount",
+          "value": 0.0,
           "valid": true,
           "why": ""
         }
       ],
-      "steps_taken": 2,
+      "steps_taken": 4,
       "steps_needed": 2,
-      "outcome_pass": true,
-      "outcome_why": "ok",
-      "trajectory_pass": true,
-      "modes": [],
-      "cost_usd": 0.000903,
-      "tokens": 4055,
-      "latency_s": 3.756
+      "outcome_pass": false,
+      "outcome_why": "no parseable final answer",
+      "trajectory_pass": false,
+      "modes": [
+        "invented_tool_name",
+        "wrong_outcome"
+      ],
+      "cost_usd": 0.000964,
+      "tokens": 4316,
+      "latency_s": 9.725
     },
     {
       "claim_number": "CLM-2026-20109",
@@ -739,26 +700,24 @@
       "outcome_why": "ok",
       "trajectory_pass": true,
       "modes": [],
-      "cost_usd": 0.001481,
-      "tokens": 6227,
-      "latency_s": 5.222
+      "cost_usd": 0.001442,
+      "tokens": 6342,
+      "latency_s": 6.194
     },
     {
       "claim_number": "CLM-2026-20110",
       "path": [
         [
           "claim"
-        ],
-        [
-          "error"
         ]
       ],
       "tools": [
-        "get_claim",
-        null
+        "get_claim"
       ],
-      "matched_path": null,
-      "tool_choice_ok": false,
+      "matched_path": [
+        "claim"
+      ],
+      "tool_choice_ok": true,
       "arg_checks": [
         {
           "tool": "get_claim",
@@ -768,19 +727,16 @@
           "why": ""
         }
       ],
-      "steps_taken": 2,
+      "steps_taken": 1,
       "steps_needed": 1,
-      "outcome_pass": false,
-      "outcome_why": "no parseable final answer",
-      "trajectory_pass": false,
-      "modes": [
-        "invented_tool_name",
-        "wrong_outcome"
-      ],
-      "cost_usd": 0.00017,
-      "tokens": 904,
-      "latency_s": 4.066
+      "outcome_pass": true,
+      "outcome_why": "ok",
+      "trajectory_pass": true,
+      "modes": [],
+      "cost_usd": 0.000454,
+      "tokens": 2109,
+      "latency_s": 1.509
     }
   ],
-  "source_runs": "reports/week7/agent_runs.jsonl"
+  "source_runs": "reports/week8/agent_runs_after.jsonl"
 }
