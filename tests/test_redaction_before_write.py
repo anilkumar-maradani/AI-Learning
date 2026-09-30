@@ -25,6 +25,8 @@ import tempfile
 _ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, os.path.join(_ROOT, "src"))
 sys.path.insert(0, os.path.join(_ROOT, "traffic"))
+# week_traffic.py (the claimant roster used by check 4) was archived here.
+sys.path.insert(0, os.path.join(_ROOT, "reports", "archive", "week5_traffic"))
 
 from dataclasses import asdict
 
@@ -40,10 +42,10 @@ RAW = {
 }
 
 _HITS = [{
-    "rank": 1, "chunk_id": "HO-0304_sa_chunk_006", "score": 0.031,
+    "rank": 1, "chunk_id": "NG-1101_sa_chunk_007", "score": 0.031,
     "vector_rank": 1, "bm25_rank": 1, "text": "irrelevant for this test",
-    "metadata": {"form_number": "HO-0304", "edition_date": "03-24",
-                 "clause_id": "EXCLUSION-TABLE", "source_file": "HO-0304_03-24.txt"},
+    "metadata": {"form_number": "NG-1101", "edition_date": "01-26",
+                 "clause_id": "EXCLUSION-TABLE", "source_file": "NG-1101_01-26.txt"},
 }]
 
 

@@ -1,0 +1,13 @@
+claim CLM-2026-20105  budgets: max_iterations=8 max_tokens=6000 max_cost_usd=0.02 max_wall_s=240
+  lap 1: 904 tok (cum 904, $0.00017) tools=['get_claim']
+  lap 2: 1267 tok (cum 2171, $0.00043) tools=['search_policy']
+  lap 3: 1538 tok (cum 3709, $0.00070) tools=['search_policy']
+  lap 4: 2241 tok (cum 5950, $0.00118) tools=['search_policy']
+  lap 5: 2915 tok (cum 8865, $0.00186) tools=['search_policy']
+  BUDGET FIRED max_tokens (limit 6000, used 8865 tokens) -> stopping cleanly
+stop_reason=budget:max_tokens laps=5 tokens=8865 cost=$0.00186 wall=11.729s final_answer=None
+  step lap 1: get_claim {"claim_number": "CLM-2026-20105"}
+  step lap 2: search_policy {"form_number": "NG-1101", "query": "mold"}
+  step lap 3: search_policy {"form_number": "NG-1103", "query": "mold"}
+  step lap 4: search_policy {"form_number": "NG-1101", "query": "escape of water"}
+  step lap 5: search_policy {"form_number": "NG-1103", "query": "sublimit"}

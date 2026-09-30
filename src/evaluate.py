@@ -25,40 +25,41 @@ QUESTIONS = [
     {
         "id": "Q1",
         "question": (
-            "Does exclusion E-17 apply to water damage caused by a burst supply "
-            "line under endorsement HO-0304 ed. 03-24?"
+            "Does exclusion E-43 apply to water damage caused by a sewer or drain "
+            "backup under endorsement NG-1101 ed. 01-26?"
         ),
-        "expected_form": "HO-0304",
-        "expected_clause": "E-17",          # The exclusion table row
-        "expected_answer_fragment": "E-17", # Must appear in retrieved text
-        "note": "Table row — E-17 explicitly confirms coverage is NOT withheld.",
+        "expected_form": "NG-1101",
+        "expected_clause": "EXCLUSION-TABLE",
+        "expected_answer_fragment": "E-43",  # Must appear in retrieved text
+        "note": "Table row — E-43 excludes sewer and drain backup, including municipal lines.",
     },
     {
         "id": "Q2",
         "question": (
-            "What is the effective date of endorsement HO-0305 ed. 03-24?"
+            "What is the effective date of endorsement NG-1102 ed. 01-26?"
         ),
-        "expected_form": "HO-0305",
-        "expected_clause": "SECTION-IV",
-        "expected_answer_fragment": "March 15, 2024",
-        "note": "Header metadata — effective date March 15, 2024.",
+        "expected_form": "NG-1102",
+        "expected_clause": "PREAMBLE",
+        "expected_answer_fragment": "January 1, 2026",
+        "note": "Header metadata — effective date January 1, 2026.",
     },
     {
         "id": "Q3",
         "question": (
-            "Does exclusion E-22 in HO-0306 ed. 04-24 cover mold damage?"
+            "Does exclusion E-61 in NG-1103 ed. 02-26 cover mold caused by "
+            "condensation or high indoor humidity?"
         ),
-        "expected_form": "HO-0306",
+        "expected_form": "NG-1103",
         "expected_clause": "EXCLUSION-TABLE",
-        "expected_answer_fragment": "E-22",  # mold damage — general exclusion
-        "note": "Table row — E-22 excludes general mold damage.",
+        "expected_answer_fragment": "E-61",  # mold from seepage or humidity
+        "note": "Table row — E-61 excludes mold from seepage, condensation or humidity.",
     },
     {
         "id": "Q4",
         "question": (
-            "What policy line does endorsement HO-0307 ed. 04-24 modify?"
+            "What policy line does endorsement NG-1104 ed. 02-26 modify?"
         ),
-        "expected_form": "HO-0307",
+        "expected_form": "NG-1104",
         "expected_clause": "PREAMBLE",
         "expected_answer_fragment": "homeowners",
         "note": "Preamble header — policy_line is homeowners.",
@@ -66,46 +67,46 @@ QUESTIONS = [
     {
         "id": "Q5",
         "question": (
-            "Under endorsement HO-0308 ed. 05-24, does exclusion E-31 apply "
+            "Under endorsement NG-1105 ed. 03-26, does exclusion E-81 apply "
             "to damage caused by earth movement?"
         ),
-        "expected_form": "HO-0308",
+        "expected_form": "NG-1105",
         "expected_clause": "EXCLUSION-TABLE",
-        "expected_answer_fragment": "E-31",  # earth movement excluded
-        "note": "Table row — E-31 excludes all forms of earth movement.",
+        "expected_answer_fragment": "E-81",  # earth movement excluded
+        "note": "Table row — E-81 excludes any loss caused by earth movement as defined in GM-1.",
     },
     {
         "id": "Q6",
         "question": (
-            "What is the Named Storm deductible amount or formula under "
-            "HO-0305 ed. 03-24?"
+            "What is the hurricane deductible amount or formula under "
+            "NG-1102 ed. 01-26?"
         ),
-        "expected_form": "HO-0305",
-        "expected_clause": "CLAUSE-NS-2",
+        "expected_form": "NG-1102",
+        "expected_clause": "CLAUSE-WH-1",
         "expected_answer_fragment": "2%",
-        "note": "CLAUSE NS-2 — $5,000 or 2% of Coverage A, whichever greater.",
+        "note": "CLAUSE WH-1 — 2% of the Coverage A limit, once per named hurricane.",
     },
     {
         "id": "Q7",
         "question": (
-            "Does endorsement HO-0309 ed. 05-24 contain a business pursuits "
-            "exclusion, and if so, what is its exclusion code?"
+            "Does endorsement NG-1106 ed. 03-26 exclude stock held for sale, "
+            "and if so, what is its exclusion code?"
         ),
-        "expected_form": "HO-0309",
+        "expected_form": "NG-1106",
         "expected_clause": "EXCLUSION-TABLE",
-        "expected_answer_fragment": "E-19",  # business pursuits
-        "note": "Table row — E-19 is the business pursuits exclusion in HO-0309.",
+        "expected_answer_fragment": "E-91",  # stock held for sale
+        "note": "Table row — E-91 is the stock-held-for-sale exclusion in NG-1106.",
     },
     {
         "id": "Q8",
         "question": (
-            "Under HO-0304 ed. 03-24, what clause defines 'sudden and accidental' "
-            "and what is the time limit for continuous leakage before coverage is lost?"
+            "Under NG-1101 ed. 01-26, what clause defines a 'sudden' escape of water "
+            "and how long can the escape continue before it is treated as seepage?"
         ),
-        "expected_form": "HO-0304",
-        "expected_clause": "CLAUSE-WD-1",
-        "expected_answer_fragment": "14",   # 14 consecutive days
-        "note": "CLAUSE WD-1 — sudden and accidental; 14-day seepage limit.",
+        "expected_form": "NG-1101",
+        "expected_clause": "CLAUSE-WE-1",
+        "expected_answer_fragment": "ten (10)",  # fewer than ten (10) days
+        "note": "CLAUSE WE-1 — sudden only if it continued fewer than 10 days; else seepage (E-41).",
     },
 ]
 
@@ -174,7 +175,7 @@ def run_evaluation(verbose: bool = True) -> dict:
 # ---------------------------------------------------------------------------
 
 FILTER_DEMO_QUERY = (
-    "Does exclusion E-31 apply to earth movement damage?"
+    "Does exclusion E-81 apply to earth movement damage?"
 )
 
 def run_filter_demo(verbose: bool = True) -> dict:

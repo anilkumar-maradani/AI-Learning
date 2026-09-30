@@ -66,7 +66,7 @@ def check_hit_at_3(hits: list[dict], expected_form: str, expected_fragment: str)
     Check if the correct chunk appears in the top 3 results.
 
     A result is a HIT if ALL of these are true for any of the top-3 chunks:
-      1. The chunk's form_number matches expected_form (e.g. "HO-0304")
+      1. The chunk's form_number matches expected_form (e.g. "NG-1101")
       2. The expected text fragment appears somewhere in the chunk's text
 
     Returns:

@@ -1,7 +1,7 @@
 """
 llm.py — One place that talks to the model for the Week 6-8 code.
 
-Why a separate helper instead of generation.call_model_with_tools:
+Why a separate helper instead of calling the client directly:
   * latency must not include rate-limit backoff. The free Groq tier allows
     8,000 tokens per minute, so an agent run can sit in a 429 sleep for longer
     than it spends thinking. api_s counts only successful request time;

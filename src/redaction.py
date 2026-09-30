@@ -53,7 +53,7 @@ _PATTERNS: list[tuple[str, re.Pattern]] = [
         r"\bCLM[-\s]?\d{4}[-\s]?\d{3,8}\b"
         r"|\bclaim\s*(?:no\.?|number|#)\s*:?\s*[A-Z0-9][A-Z0-9-]{4,}\b",
         re.IGNORECASE)),
-    # HOP-8842116 / policy no. 8842116  (NOT form numbers like HO-0304)
+    # HOP-8842116 / policy no. 8842116  (NOT form numbers like NG-1101)
     ("POLICY_NO", re.compile(
         r"\bHOP[-\s]?\d{5,10}\b"
         r"|\bpolicy\s*(?:no\.?|number|#)\s*:?\s*[A-Z0-9][A-Z0-9-]{4,}\b",

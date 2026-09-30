@@ -1,373 +1,197 @@
 """
-tools.py — Three explicit tool definitions for the W7 claims agent.
+tools.py — The claims agent's tools. Each description names one job and says
+what the tool does NOT do, so no two descriptions overlap.
 
-Each tool wraps an existing capability with a single, non-overlapping job:
+  get_claim       the claim file: policy terms, estimate lines, adjuster notes
+  search_policy   endorsement wording: clauses and exclusion rows
+  compute_payout  (Week 7 addition) arithmetic only: covered amount -> payable
 
-  get_claim_details       — retrieve relevant endorsement chunks for a loss
-  check_policy_exclusions — look up whether a specific exclusion applies
-  compute_payout          — arithmetic: damage minus excess and sublimits
-
-The tool schemas follow the OpenAI function-calling format so they work
-directly as the `tools=` argument to client.chat.completions.create().
-
-Executors are Python callables dispatched by dispatch_tool(); they return
-plain dicts that are JSON-serialised into tool_result messages.
+The first two existed before Week 7 as get_claim_details / check_policy_exclusions,
+and BOTH searched the policy corpus. That overlap is what reports/week7/tool_diff.md
+shows being removed. The deductible is read from the claim file by the tool, never
+taken from the model, so a model cannot invent a deductible.
 """
 
-from __future__ import annotations
-
 import json
-import math
-import os
-import sys
-from typing import Any
+import re
 
-sys.path.insert(0, os.path.dirname(__file__))
+from claim_store import CLAIM_NUMBER_RE, get_claim as _load_claim
 
+FORM_RE = re.compile(r"^NG-\d{4}$")
 
-# ---------------------------------------------------------------------------
-# Tool 1 — get_claim_details
-# ---------------------------------------------------------------------------
-
-_GET_CLAIM_DETAILS = {
+GET_CLAIM = {
     "type": "function",
     "function": {
-        "name": "get_claim_details",
+        "name": "get_claim",
         "description": (
-            "Retrieve the endorsement context and policy wording relevant to a "
-            "claim's loss description. Returns ranked endorsement chunks "
-            "(form_number, clause_id, text) from the indexed homeowners policy "
-            "corpus. Call this first to understand what policy language governs "
-            "the loss before attempting any coverage determination."
+            "Return one claim file from the claims system: the policy it is written on "
+            "(forms attached, Coverage A limit, all-peril deductible, scheduled articles), "
+            "the first notice of loss, the estimate lines and every dated adjuster note. "
+            "This is the only source of facts about the loss. It does not contain any "
+            "policy wording."
         ),
         "parameters": {
             "type": "object",
             "properties": {
                 "claim_number": {
                     "type": "string",
-                    "description": "The claim reference number (e.g. CLM-2024-10001).",
-                },
-                "loss_description": {
-                    "type": "string",
-                    "description": (
-                        "Natural-language summary of the loss event, including "
-                        "the form of damage, peril suspected, and any relevant "
-                        "dates. Used as the search query."
-                    ),
-                },
+                    "pattern": "^CLM-\\d{4}-\\d{5}$",
+                    "description": "Claim number exactly as given, e.g. CLM-2026-20101.",
+                }
             },
-            "required": ["claim_number", "loss_description"],
+            "required": ["claim_number"],
+            "additionalProperties": False,
         },
     },
 }
 
-
-def _exec_get_claim_details(claim_number: str, loss_description: str) -> dict:
-    """Hybrid BM25+vector search over the indexed endorsement corpus."""
-    try:
-        from hybrid_retrieval import hybrid_search
-        hits = hybrid_search(loss_description, n_results=5)
-    except Exception:
-        from retrieval import search as vector_search
-        hits = vector_search(loss_description, strategy="structure_aware", n_results=5)
-
-    chunks = [
-        {
-            "rank": h["rank"],
-            "chunk_id": h["chunk_id"],
-            "score": round(h["score"], 4),
-            "form_number": h["metadata"].get("form_number", "UNKNOWN"),
-            "clause_id": h["metadata"].get("clause_id", "N/A"),
-            "text": h["text"][:600],  # truncate for token budget
-        }
-        for h in hits
-    ]
-    return {
-        "claim_number": claim_number,
-        "chunks_retrieved": len(chunks),
-        "chunks": chunks,
-    }
-
-
-# ---------------------------------------------------------------------------
-# Tool 2 — check_policy_exclusions
-# ---------------------------------------------------------------------------
-
-_CHECK_POLICY_EXCLUSIONS = {
+SEARCH_POLICY = {
     "type": "function",
     "function": {
-        "name": "check_policy_exclusions",
+        "name": "search_policy",
         "description": (
-            "Look up whether a specific exclusion code applies to a given loss "
-            "type under a named endorsement form. Returns the exact exclusion "
-            "table row text, the coverage determination (COVERED / NOT_COVERED / "
-            "PARTIALLY_COVERED), and any conditions or sublimits that attach. "
-            "Call this after get_claim_details once you know the form number and "
-            "suspect an exclusion code."
+            "Search the wording of the endorsement forms (coverage clauses, exclusion "
+            "table rows, deductible and sublimit rules) and return the best matching "
+            "passages with their form number and clause id. It knows nothing about any "
+            "particular claim; describe the peril or cause of loss you need wording for."
         ),
         "parameters": {
             "type": "object",
             "properties": {
+                "query": {
+                    "type": "string",
+                    "description": "The peril, cause or rule to look up, e.g. 'water from a pipe broken by ground movement'.",
+                },
                 "form_number": {
                     "type": "string",
-                    "description": (
-                        "The endorsement form to search in (e.g. 'HO-0304', "
-                        "'HO-0306'). Must be one of the indexed forms."
-                    ),
-                },
-                "exclusion_code": {
-                    "type": "string",
-                    "description": (
-                        "The exclusion table code to look up (e.g. 'E-17', "
-                        "'E-11'). Use empty string if you want all exclusions "
-                        "for this form returned."
-                    ),
-                },
-                "loss_type": {
-                    "type": "string",
-                    "description": (
-                        "Plain-English description of the loss type being "
-                        "assessed (e.g. 'burst supply line', 'mold after pipe "
-                        "burst', 'sinkhole'). Used to enrich the search query."
-                    ),
+                    "pattern": "^NG-\\d{4}$",
+                    "description": "Optional. Restrict to one form attached to the policy, e.g. NG-1105.",
                 },
             },
-            "required": ["form_number", "loss_type"],
+            "required": ["query"],
+            "additionalProperties": False,
         },
     },
 }
 
+CLAIM_STATUS = ["covered", "covered_subject_to_sublimit", "excluded"]
 
-def _exec_check_policy_exclusions(
-    form_number: str, loss_type: str, exclusion_code: str = ""
-) -> dict:
-    """Targeted hybrid search for the exclusion row, then extract coverage determination."""
-    query = f"{form_number} {exclusion_code} {loss_type}".strip()
-    try:
-        from hybrid_retrieval import hybrid_search
-        hits = hybrid_search(query, n_results=5)
-    except Exception:
-        from retrieval import search as vector_search
-        hits = vector_search(query, strategy="structure_aware", n_results=5)
-
-    # Find the most relevant chunk for this exclusion
-    relevant = [
-        h for h in hits
-        if h["metadata"].get("form_number", "") == form_number
-    ] or hits  # fall back to all hits if no form match
-
-    best = relevant[0] if relevant else None
-    chunk_text = best["text"] if best else ""
-
-    # Heuristic coverage determination from text
-    determination = _infer_determination(chunk_text, exclusion_code)
-
-    # Detect any sublimit (dollar cap like $10,000)
-    import re
-    sublimit_matches = re.findall(r"\$([0-9,]+)\s*(?:sublimit|cap|limit)", chunk_text, re.IGNORECASE)
-    sublimit = None
-    if sublimit_matches:
-        try:
-            sublimit = float(sublimit_matches[0].replace(",", ""))
-        except ValueError:
-            sublimit = None
-
-    return {
-        "form_number": form_number,
-        "exclusion_code_queried": exclusion_code,
-        "loss_type": loss_type,
-        "determination": determination,
-        "sublimit_usd": sublimit,
-        "source_chunk_id": best["chunk_id"] if best else None,
-        "source_clause_id": best["metadata"].get("clause_id") if best else None,
-        "excerpt": chunk_text[:400],
-    }
-
-
-def _infer_determination(text: str, exclusion_code: str) -> str:
-    """Heuristic: parse 'NOT excluded' / 'is covered' vs 'excluded' from chunk text."""
-    low = text.lower()
-    # E-17 pattern: explicitly says NOT excluded / IS COVERED
-    if "not excluded" in low or "is covered" in low or "not withheld" in low:
-        return "COVERED"
-    # Pattern for coverage confirmation rows
-    if "coverage applies" in low or "covered under" in low:
-        return "COVERED"
-    # Partial coverage (sublimit)
-    if "sublimit" in low or "remediation sublimit" in low or "subject to" in low:
-        return "PARTIALLY_COVERED"
-    # Default exclusion when the exclusion code appears and no coverage language
-    if exclusion_code and exclusion_code.lower() in low:
-        return "NOT_COVERED"
-    # Can't determine without reading the context
-    return "DEPENDS_ON_FACTS"
-
-
-# ---------------------------------------------------------------------------
-# Tool 3 — compute_payout  [NEW THIRD TOOL]
-# ---------------------------------------------------------------------------
-
-_COMPUTE_PAYOUT = {
+COMPUTE_PAYOUT = {
     "type": "function",
     "function": {
         "name": "compute_payout",
         "description": (
-            "Compute the net payable amount on a claim given the damage estimate, "
-            "the applicable deductible (all-peril or named-storm), any "
-            "form-specific sublimits (e.g. the $10,000 mold remediation cap under "
-            "HO-0306 MF-2), and the coverage determination from the exclusion "
-            "lookup. Returns the payable amount, the deductible applied, any "
-            "sublimit that capped the payment, and a plain-English explanation. "
-            "Call this only after check_policy_exclusions has returned a "
-            "determination — never before."
+            "Arithmetic only: turn a coverage decision you have already made into the "
+            "amount payable. Applies the deductible from the claim file (or the hurricane "
+            "deductible, or none for scheduled articles), then any sublimit. It does not "
+            "look up policy wording and does not decide coverage."
         ),
         "parameters": {
             "type": "object",
             "properties": {
-                "damage_estimate": {
-                    "type": "number",
-                    "description": "Total estimated damage amount in US dollars.",
+                "claim_number": {"type": "string", "pattern": "^CLM-\\d{4}-\\d{5}$"},
+                "claim_status": {
+                    "type": "string",
+                    "enum": CLAIM_STATUS,
+                    "description": "Your coverage decision for the covered portion of the loss.",
                 },
-                "deductible_amount": {
+                "covered_amount": {
                     "type": "number",
-                    "description": (
-                        "Applicable deductible in US dollars. Use the named-storm "
-                        "deductible when a named storm triggered the loss; "
-                        "otherwise the all-peril deductible."
-                    ),
+                    "minimum": 0,
+                    "description": "Sum of the estimate lines you decided are covered, before any deductible.",
+                },
+                "deductible_basis": {
+                    "type": "string",
+                    "enum": ["all_peril", "hurricane", "none_scheduled_article"],
+                    "description": "Which deductible the policy wording says applies.",
                 },
                 "sublimit": {
                     "type": "number",
-                    "description": (
-                        "Form-specific sublimit in US dollars, if one applies "
-                        "(e.g. $10,000 for mold remediation under HO-0306 MF-2). "
-                        "Omit or pass null when no sublimit applies."
-                    ),
-                    "nullable": True,
-                },
-                "claim_status": {
-                    "type": "string",
-                    "enum": [
-                        "COVERED",
-                        "NOT_COVERED",
-                        "PARTIALLY_COVERED",
-                        "DEPENDS_ON_FACTS",
-                    ],
-                    "description": (
-                        "Coverage determination returned by check_policy_exclusions. "
-                        "COVERED: full payment less deductible. "
-                        "NOT_COVERED: zero payable. "
-                        "PARTIALLY_COVERED: payment capped by sublimit then less deductible. "
-                        "DEPENDS_ON_FACTS: cannot compute — adjuster must resolve ambiguity first."
-                    ),
+                    "minimum": 0,
+                    "description": "Required only when claim_status is covered_subject_to_sublimit.",
                 },
             },
-            "required": ["damage_estimate", "deductible_amount", "claim_status"],
+            "required": ["claim_number", "claim_status", "covered_amount", "deductible_basis"],
+            "additionalProperties": False,
         },
     },
 }
 
+TOOLS = [GET_CLAIM, SEARCH_POLICY, COMPUTE_PAYOUT]
 
-def _exec_compute_payout(
-    damage_estimate: float,
-    deductible_amount: float,
-    claim_status: str,
-    sublimit: float | None = None,
-) -> dict:
-    """Pure arithmetic: no model call, no retrieval, no IO."""
-    damage_estimate = float(damage_estimate)
-    deductible_amount = float(deductible_amount)
-    sublimit = float(sublimit) if sublimit is not None else None
 
-    if claim_status == "NOT_COVERED":
-        return {
-            "payable_amount": 0.0,
-            "deductible_applied": 0.0,
-            "sublimit_applied": None,
-            "claim_status": claim_status,
-            "explanation": (
-                f"Loss is NOT COVERED — exclusion applies. "
-                f"Damage estimate ${damage_estimate:,.2f} is not payable."
-            ),
-        }
+# ---------------------------------------------------------------------------
+# Executors
+# ---------------------------------------------------------------------------
 
-    if claim_status == "DEPENDS_ON_FACTS":
-        return {
-            "payable_amount": None,
-            "deductible_applied": None,
-            "sublimit_applied": None,
-            "claim_status": claim_status,
-            "explanation": (
-                "Coverage is ambiguous. Adjuster must resolve the factual "
-                "ambiguity before a payout figure can be computed."
-            ),
-        }
+def get_claim(claim_number: str) -> dict:
+    if not CLAIM_NUMBER_RE.match(claim_number or ""):
+        return {"error": f"'{claim_number}' is not a claim number (expected CLM-YYYY-NNNNN)"}
+    claim = _load_claim(claim_number)
+    if claim is None:
+        return {"error": f"No claim {claim_number} in the claims system"}
+    return {k: v for k, v in claim.items() if k != "claimant_name"}
 
-    # COVERED or PARTIALLY_COVERED
-    capped = damage_estimate
-    sublimit_applied = None
-    if sublimit is not None and damage_estimate > sublimit:
-        capped = sublimit
-        sublimit_applied = sublimit
 
-    net = max(0.0, capped - deductible_amount)
-
-    parts = []
-    if sublimit_applied:
-        parts.append(f"damage ${damage_estimate:,.2f} capped at ${sublimit_applied:,.2f} sublimit")
-    else:
-        parts.append(f"damage ${damage_estimate:,.2f}")
-    parts.append(f"deductible ${deductible_amount:,.2f} applied")
-    parts.append(f"net payable ${net:,.2f}")
-
+def search_policy(query: str, form_number: str | None = None, n_results: int = 4) -> dict:
+    from hybrid_retrieval import hybrid_search
+    if form_number and not FORM_RE.match(form_number):
+        return {"error": f"'{form_number}' is not a form number (expected NG-NNNN)"}
+    q = f"{form_number} {query}" if form_number else query
+    hits = hybrid_search(q, n_results=12 if form_number else n_results)
+    if form_number:
+        hits = [h for h in hits if h["metadata"].get("form_number") == form_number][:n_results]
     return {
-        "payable_amount": round(net, 2),
-        "deductible_applied": round(deductible_amount, 2),
-        "sublimit_applied": round(sublimit_applied, 2) if sublimit_applied else None,
-        "claim_status": claim_status,
-        "explanation": "; ".join(parts) + ".",
+        "passages": [
+            {
+                "chunk_id": h["chunk_id"],
+                "form_number": h["metadata"].get("form_number"),
+                "clause_id": h["metadata"].get("clause_id"),
+                "text": h["text"].split("\n", 1)[-1][:900],
+            }
+            for h in hits
+        ]
     }
 
 
-# ---------------------------------------------------------------------------
-# Public registry
-# ---------------------------------------------------------------------------
+def compute_payout(claim_number: str, claim_status: str, covered_amount: float,
+                   deductible_basis: str, sublimit: float | None = None) -> dict:
+    claim = _load_claim(claim_number) if CLAIM_NUMBER_RE.match(claim_number or "") else None
+    if claim is None:
+        return {"error": f"No claim {claim_number} in the claims system"}
+    if claim_status not in CLAIM_STATUS:
+        return {"error": f"claim_status must be one of {CLAIM_STATUS}"}
+    if claim_status == "excluded":
+        return {"payable": 0.0, "working": "excluded: nothing payable"}
+    if claim_status == "covered_subject_to_sublimit" and sublimit is None:
+        return {"error": "sublimit is required when claim_status is covered_subject_to_sublimit"}
+    deductible = {
+        "all_peril": float(claim["all_peril_deductible"]),
+        "hurricane": round(0.02 * claim["coverage_a_limit"], 2),
+        "none_scheduled_article": 0.0,
+    }.get(deductible_basis)
+    if deductible is None:
+        return {"error": "unknown deductible_basis"}
+    net = max(0.0, float(covered_amount) - deductible)
+    working = f"{covered_amount:,.2f} - deductible {deductible:,.2f} = {net:,.2f}"
+    if claim_status == "covered_subject_to_sublimit" and net > sublimit:
+        net = float(sublimit)
+        working += f", capped at sublimit {sublimit:,.2f}"
+    return {"payable": round(net, 2), "deductible_applied": deductible, "working": working}
 
-TOOLS: list[dict] = [
-    _GET_CLAIM_DETAILS,
-    _CHECK_POLICY_EXCLUSIONS,
-    _COMPUTE_PAYOUT,
-]
 
-_EXECUTORS: dict[str, Any] = {
-    "get_claim_details": _exec_get_claim_details,
-    "check_policy_exclusions": _exec_check_policy_exclusions,
-    "compute_payout": _exec_compute_payout,
-}
+_EXECUTORS = {"get_claim": get_claim, "search_policy": search_policy,
+              "compute_payout": compute_payout}
 
 
-def dispatch_tool(name: str, arguments: str | dict) -> dict:
-    """
-    Call the named tool executor with the arguments the model supplied.
-
-    ``arguments`` may arrive as a JSON string (from the API) or a dict
-    (from unit tests). Always returns a plain dict that can be
-    JSON-serialised into a tool_result message.
-    """
+def dispatch(name: str, arguments: str | dict) -> dict:
     if name not in _EXECUTORS:
-        return {"error": f"Unknown tool: {name!r}. Available: {sorted(_EXECUTORS)}"}
-
-    if isinstance(arguments, str):
-        try:
-            kwargs = json.loads(arguments)
-        except json.JSONDecodeError as exc:
-            return {"error": f"Could not parse tool arguments as JSON: {exc}"}
-    else:
-        kwargs = arguments
-
+        return {"error": f"unknown tool {name!r}"}
+    try:
+        kwargs = json.loads(arguments) if isinstance(arguments, str) else dict(arguments)
+    except json.JSONDecodeError as exc:
+        return {"error": f"arguments are not valid JSON: {exc}"}
     try:
         return _EXECUTORS[name](**kwargs)
     except TypeError as exc:
-        return {"error": f"Tool call failed (bad arguments): {exc}"}
-    except Exception as exc:
-        return {"error": f"Tool execution error: {type(exc).__name__}: {exc}"}
+        return {"error": f"bad arguments: {exc}"}

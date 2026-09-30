@@ -1,0 +1,10 @@
+{"claim_number": "CLM-2026-20101", "class": "clean", "decision": "covered", "payable": 5300, "exclusions_any_of": []}
+{"claim_number": "CLM-2026-20102", "class": "notes_change_rule", "decision": "excluded", "payable": 0, "exclusions_any_of": [["E-41"]]}
+{"claim_number": "CLM-2026-20103", "class": "notes_trigger_exclusion_lookup", "decision": "excluded", "payable": 0, "exclusions_any_of": [["E-83", "E-81"]]}
+{"claim_number": "CLM-2026-20104", "class": "notes_change_rule", "decision": "covered", "payable": 9800, "exclusions_any_of": []}
+{"claim_number": "CLM-2026-20105", "class": "notes_change_rule", "decision": "partially_covered", "payable": 7500, "exclusions_any_of": []}
+{"claim_number": "CLM-2026-20106", "class": "notes_trigger_exclusion_lookup", "decision": "excluded", "payable": 0, "exclusions_any_of": [["E-43"]]}
+{"claim_number": "CLM-2026-20107", "class": "clean", "decision": "covered", "payable": 8500, "exclusions_any_of": []}
+{"claim_number": "CLM-2026-20108", "class": "notes_trigger_exclusion_lookup", "decision": "excluded", "payable": 0, "exclusions_any_of": [["E-51"]]}
+{"claim_number": "CLM-2026-20109", "class": "clean", "decision": "partially_covered", "payable": 2500, "exclusions_any_of": [["E-92"]]}
+{"claim_number": "CLM-2026-20110", "class": "missing_notes", "decision": "needs_info", "payable": null, "exclusions_any_of": []}
