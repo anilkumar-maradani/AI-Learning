@@ -1,0 +1,205 @@
+{
+  "generated_utc": "2026-09-30T17:40:39+00:00",
+  "summaries": [
+    {
+      "id": 1,
+      "claim_number": "CLM-2026-10001",
+      "summary": "Claim CLM-2026-10001, loss date 2026-02-11. A toilet supply line burst in the upstairs bathroom, causing 40 minutes of water flow that damaged the bathroom floor and the dining room ceiling below. Under policy NG‑1101 WE‑1, the loss is covered as a sudden escape of water. Total covered loss is $4,600. The all‑peril deductible of $1,000 applies, leaving a payable amount of $3,600.",
+      "summary_sha256": "1bd8afcea90186fc29de4638098294ee646dc86bcc6d53c724d373a6fd60a4bd",
+      "input_sha256": "b11ca4e3f07186ace421fb483ee586083850ca967b041362bfb7b24c3ffbdb72",
+      "model": "openai/gpt-oss-20b"
+    },
+    {
+      "id": 2,
+      "claim_number": "CLM-2026-10002",
+      "summary": "Claim number CLM-2026-10002, date of loss 2026-02-20. Water damage in the kitchen under the sink from a leaking drain trap joint; the leak persisted for about three weeks, causing cabinet base rot and a musty odor. The claim is denied under exclusion E‑41 (seepage). The all‑peril deductible of $500 is not applied because nothing is payable. Amount payable: $0.",
+      "summary_sha256": "a405dd436c7b325ef3da8c6fead32887b9bce7270824dc266e8ad5d206f0bbdc",
+      "input_sha256": "147f067e03e0417f4620373090eb0f3d0618fada67191115dd3a27d6f9539719",
+      "model": "openai/gpt-oss-20b"
+    },
+    {
+      "id": 3,
+      "claim_number": "CLM-2026-10003",
+      "summary": "Claim CLM-2026-10003, loss date 2026-03-02. Washer hose failed, carpet remained wet for a week with no drying, mold was found in carpet pad and lower drywall. Water damage is covered under WE‑1: $2,800 minus $1,000 deductible equals $1,800 payable. Mold remediation of $4,500 is denied under exclusion E‑63 because drying did not begin within 72 hours. Deductible: $1,000. Amount payable: $1,800.",
+      "summary_sha256": "15ae66f68d102bb8b783dcfb3145e985764e56dfb8740c98371b4426d94b653b",
+      "input_sha256": "881390ad4bdd8f9769ca110290f9fbc406333dac6ae560c175d2c925333d7c26",
+      "model": "openai/gpt-oss-20b"
+    },
+    {
+      "id": 4,
+      "claim_number": "CLM-2026-10004",
+      "summary": "Claim number: CLM-2026-10004. Date of loss: 2026-08-23. Roof damage from Hurricane Delia caused loss of shingles and flashing on the west slope; no interior water damage. Covered under NG‑1102. The hurricane deductible of 2% of the $300,000 Coverage A limit ($6,000) applies instead of the $1,000 all‑peril deductible. Deductible: $6,000. Amount payable: $7,200.",
+      "summary_sha256": "43b2bf4eeb4b72b77cc4daa9c083c9a401d7ab1aaac27eaff1acb595ab2468bf",
+      "input_sha256": "eae142085caad9fae94f12a7ecce352d5ac5779fb8af92f99df7fd9b81fe949d",
+      "model": "openai/gpt-oss-20b"
+    },
+    {
+      "id": 5,
+      "claim_number": "CLM-2026-10005",
+      "summary": "Claim CLM-2026-10005, loss date 2026-05-14. The insured reported rain entering the living room during a storm; inspection found rain entered through an open window and worn chimney flashing, not a wind‑made opening. The claim was denied under exclusion E‑52 (rain entering without a storm‑made opening). The all‑peril deductible is $1,000. Interior damage estimate was $3,900, but no payment is due. Amount payable: $0.",
+      "summary_sha256": "5ab2d90e58c5d3b9e87a6103ecd4e5d1f102ef216ccb4fa8f6d3835559c85801",
+      "input_sha256": "99631002c7b9ec83a625d70d60a79cfb980d37db8ae3ac415d947dcc660b9db1",
+      "model": "openai/gpt-oss-20b"
+    },
+    {
+      "id": 6,
+      "claim_number": "CLM-2026-10006",
+      "summary": "Claim number CLM-2026-10006, date of loss 2026-04-02. A watch, item 2 on the Valuable Articles Schedule with an agreed value of $6,200, was lost at an airport during a business trip; no theft was documented. The loss is covered under VA‑1 and VA‑2 (loss anywhere, including unexplained disappearance). No deductible applies to scheduled articles, so the deductible is $0. The payable amount is the agreed value of $6,200.",
+      "summary_sha256": "454434c7532b505d9d88b5b9fc9a82b2d3b3c1588efc7bc01140fca3b5c5af05",
+      "input_sha256": "d157f86c110b6c9c81dede16088d35a2782830fa661bff0d9ff80cc55d45b5e2",
+      "model": "openai/gpt-oss-20b"
+    },
+    {
+      "id": 7,
+      "claim_number": "CLM-2026-10007",
+      "summary": "Claim CLM-2026-10007, loss date 2026-04-18. A gold bracelet was reported missing after a home party. The bracelet was not on the policy schedule and no evidence of break‑in or theft was established. The claim was denied under exclusion E‑73. The all‑peril deductible of $500 applies. No payment is made; the payable amount is $0.",
+      "summary_sha256": "84f92be0b52828e94b1df423d1525721e4fe3ace52afcc3953513bb6bd12c984",
+      "input_sha256": "46202d7fc6b01ea595f64a0526bb5319f554215700f1063fba1a6e93c9fa1ff0",
+      "model": "openai/gpt-oss-20b"
+    },
+    {
+      "id": 8,
+      "claim_number": "CLM-2026-10008",
+      "summary": "Claim number CLM-2026-10008, loss date 2026-03-15. Water escaped from a cracked basement copper pipe after a 3.9‑magnitude earthquake caused foundation shift. The claim was denied under NG‑1105 E‑83 (water escape caused by earth movement). The all‑peril deductible of $1,500 applies. No payment is made; amount payable $0.",
+      "summary_sha256": "f7778e808fd44acd72149c08be9231ca6c309afd9dc51debd40b6396371862d9",
+      "input_sha256": "cd069055419506a39f2b5605e1c7d3ad369962317b6a4d97e4de7ac8c33b3353",
+      "model": "openai/gpt-oss-20b"
+    },
+    {
+      "id": 9,
+      "claim_number": "CLM-2026-10009",
+      "summary": "Claim CLM-2026-10009, loss date 2026-01-12. The lake house, vacant since 2025-11-20, suffered a frozen pipe burst. Adjuster determined the loss is excluded under E‑44 (freezing while unoccupied >30 days with no heat and no drainage). The damage estimate was $12,300. The all‑peril deductible of $1,000 applies, but the claim is denied, so the payable amount is $0.",
+      "summary_sha256": "9a646e8eff0f2a6e155757c85d0bba016b15773fbb23aaf12580884a52c73522",
+      "input_sha256": "218749d2b519bef7dae67e2623f356d02a0b2e7293f5a0f84e558c27ab832631",
+      "model": "openai/gpt-oss-20b"
+    },
+    {
+      "id": 10,
+      "claim_number": "CLM-2026-10010",
+      "summary": "Claim CLM-2026-10010, loss date 2026-01-25. A pipe froze and burst inside the garage wall, causing water damage. The loss is covered under WE‑1 and WE‑2. The $450 pipe repair is excluded under E‑45. The repair estimate for the garage wall and water damage is $2,900. After the $1,000 all‑peril deductible, the payable amount is $1,900.",
+      "summary_sha256": "e9c7dd647287e4bdd36c22a8b07d1f580541f089c840ed793396b351448e0397",
+      "input_sha256": "172c421fa83704d2a992addf35338a17fde0c1f732dbcc35b122a88464cee332",
+      "model": "openai/gpt-oss-20b"
+    },
+    {
+      "id": 11,
+      "claim_number": "CLM-2026-10011",
+      "summary": "Claim CLM-2026-10011, loss date 2026-06-09. A radiator leak in the home office damaged the insured’s equipment. The employer’s laptop ($1,900) is denied under NG‑1106 E‑93 (property of others). The insured’s printer ($1,300) is covered under HB‑1. After the $500 all‑peril deductible, the payable amount is $800. Total payable: $800.",
+      "summary_sha256": "dfba3c8480a08f71257e1db876702f13892e462ae999e3e74a47234b8bd7ac43",
+      "input_sha256": "561c4fbf7752e2a3bf520d6f188577a22dcd2949633762cce75c75a05aa60983",
+      "model": "openai/gpt-oss-20b"
+    },
+    {
+      "id": 12,
+      "claim_number": "CLM-2026-10012",
+      "summary": "Claim CLM-2026-10012, loss date 2026-06-30. A kitchen fire destroyed the insured’s candle stock and a sewing machine. The candle stock, valued at $3,000, is denied under exclusion code E‑91 (stock held for sale). The sewing machine, valued at $1,800, is covered under HB‑1. The all‑peril deductible of $1,000 applies, leaving a payable amount of $800.",
+      "summary_sha256": "7c31b272c6b9d7e72eaddbb345fae5ed2dcae4f624069e5893982bfed0961ee9",
+      "input_sha256": "1e21f2e6aa69112609f30519a0093008a76519db631c7e670e99834bc5c3b3fd",
+      "model": "openai/gpt-oss-20b"
+    },
+    {
+      "id": 13,
+      "claim_number": "CLM-2026-10013",
+      "summary": "Claim CLM-2026-10013, loss date 2026-03-20. The homeowner reported mold in the basement. Inspection report from 2025-10-04 already noted mold in the north‑west basement corner, which existed before the policy began 2026-01-01. Under policy exclusion NG‑1103 E‑62, mold that existed prior to coverage is excluded. The claim is denied. The all‑peril deductible of $1,000 applies, but no payment is made. Amount payable: $0.",
+      "summary_sha256": "50e8562a37d5257fe4ae022859d74f9966af9df4aecf342b2feee29a120fe055",
+      "input_sha256": "fe191efd098e2e4e8f4e9a056de909b1e6bd7fff221970fec7d4618f1ecd4df3",
+      "model": "openai/gpt-oss-20b"
+    },
+    {
+      "id": 14,
+      "claim_number": "CLM-2026-10014",
+      "summary": "Claim number CLM‑2026‑10014, loss date 2026‑05‑03. Water seeped into the basement through cracks in the walls after three days of rain; the high water table caused groundwater intrusion, with no surface water or pipe failure. The claim is denied under exclusion E‑46 (groundwater seeping through the foundation). The all‑peril deductible of $2,500 applies. Payable amount: $0.",
+      "summary_sha256": "6cbf38fa4e82d6e0fadab0e8bc734cc39ac3b7b7c706d805c723915627a05f46",
+      "input_sha256": "728510350cfffc85600a7d4473fcda43de20c75ef4de81649667c8977363a703",
+      "model": "openai/gpt-oss-20b"
+    },
+    {
+      "id": 15,
+      "claim_number": "CLM-2026-10015",
+      "summary": "Claim CLM-2026-10015, loss date 2026-07-07. An oak tree fell across the back lawn during a windstorm but did not damage the house, fence, shed, or any other structure. The policy covers tree removal only when a covered structure is damaged. Under exclusion E‑54, the removal is not covered. The all‑peril deductible of $1,000 applies, but no claim payment is made. Amount payable: $0.",
+      "summary_sha256": "8485ca3a407db68b8ee0bb52dd313ce0c4260cb1dfb6e470646b73bab8adb701",
+      "input_sha256": "7a7f1cb601370c20417595394a89fdea104f57641fcacf50f8ef5ed9c3119f84",
+      "model": "openai/gpt-oss-20b"
+    },
+    {
+      "id": 16,
+      "claim_number": "CLM-2026-10017",
+      "summary": "Claim CLM-2026-10017, loss date 2026-02-02. A water heater burst in the utility room, spreading water to the hallway carpet. Under policy coverage, carpet and drywall repairs are covered under WE‑1. The water heater itself is excluded under E‑45. The all‑peril deductible of $1,000 applies. Total covered loss is $3,100; after deductible, the payable amount is $2,100.",
+      "summary_sha256": "cec37e240eb92d68d90a303e4d111b2cc6fa25a33b0276ef6c0abf610bdd693c",
+      "input_sha256": "b5d07a7223956517aa5477db653d3c344deec899ee6adc3727d78e72550f1c25",
+      "model": "openai/gpt-oss-20b"
+    },
+    {
+      "id": 17,
+      "claim_number": "CLM-2026-10018",
+      "summary": "Claim CLM-2026-10018, loss date 2026-04-11. Insured reported cracks in living room walls after an alleged delivery truck impact. Investigation found no impact marks; an engineer determined the hairline cracks and sticking door are normal settling of a 1970s house, with no recent earthquake. Claim denied under exclusion E‑82 (settling and cracking). Deductible $1,000. Payable amount $0.",
+      "summary_sha256": "42a81f32f943f955a676efd666a3893293754e08b77cdf42586a38160430d990",
+      "input_sha256": "70bf490e7b196da52b52f8e3bc538d27cbd1f59b9271dd600e2f107ef317a6e0",
+      "model": "openai/gpt-oss-20b"
+    },
+    {
+      "id": 18,
+      "claim_number": "CLM-2026-10019",
+      "summary": "Claim CLM-2026-10019, loss date 2026-04-28. A magnitude 5.1 earthquake caused the gas range to loosen, igniting a kitchen fire. Fire damage estimated at $18,400. Under coverage A, fire after earth movement (GM-2) is covered. Deductible $1,000 applies, leaving $17,400 payable. Garage slab cracks from the quake are excluded under E-81, so $2,600 repair is denied.",
+      "summary_sha256": "0516fb33498b64709864cae9fdddb84a04394f2de1d36389028ce4929ed2da05",
+      "input_sha256": "ecfaa2684a33059db05e645f1b76baa7d3ffb29d75a71ecf611f115d394da15a",
+      "model": "openai/gpt-oss-20b"
+    },
+    {
+      "id": 19,
+      "claim_number": "CLM-2026-10020",
+      "summary": "Claim CLM-2026-10020, loss date 2026-05-22. Sump pump motor burned out during heavy rain, causing water to back up through the sump pit into the finished basement. The loss is denied under exclusion E‑43 (sewer and drain backup, including sump pump backup). The pump is not covered as a household appliance escape under WE‑1. All‑peril deductible of $1,000 applies. Total loss estimate $8,100. Payable amount: $0.",
+      "summary_sha256": "22c98bf6f147a7f0a4f47ad0d05162180f52845dcc92bf8f4155eae00c7aa31b",
+      "input_sha256": "7aafcfb504279f4805eb4be7f47696bd6b96c81f7d147dcbb02db13b03706a5c",
+      "model": "openai/gpt-oss-20b"
+    },
+    {
+      "id": 20,
+      "claim_number": "CLM-2026-10021",
+      "summary": "Claim CLM-2026-10021, loss date 2026-09-02. Hurricane Emil caused a 60 cm sea‑water surge into the ground floor ($41,000) and minor roof wind damage ($2,000). Storm surge damage is denied under exclusion E‑53. Roof wind damage is covered but falls below the hurricane deductible of $10,000 (2% of the $500,000 Coverage A limit). Deductible applied: $10,000. Total payable: $0.",
+      "summary_sha256": "076a5c53e77636d6a32a958ff440ecbfbbfc73c14ae9b130cd8eeafe2be270d1",
+      "input_sha256": "a0b7d97775144a6d9cf99aa8697d3aed6465963dd18096e57d50b38de962bcfc",
+      "model": "openai/gpt-oss-20b"
+    },
+    {
+      "id": 21,
+      "claim_number": "CLM-2026-10022",
+      "summary": "Claim number: CLM-2026-10022  \nDate of loss: 2026‑03‑28  \n\nAn oil painting (item 4 on the Valuable Articles Schedule) fell while being dusted, tearing the canvas. The conservator’s repair quote was $2,300. The painting is not a fragile article under E‑72.  \n\nCoverage decision: Covered under VA‑1. No deductible applies to scheduled articles.  \n\nAmount payable: $2,300.",
+      "summary_sha256": "f50006e6fdfada72b47e77d83918d2b24452255dc1d780a8dece7eef3e3c1a20",
+      "input_sha256": "db498a134187136513157cdd23fb0e4cae90aaa47523c70939b23101c60640b3",
+      "model": "openai/gpt-oss-20b"
+    },
+    {
+      "id": 22,
+      "claim_number": "CLM-2026-10023",
+      "summary": "Claim CLM-2026-10023, loss date 2026-03-30. The insured’s dog knocked a crystal vase (item 5 on the Valuable Articles Schedule, agreed value $3,400) off a table, causing breakage. Under policy coverage, the loss is denied under exclusion E‑72 (breakage of a fragile article not caused by fire, theft or collapse). The deductible for scheduled articles is $0, but no payment is due. Total payable: $0. Claim closed.",
+      "summary_sha256": "93e3228183a28750177e514b39494b5531aa543b63d5d0d28488e01f2425ad20",
+      "input_sha256": "3f23a609a84050cfbf3648985659f3661aa32eaa6f666e53b97b783e28c5264d",
+      "model": "openai/gpt-oss-20b"
+    },
+    {
+      "id": 23,
+      "claim_number": "CLM-2026-10024",
+      "summary": "Claim CLM-2026-10024, loss date 2026-06-14. A shower valve cartridge failure in the upstairs bathroom caused water to leak into the kitchen ceiling. Water damage was assessed at $3,600 and mold remediation at $9,900. Under coverage WE‑1, water damage is payable after the $1,000 deductible, resulting in $2,600. Mold remediation is covered under MR‑1 but limited to the MR‑2 sublimit of $7,500. Total payable amount is $10,100.",
+      "summary_sha256": "1bb6af9a78a52c040c15cdee6291b1c3243e9b1f6044539094ec9595f2be7e40",
+      "input_sha256": "b34ae7bf969e04e5ddc5d18ec33d38c159657b4b998fea732e350075571c4893",
+      "model": "openai/gpt-oss-20b"
+    },
+    {
+      "id": 24,
+      "claim_number": "CLM-2026-10025",
+      "summary": "Claim CLM-2026-10025, loss date 2026-07-01. A ceiling leak in the main bedroom was caused by rain entering through worn flashing around the vent stack, not a storm‑made opening. The claim was denied under NG‑1102 E‑52. The all‑peril deductible of $1,000 applies. No payment is due; amount payable $0.",
+      "summary_sha256": "6a64cf5e3c21a4ba3ae63fa0dd7c00d39eb65ec34131e95c7db9600448a8689f",
+      "input_sha256": "978eb68998b9af0a0fd1c1df629b811c1b64187d450a7f395f99d6a3fb14d331",
+      "model": "openai/gpt-oss-20b"
+    },
+    {
+      "id": 25,
+      "claim_number": "CLM-2026-10029",
+      "summary": "Claim CLM-2026-10029, loss date 2026-02-08. Insured reported a sudden pipe burst in the hallway wall. Investigation revealed a pinhole leak in a corroded copper line that had been leaking for approximately 12 days before discovery. Under policy exclusion E‑41, the loss is classified as seepage, not a sudden escape, and is denied. The all‑peril deductible of $1,000 applies. No payment is made; amount payable is $0.",
+      "summary_sha256": "00f468f21a7cb3fe46165cf76223e3dc12e05776e672922b4f1ae404882abbf6",
+      "input_sha256": "4326e1161b78968290a051b267240b07c954f5e8e7e189c2a49bbb4b64d4f4bd",
+      "model": "openai/gpt-oss-20b"
+    }
+  ]
+}

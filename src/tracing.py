@@ -274,3 +274,46 @@ def get_trace(trace_id: str, path: str = TRACE_PATH) -> dict | None:
         if t["trace_id"] == trace_id:
             return t
     return None
+
+
+# ---------------------------------------------------------------------------
+# Event traces (Week 6 summariser, Week 7/8 agent and workflow runs)
+# ---------------------------------------------------------------------------
+
+def redact_obj(obj, known_names: list[str] | None = None):
+    """Redact every string inside a nested dict/list before it is serialised."""
+    if isinstance(obj, str):
+        return redact_text(obj, known_names)[0]
+    if isinstance(obj, list):
+        return [redact_obj(v, known_names) for v in obj]
+    if isinstance(obj, dict):
+        return {k: redact_obj(v, known_names) for k, v in obj.items()}
+    return obj
+
+
+class EventWriter:
+    """
+    Append-only JSONL writer for free-form run events. Same rule as
+    TraceWriter: redact in memory, re-check the line, refuse to write a leak.
+    """
+
+    def __init__(self, path: str):
+        self.path = path
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+
+    def write(self, event: dict, known_names: list[str] | None = None) -> str:
+        event = {
+            "trace_id": event.get("trace_id") or f"tr_{uuid.uuid4().hex[:12]}",
+            "ts_utc": datetime.now(timezone.utc).isoformat(timespec="milliseconds"),
+            "git_commit": git_commit(),
+            "index_fingerprint": index_fingerprint(),
+            **{k: v for k, v in event.items() if k != "trace_id"},
+        }
+        clean = redact_obj(event, known_names)
+        line = json.dumps(clean, ensure_ascii=False)
+        leaks = assert_clean(line, known_names)
+        if leaks:
+            raise RuntimeError("Refusing to write event: " + "; ".join(leaks))
+        with open(self.path, "a", encoding="utf-8") as fh:
+            fh.write(line + "\n")
+        return event["trace_id"]
