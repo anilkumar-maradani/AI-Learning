@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "policy_docs": {
+      "command": "${python}",
+      "args": ["mcp_servers/policy_docs/server.py"],
+      "attach_resources": ["policy://exclusion-schedule"]
+    }
+  }
+}
