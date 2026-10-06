@@ -1,0 +1,21 @@
+{
+  "mcpServers": {
+    "policy_docs": {
+      "command": "${python}",
+      "args": ["mcp_servers/policy_docs/server.py"],
+      "attach_resources": ["policy://exclusion-schedule"]
+    },
+    "claims_system": {
+      "command": "${python}",
+      "args": ["mcp_servers/claims_system/server.py"],
+      "env": {"CLAIMS_API_TOKEN": "${CLAIMS_API_TOKEN}"}
+    }
+  },
+  "tokens": {
+    "76b3ee7062b10b6b146e7cbab361c9a590d6d8ecb53c2d380051bb31aada0e05": {
+      "caller": "triage-agent",
+      "allow": ["*"],
+      "deny": ["claims_system__get_adjuster_notes"]
+    }
+  }
+}

@@ -27,6 +27,17 @@ from mcp_server import Server, ToolError  # noqa: E402
 server = Server("policy-docs", "0.9.0")
 
 POLICY_DIR = os.path.join(ROOT, "data", "policy")
+FORM_RE = re.compile(r"^NG-\d{4}$")
+
+
+def _forms() -> dict[str, str]:
+    """{form_number: title}, read from the form headers so the error message never goes stale."""
+    out = {}
+    for path in sorted(glob.glob(os.path.join(POLICY_DIR, "*.txt"))):
+        with open(path, encoding="utf-8") as fh:
+            head = dict(l.split(":", 1) for l in fh.read().splitlines()[:10] if ":" in l)
+        out[head["Form Number"].strip()] = head["Title"].strip()
+    return out
 
 
 @server.tool({
@@ -38,14 +49,52 @@ POLICY_DIR = os.path.join(ROOT, "data", "policy")
     "required": ["query"],
 })
 def search_policy(query: str, form_number: str | None = None) -> dict:
-    """Search policy documents."""
+    """
+    Read Northgate Mutual endorsement wording: coverage clauses, exclusion-table
+    rows, deductible and sublimit rules. Use it whenever an answer depends on what
+    a form actually says; quote the clause ids (e.g. GM-3) and exclusion codes
+    (e.g. E-83) it returns.
+
+    form_number (optional) restricts the search to one form and then returns that
+    form's COMPLETE wording, so one call per form is enough. Form numbers look
+    like NG-NNNN. The library holds NG-1101 to NG-1106 only. Without form_number,
+    returns the best-matching passages across every form for the query.
+
+    It knows nothing about any particular claim and does not decide coverage.
+
+    Errors are written for you to act on:
+      "form NG-xxxx not found"  -> the number is wrong; the message lists every
+                                   form in the library, retry with the right one
+                                   or drop form_number.
+      "is not a form number"    -> fix the format (NG-NNNN) and retry.
+      "policy library unavailable" -> a server fault; do not retry, tell the
+                                   adjuster the wording could not be read.
+    """
     from tools import search_policy as _search
+    if form_number is not None:
+        form_number = form_number.strip().upper()
+        library = _forms()
+        if not FORM_RE.match(form_number):
+            raise ToolError(
+                f"'{form_number}' is not a form number: form numbers look like NG-NNNN, "
+                f"e.g. NG-1105. Retry with the corrected number, or omit form_number to "
+                f"search every form.")
+        if form_number not in library:
+            listing = "; ".join(f"{n} {t}" for n, t in library.items())
+            raise ToolError(
+                f"form {form_number} not found: the policy library holds only {listing}. "
+                f"If the adjuster quoted {form_number}, it is probably a typo for one of these; "
+                f"retry with the form whose title matches the question, or omit form_number "
+                f"to search every form.")
     try:
         out = _search(query, form_number=form_number)
-    except Exception:
-        raise ToolError("Error: lookup failed")
+    except Exception as exc:
+        raise ToolError(
+            f"policy library unavailable ({type(exc).__name__}): the search index could not be "
+            f"read. This is a server fault, not a bad argument; retrying will not help. Tell "
+            f"the adjuster the policy wording could not be retrieved.")
     if out.get("error"):
-        raise ToolError("Error: lookup failed")
+        raise ToolError(out["error"])
     return out
 
 

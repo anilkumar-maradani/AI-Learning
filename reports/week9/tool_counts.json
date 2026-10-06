@@ -1,0 +1,16 @@
+{
+  "before": {
+    "policy_docs": [
+      "search_policy"
+    ]
+  },
+  "after": {
+    "policy_docs": [
+      "search_policy"
+    ],
+    "claims_system": [
+      "get_claim_status",
+      "get_adjuster_notes"
+    ]
+  }
+}

@@ -1,0 +1,178 @@
+{
+  "what": "Raw JSON-RPC exchange between the PolicyLens host (src/mcp_client.py) and the claims-system MCP server over stdio: initialize -> notifications/initialized -> tools/list -> tools/call. Captured by `python evals/week9.py wire`; the raw capture is wire_raw.json. Every top-level field of every message is annotated by hand in `annotations`.",
+  "model_call_location": "No model call happens on this wire, neither in the client nor in the server. The model runs only in the host (src/mcp_agent.py -> llm.chat -> Groq), between tools/list and tools/call: it reads the tools/list result as function definitions, chooses the tool and writes the tools/call arguments.",
+  "redaction": "Identical to what crossed the pipe, except the claimant name inside message 7 is replaced by a stable pseudonym before writing (the Week 5 rule).",
+  "exchange": [
+    {
+      "step": 1,
+      "direction": "client->server",
+      "message": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "initialize",
+        "params": {
+          "protocolVersion": "2025-06-18",
+          "capabilities": {},
+          "clientInfo": {
+            "name": "policylens-host",
+            "version": "0.9.0"
+          }
+        }
+      },
+      "annotations": {
+        "jsonrpc": "Protocol tag. Every MCP message is JSON-RPC 2.0; a message without it is not MCP.",
+        "id": "1. Request id chosen by the client (host). The reply must carry the same id; that is how a reply is matched to its request over one stdio pipe.",
+        "method": "initialize: always the first request. Nothing else may be sent before it.",
+        "params": "protocolVersion = the spec revision the client speaks (2025-06-18); capabilities = what the CLIENT offers the server (empty: no sampling, no roots, no elicitation, so this server can never ask our host to run the model); clientInfo = who is connecting (PolicyLens host 0.9.0)."
+      }
+    },
+    {
+      "step": 2,
+      "direction": "server->client",
+      "message": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "protocolVersion": "2025-06-18",
+          "capabilities": {
+            "tools": {
+              "listChanged": false
+            }
+          },
+          "serverInfo": {
+            "name": "claims-system",
+            "version": "0.3.1"
+          }
+        }
+      },
+      "annotations": {
+        "jsonrpc": "JSON-RPC 2.0.",
+        "id": "1, the same as the request. This is the reply to initialize.",
+        "result": "The handshake answer. protocolVersion = the revision the server agrees to use (it accepted 2025-06-18). capabilities = what the server offers: tools only (listChanged false: the tool list will not change mid-session; no resources, no prompts). serverInfo = claims-system 0.3.1, the third party's own name and version, so this is the only identity the server asserts about itself."
+      }
+    },
+    {
+      "step": 3,
+      "direction": "client->server",
+      "message": {
+        "jsonrpc": "2.0",
+        "method": "notifications/initialized"
+      },
+      "annotations": {
+        "jsonrpc": "JSON-RPC 2.0.",
+        "method": "notifications/initialized: the client says the handshake is done and normal traffic can start.",
+        "(no id)": "There is no id because this is a notification: the server must not reply, and none came back."
+      }
+    },
+    {
+      "step": 4,
+      "direction": "client->server",
+      "message": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "method": "tools/list",
+        "params": {}
+      },
+      "annotations": {
+        "jsonrpc": "JSON-RPC 2.0.",
+        "id": "2.",
+        "method": "tools/list: discovery. Ask the server which tools it has right now. This is what makes adding the server a config-only change; the agent hard-codes nothing.",
+        "params": "Empty: first page, no cursor."
+      }
+    },
+    {
+      "step": 5,
+      "direction": "server->client",
+      "message": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "result": {
+          "tools": [
+            {
+              "name": "get_claim_status",
+              "description": "Current status of one claim in the Northgate claims system, looked up by claim number (format CLM-YYYY-nnnnn, e.g. CLM-2026-20103). Returns the status (open/closed), policy number, claimant, date of loss, date reported, the endorsement forms on the policy, how many adjuster notes exist and the date of the latest one. It does not return the note text (use get_adjuster_notes) and it does not say whether anything is covered.",
+              "inputSchema": {
+                "type": "object",
+                "properties": {
+                  "claim_number": {
+                    "type": "string",
+                    "pattern": "^CLM-\\d{4}-\\d{5}$",
+                    "description": "e.g. CLM-2026-20103"
+                  }
+                },
+                "required": [
+                  "claim_number"
+                ]
+              }
+            },
+            {
+              "name": "get_adjuster_notes",
+              "description": "The adjuster note history behind one claim, oldest first: date, adjuster id and the note text. Notes record what the adjuster found on site and often say what actually caused the loss. A claim with no notes yet returns an empty list, which means the facts are not in yet, not that nothing happened.",
+              "inputSchema": {
+                "type": "object",
+                "properties": {
+                  "claim_number": {
+                    "type": "string",
+                    "pattern": "^CLM-\\d{4}-\\d{5}$",
+                    "description": "e.g. CLM-2026-20103"
+                  }
+                },
+                "required": [
+                  "claim_number"
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "annotations": {
+        "jsonrpc": "JSON-RPC 2.0.",
+        "id": "2, the reply to tools/list.",
+        "result": "tools = the full catalogue, 2 entries. Per tool: name (what tools/call must use; our host exposes it to the model as claims_system__<name>), description (the ONLY text the model reads when deciding whether to call it; this is a prompt the third party wrote and we pass on verbatim) and inputSchema (JSON Schema for the arguments, sent to the model as function parameters). There is no nextCursor, so this was the last page."
+      }
+    },
+    {
+      "step": 6,
+      "direction": "client->server",
+      "message": {
+        "jsonrpc": "2.0",
+        "id": 3,
+        "method": "tools/call",
+        "params": {
+          "name": "get_claim_status",
+          "arguments": {
+            "claim_number": "CLM-2026-20103"
+          }
+        }
+      },
+      "annotations": {
+        "jsonrpc": "JSON-RPC 2.0.",
+        "id": "3.",
+        "method": "tools/call: run one tool.",
+        "params": "name = get_claim_status, the server's own name with no namespace prefix (the host strips claims_system__); arguments = {claim_number}. In an agent run the MODEL produced these arguments; in this capture the runner sent them directly."
+      }
+    },
+    {
+      "step": 7,
+      "direction": "server->client",
+      "message": {
+        "jsonrpc": "2.0",
+        "id": 3,
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\"claim_number\": \"CLM-2026-20103\", \"status\": \"open\", \"policy_number\": \"HOP-5510203\", \"claimant_name\": \"[CLAIMANT:dd9fcd]\", \"date_of_loss\": \"2026-06-01\", \"reported_date\": \"2026-06-02\", \"forms\": [\"NG-1101\", \"NG-1105\"], \"adjuster_note_count\": 2, \"latest_note_date\": \"2026-06-09\"}"
+            }
+          ],
+          "isError": false
+        }
+      },
+      "annotations": {
+        "jsonrpc": "JSON-RPC 2.0.",
+        "id": "3, the reply to tools/call.",
+        "result": "content = a list of content blocks; here one text block holding the claim status as a JSON string (the claimant name is pseudonymised by our writer; the server sent the real name). isError = false. Had the claim been unknown, this would still be a result, with isError true and a readable message for the model, not a JSON-RPC error. JSON-RPC errors are for protocol faults such as an unknown tool."
+      }
+    }
+  ]
+}

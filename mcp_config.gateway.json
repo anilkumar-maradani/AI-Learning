@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "gateway": {
+      "command": "${python}",
+      "args": ["mcp_servers/gateway/server.py"],
+      "env": {"GATEWAY_TOKEN": "${GATEWAY_TOKEN}"},
+      "attach_resources": ["policy://exclusion-schedule"]
+    }
+  }
+}

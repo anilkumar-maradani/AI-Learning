@@ -1,0 +1,14 @@
+$ git diff --numstat 5c8265b..7190235 -- src/mcp_agent.py src/mcp_client.py
+$ git diff 5c8265b..7190235 -- src/mcp_agent.py src/mcp_client.py
+
+changed lines in the agent module (src/mcp_agent.py + src/mcp_client.py): 0
+
+$ git diff --stat 5c8265b..7190235
+ .env.example                        |   3 +
+ mcp_config.json                     |   5 +
+ mcp_servers/claims_system/server.py | 176 ++++++++++++++++++++++++++++++++++++
+ 3 files changed, 184 insertions(+)
+
+# The agent module in the final working tree is still identical to the server-one-only commit:
+$ git diff --numstat 5c8265b -- src/mcp_agent.py src/mcp_client.py
+(no output = 0 changed lines)
