@@ -3,7 +3,8 @@
 One app that grows each week: from chunking and retrieval over homeowners
 policy forms (Weeks 3–4), to traced and redacted claim answers (Week 5), to an
 evaluated claim-summary writer (Week 6), a tool-using triage agent raced
-against a fixed workflow (Week 7), and a trajectory eval of that agent (Week 8).
+against a fixed workflow (Week 7), a trajectory eval of that agent (Week 8), and
+an agent that finds its tools over MCP, so adding a server is a config change (Week 9).
 
 All app code lives in `src/`. Each week adds one command under `evals/` and
 puts its evidence under `reports/weekN/`. Everything runs locally except the
@@ -42,10 +43,11 @@ copy .env.example .env                       # then paste your GROQ_API_KEY
 | 6 | `python evals/week6.py` | 25 mode-tagged summary cases: 4 assertions + 1 judged criterion, pass rate by mode |
 | 7 | `python evals/week7.py agent` · `... workflow` · `... table` | agent vs workflow race, the 8 numbers |
 | 8 | `python evals/week8.py score --runs ... --label ...` · `... compare` | trajectory eval, outcome-vs-path gap, one mitigation |
+| 9 | `python evals/week9.py tools` · `... query` · `... wire` · `... errors --before-rev REV` · `... gateway` | MCP: tools discovered from `mcp_config.json`, the claims-system server added by config only |
 | any | `python chat.py` | interactive grounded Q&A over the forms |
 
 Each week's write-up: [Week 6](reports/week6/README.md) ·
-[Week 7](reports/week7/README.md) · [Week 8](reports/week8/README.md).
+[Week 7](reports/week7/README.md) · [Week 8](reports/week8/README.md) · [Week 9](reports/week9/README.md).
 
 ## How the app fits together
 
@@ -70,6 +72,7 @@ data/claims/*.jsonl ──claim_store──────────────�
 | `claim_store.py`, `llm.py`, `summariser.py`, `assertions.py`, `judge.py` | 6 |
 | `tools.py`, `agent.py`, `workflow.py`, `triage.py` | 7 |
 | `trajectory.py` | 8 |
+| `mcp_server.py`, `mcp_client.py`, `mcp_agent.py`, `mcp_servers/` | 9 |
 
 ## Configuration
 
@@ -79,6 +82,8 @@ data/claims/*.jsonl ──claim_store──────────────�
 | `GROQ_MODEL` | `openai/gpt-oss-120b` | agent, workflow, judge, chat |
 | `GROQ_SMALL_MODEL` | `openai/gpt-oss-20b` | the Week 6 summary writer |
 | `POLICYLENS_REDACTION_SALT` | dev salt | key for the pseudonyms in traces |
+| `CLAIMS_API_TOKEN` | — | Week 9: token the claims-system MCP server requires |
+| `GATEWAY_TOKEN` | — | Week 9 bonus: the agent's scoped token for the gateway |
 
 The free Groq tier allows 8,000 tokens a minute. The eval runners pace
 themselves, and reported latency excludes rate-limit waits (see `src/llm.py`).

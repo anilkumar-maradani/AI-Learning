@@ -1,0 +1,8 @@
+1 before -> 3 after   [search_policy] -> [search_policy, get_claim_status, get_adjuster_notes]
+
+before (5c8265b, mcp_config.json at that commit): 1 tools from tools/list
+  policy_docs__search_policy
+after (7190235, mcp_config.json at that commit): 3 tools from tools/list
+  policy_docs__search_policy
+  claims_system__get_claim_status
+  claims_system__get_adjuster_notes

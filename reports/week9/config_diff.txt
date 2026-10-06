@@ -1,0 +1,28 @@
+$ git diff 5c8265b..7190235 -- mcp_config.json .env.example
+diff --git a/.env.example b/.env.example
+index dd142b3..f6d8f9e 100644
+--- a/.env.example
++++ b/.env.example
+@@ -6,3 +6,6 @@ GROQ_API_KEY=gsk_your_groq_api_key_here
+ 
+ # Optional. Any chat model served by Groq (default shown).
+ # GROQ_MODEL=openai/gpt-oss-120b
++
++# Week 9. Token the claims-system MCP server checks; mcp_config.json passes it through.
++CLAIMS_API_TOKEN=dev-claims-token
+diff --git a/mcp_config.json b/mcp_config.json
+index e941813..e2c7278 100644
+--- a/mcp_config.json
++++ b/mcp_config.json
+@@ -4,6 +4,11 @@
+       "command": "${python}",
+       "args": ["mcp_servers/policy_docs/server.py"],
+       "attach_resources": ["policy://exclusion-schedule"]
++    },
++    "claims_system": {
++      "command": "${python}",
++      "args": ["mcp_servers/claims_system/server.py"],
++      "env": {"CLAIMS_API_TOKEN": "${CLAIMS_API_TOKEN}"}
+     }
+   }
+ }

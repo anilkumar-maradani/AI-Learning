@@ -33,3 +33,7 @@ Thumbs.db
 # IDE
 .vscode/
 .idea/
+
+# MCP server logs (claims-system call log, gateway audit) and Week 9 scratch copies
+logs/
+mcp_servers/policy_docs/_server_at_*.py
