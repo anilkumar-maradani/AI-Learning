@@ -1,0 +1,119 @@
+# single: one line per model call (hand-off), tokens = prompt + completion
+case  1 CLM-2026-10001 | single | agent lap 1 (system + question)                  | prompt    866 | completion    57 | total    923
+case  1 CLM-2026-10001 | single | agent lap 2 (whole conversation re-sent)         | prompt   1093 | completion    69 | total   1162
+case  1 CLM-2026-10001 | single | agent lap 3 (whole conversation re-sent)         | prompt   1895 | completion   341 | total   2236
+case  1 CLM-2026-10001 | single | agent lap 4 (whole conversation re-sent)         | prompt   1998 | completion   415 | total   2413
+case  2 CLM-2026-10002 | single | agent lap 1 (system + question)                  | prompt    866 | completion    57 | total    923
+case  2 CLM-2026-10002 | single | agent lap 2 (whole conversation re-sent)         | prompt   1083 | completion    85 | total   1168
+case  2 CLM-2026-10002 | single | agent lap 3 (whole conversation re-sent)         | prompt   1887 | completion   262 | total   2149
+case  2 CLM-2026-10002 | single | agent lap 4 (whole conversation re-sent)         | prompt   1959 | completion   315 | total   2274
+case  3 CLM-2026-10003 | single | agent lap 1 (system + question)                  | prompt    866 | completion    57 | total    923
+case  3 CLM-2026-10003 | single | agent lap 2 (whole conversation re-sent)         | prompt   1112 | completion   101 | total   1213
+case  3 CLM-2026-10003 | single | agent lap 3 (whole conversation re-sent)         | prompt   1912 | completion    77 | total   1989
+case  3 CLM-2026-10003 | single | agent lap 4 (whole conversation re-sent)         | prompt   2491 | completion   429 | total   2920
+case  3 CLM-2026-10003 | single | agent lap 5 (whole conversation re-sent)         | prompt   2594 | completion   560 | total   3154
+case  4 CLM-2026-10004 | single | agent lap 1 (system + question)                  | prompt    866 | completion    57 | total    923
+case  4 CLM-2026-10004 | single | agent lap 2 (whole conversation re-sent)         | prompt   1093 | completion    65 | total   1158
+case  4 CLM-2026-10004 | single | agent lap 3 (whole conversation re-sent)         | prompt   1849 | completion   507 | total   2356
+case  5 CLM-2026-10005 | single | agent lap 1 (system + question)                  | prompt    866 | completion    57 | total    923
+case  5 CLM-2026-10005 | single | agent lap 2 (whole conversation re-sent)         | prompt   1088 | completion    80 | total   1168
+case  5 CLM-2026-10005 | single | agent lap 3 (whole conversation re-sent)         | prompt   1841 | completion   291 | total   2132
+case  5 CLM-2026-10005 | single | agent lap 4 (whole conversation re-sent)         | prompt   1913 | completion   285 | total   2198
+case  6 CLM-2026-10006 | single | agent lap 1 (system + question)                  | prompt    866 | completion    57 | total    923
+case  6 CLM-2026-10006 | single | agent lap 2 (whole conversation re-sent)         | prompt   1044 | completion   104 | total   1148
+case  6 CLM-2026-10006 | single | agent lap 3 (whole conversation re-sent)         | prompt   1652 | completion   226 | total   1878
+case  6 CLM-2026-10006 | single | agent lap 4 (whole conversation re-sent)         | prompt   1753 | completion    72 | total   1825
+case  7 CLM-2026-10007 | single | agent lap 1 (system + question)                  | prompt    866 | completion    57 | total    923
+case  7 CLM-2026-10007 | single | agent lap 2 (whole conversation re-sent)         | prompt   1049 | completion    71 | total   1120
+case  7 CLM-2026-10007 | single | agent lap 3 (whole conversation re-sent)         | prompt      0 | completion     0 | total      0
+case  8 CLM-2026-10008 | single | agent lap 1 (system + question)                  | prompt    866 | completion    57 | total    923
+case  8 CLM-2026-10008 | single | agent lap 2 (whole conversation re-sent)         | prompt   1168 | completion   105 | total   1273
+case  8 CLM-2026-10008 | single | agent lap 3 (whole conversation re-sent)         | prompt   1970 | completion   148 | total   2118
+case  8 CLM-2026-10008 | single | agent lap 4 (whole conversation re-sent)         | prompt   2770 | completion   148 | total   2918
+case  8 CLM-2026-10008 | single | agent lap 5 (whole conversation re-sent)         | prompt   3376 | completion   504 | total   3880
+case  8 CLM-2026-10008 | single | agent lap 6 (whole conversation re-sent)         | prompt   3448 | completion   363 | total   3811
+case  9 CLM-2026-10009 | single | agent lap 1 (system + question)                  | prompt    866 | completion    57 | total    923
+case  9 CLM-2026-10009 | single | agent lap 2 (whole conversation re-sent)         | prompt   1051 | completion   136 | total   1187
+case  9 CLM-2026-10009 | single | agent lap 3 (whole conversation re-sent)         | prompt   1860 | completion   141 | total   2001
+case  9 CLM-2026-10009 | single | agent lap 4 (whole conversation re-sent)         | prompt   2661 | completion   219 | total   2880
+case  9 CLM-2026-10009 | single | agent lap 5 (whole conversation re-sent)         | prompt   3461 | completion   113 | total   3574
+case  9 CLM-2026-10009 | single | agent lap 6 (whole conversation re-sent)         | prompt   4262 | completion   105 | total   4367
+case  9 CLM-2026-10009 | single | agent lap 7 (whole conversation re-sent)         | prompt   5064 | completion   132 | total   5196
+case  9 CLM-2026-10009 | single | agent lap 8 (whole conversation re-sent)         | prompt   5745 | completion   141 | total   5886
+case 10 CLM-2026-10010 | single | agent lap 1 (system + question)                  | prompt    866 | completion    57 | total    923
+case 10 CLM-2026-10010 | single | agent lap 2 (whole conversation re-sent)         | prompt   1089 | completion    95 | total   1184
+case 10 CLM-2026-10010 | single | agent lap 3 (whole conversation re-sent)         | prompt   1891 | completion   633 | total   2524
+case 10 CLM-2026-10010 | single | agent lap 4 (whole conversation re-sent)         | prompt   1994 | completion   255 | total   2249
+case 10 CLM-2026-10010 | single | agent lap 5 (whole conversation re-sent)         | prompt   2795 | completion   195 | total   2990
+case 10 CLM-2026-10010 | single | agent lap 6 (whole conversation re-sent)         | prompt   3597 | completion   133 | total   3730
+case 10 CLM-2026-10010 | single | agent lap 7 (whole conversation re-sent)         | prompt   4397 | completion   176 | total   4573
+case 10 CLM-2026-10010 | single | agent lap 8 (whole conversation re-sent)         | prompt   4879 | completion   195 | total   5074
+
+# squad: one line per model call (hand-off), tokens = prompt + completion
+case  1 CLM-2026-10001 | squad  | orchestrator:plan                                | prompt    214 | completion   692 | total    906
+case  1 CLM-2026-10001 | squad  | orchestrator -> notes_worker                     | prompt    568 | completion   582 | total   1150
+case  1 CLM-2026-10001 | squad  | orchestrator -> exclusions_worker (lap 1)        | prompt    948 | completion    67 | total   1015
+case  1 CLM-2026-10001 | squad  | orchestrator -> exclusions_worker (lap 2)        | prompt   1747 | completion   198 | total   1945
+case  1 CLM-2026-10001 | squad  | orchestrator -> exclusions_worker (lap 3)        | prompt   2547 | completion   494 | total   3041
+case  1 CLM-2026-10001 | squad  | workers -> orchestrator:synthesis                | prompt    685 | completion   197 | total    882
+case  2 CLM-2026-10002 | squad  | orchestrator:plan                                | prompt    214 | completion   297 | total    511
+case  2 CLM-2026-10002 | squad  | orchestrator -> notes_worker                     | prompt    464 | completion   386 | total    850
+case  2 CLM-2026-10002 | squad  | orchestrator -> exclusions_worker (lap 1)        | prompt    736 | completion    69 | total    805
+case  2 CLM-2026-10002 | squad  | orchestrator -> exclusions_worker (lap 2)        | prompt   1536 | completion   267 | total   1803
+case  2 CLM-2026-10002 | squad  | workers -> orchestrator:synthesis                | prompt    605 | completion   225 | total    830
+case  3 CLM-2026-10003 | squad  | orchestrator:plan                                | prompt    219 | completion   427 | total    646
+case  3 CLM-2026-10003 | squad  | orchestrator -> notes_worker                     | prompt    528 | completion   410 | total    938
+case  3 CLM-2026-10003 | squad  | orchestrator -> exclusions_worker (lap 1)        | prompt    849 | completion   113 | total    962
+case  3 CLM-2026-10003 | squad  | orchestrator -> exclusions_worker (lap 2)        | prompt   1665 | completion    59 | total   1724
+case  3 CLM-2026-10003 | squad  | orchestrator -> exclusions_worker (lap 3)        | prompt      0 | completion     0 | total      0
+case  3 CLM-2026-10003 | squad  | workers -> orchestrator:synthesis                | prompt    517 | completion   285 | total    802
+case  4 CLM-2026-10004 | squad  | orchestrator:plan                                | prompt    210 | completion   369 | total    579
+case  4 CLM-2026-10004 | squad  | orchestrator -> notes_worker                     | prompt    470 | completion   479 | total    949
+case  4 CLM-2026-10004 | squad  | orchestrator -> exclusions_worker (lap 1)        | prompt    779 | completion    66 | total    845
+case  4 CLM-2026-10004 | squad  | orchestrator -> exclusions_worker (lap 2)        | prompt   1528 | completion   561 | total   2089
+case  4 CLM-2026-10004 | squad  | workers -> orchestrator:synthesis                | prompt    617 | completion   263 | total    880
+case  5 CLM-2026-10005 | squad  | orchestrator:plan                                | prompt    214 | completion   379 | total    593
+case  5 CLM-2026-10005 | squad  | orchestrator -> notes_worker                     | prompt    464 | completion   351 | total    815
+case  5 CLM-2026-10005 | squad  | orchestrator -> exclusions_worker (lap 1)        | prompt    781 | completion    69 | total    850
+case  5 CLM-2026-10005 | squad  | orchestrator -> exclusions_worker (lap 2)        | prompt   1531 | completion   369 | total   1900
+case  5 CLM-2026-10005 | squad  | workers -> orchestrator:synthesis                | prompt    628 | completion   217 | total    845
+case  6 CLM-2026-10006 | squad  | orchestrator:plan                                | prompt    211 | completion   433 | total    644
+case  6 CLM-2026-10006 | squad  | orchestrator -> notes_worker                     | prompt    422 | completion   431 | total    853
+case  6 CLM-2026-10006 | squad  | orchestrator -> exclusions_worker (lap 1)        | prompt    737 | completion    68 | total    805
+case  6 CLM-2026-10006 | squad  | orchestrator -> exclusions_worker (lap 2)        | prompt   1343 | completion   328 | total   1671
+case  6 CLM-2026-10006 | squad  | workers -> orchestrator:synthesis                | prompt    601 | completion   254 | total    855
+case  7 CLM-2026-10007 | squad  | orchestrator:plan                                | prompt    213 | completion   318 | total    531
+case  7 CLM-2026-10007 | squad  | orchestrator -> notes_worker                     | prompt    425 | completion   636 | total   1061
+case  7 CLM-2026-10007 | squad  | orchestrator -> exclusions_worker (lap 1)        | prompt    738 | completion    67 | total    805
+case  7 CLM-2026-10007 | squad  | orchestrator -> exclusions_worker (lap 2)        | prompt   1343 | completion   418 | total   1761
+case  7 CLM-2026-10007 | squad  | workers -> orchestrator:synthesis                | prompt    617 | completion   223 | total    840
+case  8 CLM-2026-10008 | squad  | orchestrator:plan                                | prompt    219 | completion   440 | total    659
+case  8 CLM-2026-10008 | squad  | orchestrator -> notes_worker                     | prompt    566 | completion   592 | total   1158
+case  8 CLM-2026-10008 | squad  | orchestrator -> exclusions_worker (lap 1)        | prompt    872 | completion    69 | total    941
+case  8 CLM-2026-10008 | squad  | orchestrator -> exclusions_worker (lap 2)        | prompt   1678 | completion   101 | total   1779
+case  8 CLM-2026-10008 | squad  | orchestrator -> exclusions_worker (lap 3)        | prompt   2286 | completion   401 | total   2687
+case  8 CLM-2026-10008 | squad  | workers -> orchestrator:synthesis                | prompt    688 | completion   250 | total    938
+case  9 CLM-2026-10009 | squad  | orchestrator:plan                                | prompt    212 | completion   329 | total    541
+case  9 CLM-2026-10009 | squad  | orchestrator -> notes_worker                     | prompt    443 | completion   312 | total    755
+case  9 CLM-2026-10009 | squad  | orchestrator -> exclusions_worker (lap 1)        | prompt    790 | completion    69 | total    859
+case  9 CLM-2026-10009 | squad  | orchestrator -> exclusions_worker (lap 2)        | prompt   1590 | completion    54 | total   1644
+case  9 CLM-2026-10009 | squad  | orchestrator -> exclusions_worker (lap 3)        | prompt   2391 | completion    82 | total   2473
+case  9 CLM-2026-10009 | squad  | orchestrator -> exclusions_worker (lap 4)        | prompt      0 | completion     0 | total      0
+case  9 CLM-2026-10009 | squad  | workers -> orchestrator:synthesis                | prompt    506 | completion   279 | total    785
+case 10 CLM-2026-10010 | squad  | orchestrator:plan                                | prompt    213 | completion   383 | total    596
+case 10 CLM-2026-10010 | squad  | orchestrator -> notes_worker                     | prompt    458 | completion   561 | total   1019
+case 10 CLM-2026-10010 | squad  | orchestrator -> exclusions_worker (lap 1)        | prompt    791 | completion    78 | total    869
+case 10 CLM-2026-10010 | squad  | orchestrator -> exclusions_worker (lap 2)        | prompt   1595 | completion    73 | total   1668
+case 10 CLM-2026-10010 | squad  | orchestrator -> exclusions_worker (lap 3)        | prompt   2396 | completion   104 | total   2500
+case 10 CLM-2026-10010 | squad  | orchestrator -> exclusions_worker (lap 4)        | prompt   3014 | completion   448 | total   3462
+case 10 CLM-2026-10010 | squad  | workers -> orchestrator:synthesis                | prompt    627 | completion   213 | total    840
+
+# single: tokens by hand-off, all 10 cases (106,306 total)
+  agent laps 2+ (conversation re-send)               97,076   91.3%
+  agent lap 1                                         9,230    8.7%
+
+# squad: tokens by hand-off, all 10 cases (65,154 total)
+  orchestrator -> exclusions_worker                  40,903   62.8%
+  orchestrator -> notes_worker                        9,548   14.7%
+  workers -> orchestrator:synthesis                   8,497   13.0%
+  orchestrator:plan                                   6,206    9.5%

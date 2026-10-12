@@ -132,7 +132,13 @@ def get_claim(claim_number: str) -> dict:
     claim = _load_claim(claim_number)
     if claim is None:
         return {"error": f"No claim {claim_number} in the claims system"}
-    return {k: v for k, v in claim.items() if k != "claimant_name"}
+    out = {k: v for k, v in claim.items() if k != "claimant_name"}
+    # Week 10: a closed claim's last note is the adjuster's decision, i.e. the
+    # answer key the Week 6 judge grades against. No tool may read it. Open
+    # claims have no decision note, so Weeks 7-8 see exactly what they saw.
+    out["adjuster_notes"] = [n for n in claim.get("adjuster_notes") or []
+                             if not n["text"].startswith("Decision:")]
+    return out
 
 
 def search_policy(query: str, form_number: str | None = None, n_results: int = 4) -> dict:

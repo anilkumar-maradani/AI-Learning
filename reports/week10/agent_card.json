@@ -1,0 +1,53 @@
+{
+  "protocolVersion": "0.3.0",
+  "name": "PolicyLens claims squad",
+  "description": "Triages one Northgate Mutual homeowners claim: reads the adjuster notes, checks the attached endorsements' coverage clauses and exclusions, and returns a coverage decision with the exclusions relied on and the amount payable. Never states 'covered' without an exclusions check; if that check cannot run it says so.",
+  "url": "https://policylens.northgate.example/a2a/claims-squad",
+  "preferredTransport": "JSONRPC",
+  "version": "1.0.0",
+  "provider": {"organization": "Northgate Mutual, PolicyLens team", "url": "https://policylens.northgate.example"},
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": true,
+    "stateTransitionHistory": true
+  },
+  "defaultInputModes": ["text/plain", "application/json"],
+  "defaultOutputModes": ["application/json", "text/plain"],
+  "skills": [
+    {
+      "id": "triage-claim",
+      "name": "Triage a claim",
+      "description": "Given a claim number (CLM-YYYY-nnnnn), decide covered / partially_covered / excluded / needs_info, cite every exclusion (E-NN) and clause relied on, and compute the payable amount after the deductible. Output follows the PolicyLens triage contract.",
+      "tags": ["insurance", "claims", "coverage", "exclusions", "homeowners"],
+      "examples": ["Triage claim CLM-2026-10002.", "{\"claim_number\": \"CLM-2026-10008\"}"],
+      "inputModes": ["text/plain", "application/json"],
+      "outputModes": ["application/json"]
+    },
+    {
+      "id": "summarise-adjuster-notes",
+      "name": "Summarise adjuster notes",
+      "description": "The facts in a claim's adjuster note history that decide coverage: actual cause, timeline and durations, damage lines, and anything that contradicts the first notice of loss. Facts only; no coverage call.",
+      "tags": ["claims", "adjuster-notes", "summary"],
+      "examples": ["What do the notes on CLM-2026-10005 say caused the water damage?"],
+      "inputModes": ["text/plain", "application/json"],
+      "outputModes": ["application/json"]
+    }
+  ],
+  "securitySchemes": {
+    "oauth2": {
+      "type": "oauth2",
+      "description": "Client credentials. Scope claims.triage covers both skills; reading raw adjuster notes additionally needs claims.notes.read.",
+      "flows": {
+        "clientCredentials": {
+          "tokenUrl": "https://auth.northgate.example/oauth2/token",
+          "scopes": {
+            "claims.triage": "Triage a claim and receive the decision",
+            "claims.notes.read": "Receive adjuster-note facts"
+          }
+        }
+      }
+    }
+  },
+  "security": [{"oauth2": ["claims.triage"]}],
+  "supportsAuthenticatedExtendedCard": false
+}

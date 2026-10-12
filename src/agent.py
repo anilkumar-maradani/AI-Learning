@@ -56,6 +56,7 @@ def run_agent(claim_number: str, budgets: dict | None = None, log=None) -> dict:
         {"role": "user", "content": f"Triage claim {claim_number}."},
     ]
     steps, tokens, cost, api_s, tool_s, throttle_s = [], 0, 0.0, 0.0, 0.0, 0.0
+    lap_usage = []  # Week 10: per-lap tokens, so the hand-off log can show every re-send
     t0 = time.perf_counter()
     stop, final_text, laps = None, "", 0
 
@@ -83,6 +84,8 @@ def run_agent(claim_number: str, budgets: dict | None = None, log=None) -> dict:
         cost += res["cost_usd"]
         api_s += res["api_s"]
         throttle_s += res["throttle_s"]
+        lap_usage.append({"lap": laps, **res["usage"], "cost_usd": res["cost_usd"],
+                          "tools": [tc["name"] for tc in res["tool_calls"]]})
         note(f"  lap {laps}: {res['usage']['total']} tok (cum {tokens}, ${cost:.5f}) "
              f"tools={[tc['name'] for tc in res['tool_calls']] or 'none'}")
         if res["error"]:
@@ -122,6 +125,7 @@ def run_agent(claim_number: str, budgets: dict | None = None, log=None) -> dict:
         "final_text": final_text,
         "stop_reason": stop,
         "steps": steps,
+        "lap_usage": lap_usage,
         "laps": laps,
         "tokens": tokens,
         "cost_usd": round(cost, 6),

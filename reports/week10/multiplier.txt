@@ -1,0 +1,1 @@
+Context re-send multiplier: squad 65,154 / single 106,306 tokens = 0.6x. Largest share: orchestrator -> exclusions_worker (every lap re-sends the brief, the notes worker's facts and the form wording read so far), 63% of all squad tokens. Largest single hand-off: orchestrator -> exclusions_worker (lap 4) on case 10, 3,462 tokens.

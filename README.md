@@ -4,7 +4,8 @@ One app that grows each week: from chunking and retrieval over homeowners
 policy forms (Weeks 3–4), to traced and redacted claim answers (Week 5), to an
 evaluated claim-summary writer (Week 6), a tool-using triage agent raced
 against a fixed workflow (Week 7), a trajectory eval of that agent (Week 8), and
-an agent that finds its tools over MCP, so adding a server is a config change (Week 9).
+an agent that finds its tools over MCP, so adding a server is a config change (Week 9),
+and a multi-agent squad raced against the single agent (Week 10).
 
 All app code lives in `src/`. Each week adds one command under `evals/` and
 puts its evidence under `reports/weekN/`. Everything runs locally except the
@@ -44,10 +45,11 @@ copy .env.example .env                       # then paste your GROQ_API_KEY
 | 7 | `python evals/week7.py agent` · `... workflow` · `... table` | agent vs workflow race, the 8 numbers |
 | 8 | `python evals/week8.py score --runs ... --label ...` · `... compare` | trajectory eval, outcome-vs-path gap, one mitigation |
 | 9 | `python evals/week9.py tools` · `... query` · `... wire` · `... errors --before-rev REV` · `... gateway` | MCP: tools discovered from `mcp_config.json`, the claims-system server added by config only |
+| 10 | `python evals/week10.py single` · `squad` · `judge` · `table` · `fail --case 2` | orchestrator + 2 workers vs the single agent on 10 Week-6 cases: 4 numbers, re-send multiplier, injected worker failure |
 | any | `python chat.py` | interactive grounded Q&A over the forms |
 
 Each week's write-up: [Week 6](reports/week6/README.md) ·
-[Week 7](reports/week7/README.md) · [Week 8](reports/week8/README.md) · [Week 9](reports/week9/README.md).
+[Week 7](reports/week7/README.md) · [Week 8](reports/week8/README.md) · [Week 9](reports/week9/README.md) · [Week 10](reports/week10/README.md).
 
 ## How the app fits together
 
@@ -73,6 +75,7 @@ data/claims/*.jsonl ──claim_store──────────────�
 | `tools.py`, `agent.py`, `workflow.py`, `triage.py` | 7 |
 | `trajectory.py` | 8 |
 | `mcp_server.py`, `mcp_client.py`, `mcp_agent.py`, `mcp_servers/` | 9 |
+| `squad.py` | 10 |
 
 ## Configuration
 

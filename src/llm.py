@@ -74,6 +74,10 @@ def chat(
         except Exception as exc:  # 429 / 5xx / tool-parse errors
             last_exc = exc
             msg = str(exc)
+            # The free tier's DAILY token cap does not refill in minutes; sleeping
+            # 6 x 120 s only to fail anyway hides the cause. Fail fast instead.
+            if "tokens per day" in msg:
+                break
             if attempt + 1 < max_attempts and any(
                 s in msg for s in ("429", "500", "502", "503", "timeout", "Timeout")
             ):
@@ -110,5 +114,6 @@ def chat(
         "api_s": 0.0,
         "throttle_s": round(throttle_s, 1),
         "finish_reason": "error",
-        "error": {"type": type(last_exc).__name__, "message": str(last_exc)[:400]},
+        "error": {"type": type(last_exc).__name__, "message": str(last_exc)[:400],
+                  "quota": "tokens per day" in str(last_exc)},
     }
