@@ -1,0 +1,5 @@
+suite before2 (workflow-v2) -> after2 (workflow-v3): 7/12 -> 12/12
+  regressed (PASS -> FAIL)    0  -
+  fixed (FAIL -> PASS)        5  4 CLM-2026-10004; 8 CLM-2026-10008; 10 CLM-2026-10010; W11-1 CLM-2026-10011; W11-2 CLM-2026-10014
+  still failing               0  -
+  still passing               7  1 CLM-2026-10001; 2 CLM-2026-10002; 3 CLM-2026-10003; 5 CLM-2026-10005; 6 CLM-2026-10006; 7 CLM-2026-10007; 9 CLM-2026-10009

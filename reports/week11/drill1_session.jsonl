@@ -1,0 +1,4 @@
+{"event": "start", "ts": "2026-11-03T09:13:34+00:00", "finder": "Claude (coding agent)", "log_lines": 45}
+{"event": "find", "ts": "2026-11-03T09:13:34+00:00", "argv": ["--day", "yesterday", "--decision", "covered,partially_covered", "--wide"], "rows": 10}
+{"event": "show", "ts": "2026-11-03T09:13:55+00:00", "trace_id": "tr_03c4501f8140"}
+{"event": "found", "ts": "2026-11-03T09:13:55+00:00", "trace_id": "tr_03c4501f8140", "seal_match": true, "time_to_find": "00:21"}

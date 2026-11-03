@@ -5,7 +5,10 @@ policy forms (Weeks 3–4), to traced and redacted claim answers (Week 5), to an
 evaluated claim-summary writer (Week 6), a tool-using triage agent raced
 against a fixed workflow (Week 7), a trajectory eval of that agent (Week 8), and
 an agent that finds its tools over MCP, so adding a server is a config change (Week 9),
-and a multi-agent squad raced against the single agent (Week 10).
+a multi-agent squad raced against the single agent (Week 10), and production
+observability for the shipped workflow: one redacted log line per request with
+per-span latency, tokens and cost, a timed find-the-bad-answer drill, and the
+failure turned into a regression case (Week 11).
 
 All app code lives in `src/`. Each week adds one command under `evals/` and
 puts its evidence under `reports/weekN/`. Everything runs locally except the
@@ -46,10 +49,11 @@ copy .env.example .env                       # then paste your GROQ_API_KEY
 | 8 | `python evals/week8.py score --runs ... --label ...` · `... compare` | trajectory eval, outcome-vs-path gap, one mitigation |
 | 9 | `python evals/week9.py tools` · `... query` · `... wire` · `... errors --before-rev REV` · `... gateway` | MCP: tools discovered from `mcp_config.json`, the claims-system server added by config only |
 | 10 | `python evals/week10.py single` · `squad` · `judge` · `table` · `fail --case 2` | orchestrator + 2 workers vs the single agent on 10 Week-6 cases: 4 numbers, re-send multiplier, injected worker failure |
+| 11 | `python evals/week11.py traffic` · `plant` · `drill start` · `find` · `show` · `drill found` · `trace` · `case` · `suite` · `diff` · `cost` · `tenx` · `outcomes` | request log with spans for the production workflow, a timed drill to find a planted bad coverage answer, its regression case RED then GREEN, cost by stage, what breaks at 10x |
 | any | `python chat.py` | interactive grounded Q&A over the forms |
 
 Each week's write-up: [Week 6](reports/week6/README.md) ·
-[Week 7](reports/week7/README.md) · [Week 8](reports/week8/README.md) · [Week 9](reports/week9/README.md) · [Week 10](reports/week10/README.md).
+[Week 7](reports/week7/README.md) · [Week 8](reports/week8/README.md) · [Week 9](reports/week9/README.md) · [Week 10](reports/week10/README.md) · [Week 11](reports/week11/README.md).
 
 ## How the app fits together
 
@@ -64,6 +68,7 @@ data/claims/*.jsonl ──claim_store──────────────�
   trajectory.py path scoring: accepted path sets, argument validity, failure modes
   summariser.py / assertions.py / judge.py   Week 6 summary writer and its eval
   tracing.py / redaction.py                  every trace is redacted before it is written
+  triage_service.py / observability.py       production front door: canary routing, one request line with spans
 ```
 
 | Module | Week |
@@ -76,6 +81,7 @@ data/claims/*.jsonl ──claim_store──────────────�
 | `trajectory.py` | 8 |
 | `mcp_server.py`, `mcp_client.py`, `mcp_agent.py`, `mcp_servers/` | 9 |
 | `squad.py` | 10 |
+| `observability.py`, `triage_service.py` | 11 |
 
 ## Configuration
 
@@ -87,6 +93,9 @@ data/claims/*.jsonl ──claim_store──────────────�
 | `POLICYLENS_REDACTION_SALT` | dev salt | key for the pseudonyms in traces |
 | `CLAIMS_API_TOKEN` | — | Week 9: token the claims-system MCP server requires |
 | `GATEWAY_TOKEN` | — | Week 9 bonus: the agent's scoped token for the gateway |
+| `POLICYLENS_STABLE_VERSION` | `workflow-v2` | Week 11: workflow version every claim gets by default |
+| `POLICYLENS_CANARY_VERSION` | `workflow-v3` | Week 11: version under canary |
+| `POLICYLENS_CANARY_PERCENT` | `10` | Week 11: share of claims routed to the canary; `0` is the rollback |
 
 The free Groq tier allows 8,000 tokens a minute. The eval runners pace
 themselves, and reported latency excludes rate-limit waits (see `src/llm.py`).

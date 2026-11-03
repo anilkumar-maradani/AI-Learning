@@ -1,0 +1,197 @@
+{
+  "trace_id": "tr_5d0758c1e3af",
+  "ts_utc": "2026-11-02T07:26:54.432+00:00",
+  "git_commit": "1d57f53",
+  "index_fingerprint": "21919ec27d0641d6",
+  "schema": "w11-request/1",
+  "service": "triage-workflow",
+  "user": "adj-109",
+  "channel": "adjuster_console",
+  "prompt": {
+    "version": "workflow-v2",
+    "system_sha256": "cf7def97607979273fd8ad24bb15af42c91a2874f1dfc4cbba7387d5d8046967",
+    "user_template_sha256": "7153ddf8595d9858c2fac1c2fefa8773c9003cea49ec6542f333d04885d41e51"
+  },
+  "model": "openai/gpt-oss-120b",
+  "input": {
+    "type": "water",
+    "claim_ref": "[CLAIM_NO:7bdf6b]",
+    "forms": [
+      "NG-1101"
+    ],
+    "fnol": "Water in the basement after a storm.",
+    "notes": {
+      "count": 1,
+      "sha256": "02eb86626e73c6e984e669cc5979ee581b19ecd0056474511f9b70d9e534b79f"
+    }
+  },
+  "retrieval": {
+    "context_ids": [
+      "NG-1102_sa_chunk_004",
+      "NG-1102_sa_chunk_007",
+      "NG-1101_sa_chunk_007",
+      "NG-1103_sa_chunk_003"
+    ]
+  },
+  "output": {
+    "decision": "covered",
+    "exclusion_ids": [],
+    "clauses": [],
+    "payable": 0.0,
+    "reason": "The water entered through wall cracks after three days of rain, which does not meet the 10‑day threshold of exclusion E‑41 nor the flood definition of exclusion E‑42, so the loss is covered under the dwelling form."
+  },
+  "stop_reason": "final_answer",
+  "spans": [
+    {
+      "span_id": "sp1",
+      "name": "tools:get_claim",
+      "stage": "tools",
+      "start_ms": 0.0,
+      "latency_ms": 0.0,
+      "throttle_ms": 0.0,
+      "tokens": {
+        "prompt": 0,
+        "completion": 0,
+        "total": 0
+      },
+      "cost_usd": 0.0,
+      "attrs": {
+        "tool": "get_claim",
+        "error": null,
+        "notes_count": 1
+      }
+    },
+    {
+      "span_id": "sp2",
+      "name": "retrieval:search_policy",
+      "stage": "retrieval",
+      "start_ms": 0.1,
+      "latency_ms": 20.2,
+      "throttle_ms": 0.0,
+      "tokens": {
+        "prompt": 0,
+        "completion": 0,
+        "total": 0
+      },
+      "cost_usd": 0.0,
+      "attrs": {
+        "tool": "search_policy",
+        "error": null,
+        "query_sha256": "212313ae4e1ea2de9b2edb0c388d73bd670492d2c52975bb00f84efac0be2236",
+        "n_results": 4,
+        "context": [
+          {
+            "rank": 1,
+            "chunk_id": "NG-1102_sa_chunk_004",
+            "form_number": "NG-1102",
+            "clause_id": "CLAUSE-WH-2"
+          },
+          {
+            "rank": 2,
+            "chunk_id": "NG-1102_sa_chunk_007",
+            "form_number": "NG-1102",
+            "clause_id": "EXCLUSION-TABLE"
+          },
+          {
+            "rank": 3,
+            "chunk_id": "NG-1101_sa_chunk_007",
+            "form_number": "NG-1101",
+            "clause_id": "EXCLUSION-TABLE"
+          },
+          {
+            "rank": 4,
+            "chunk_id": "NG-1103_sa_chunk_003",
+            "form_number": "NG-1103",
+            "clause_id": "CLAUSE-MR-1"
+          }
+        ]
+      }
+    },
+    {
+      "span_id": "sp3",
+      "name": "generation:decide",
+      "stage": "generation",
+      "start_ms": 20.4,
+      "latency_ms": 4444.0,
+      "throttle_ms": 0.0,
+      "tokens": {
+        "prompt": 1140,
+        "completion": 600,
+        "total": 1740
+      },
+      "cost_usd": 0.000621,
+      "attrs": {
+        "model": "openai/gpt-oss-120b",
+        "prompt_version": "workflow-v2",
+        "temperature": 0.0,
+        "max_tokens": 2000,
+        "finish_reason": "stop",
+        "error": null,
+        "prompt_tokens_by_block": {
+          "system": 269,
+          "claim_file": 151,
+          "policy_passages": 637,
+          "template_and_chat_format": 83
+        }
+      }
+    },
+    {
+      "span_id": "sp4",
+      "name": "tools:compute_payout",
+      "stage": "tools",
+      "start_ms": 4613.6,
+      "latency_ms": 0.0,
+      "throttle_ms": 0.0,
+      "tokens": {
+        "prompt": 0,
+        "completion": 0,
+        "total": 0
+      },
+      "cost_usd": 0.0,
+      "attrs": {
+        "tool": "compute_payout",
+        "error": null,
+        "args": {
+          "claim_status": "covered",
+          "covered_amount": 0.0,
+          "deductible_basis": "all_peril"
+        },
+        "result": {
+          "payable": 0.0,
+          "deductible_applied": 2500.0,
+          "error": null
+        }
+      }
+    }
+  ],
+  "totals": {
+    "latency_ms": 4464.2,
+    "throttle_ms": 0.0,
+    "tokens": 1740,
+    "cost_usd": 0.000621,
+    "by_stage": {
+      "retrieval": {
+        "spans": 1,
+        "latency_ms": 20.2,
+        "tokens": 0,
+        "cost_usd": 0.0
+      },
+      "generation": {
+        "spans": 1,
+        "latency_ms": 4444.0,
+        "tokens": 1740,
+        "cost_usd": 0.000621
+      },
+      "tools": {
+        "spans": 2,
+        "latency_ms": 0.0,
+        "tokens": 0,
+        "cost_usd": 0.0
+      }
+    }
+  },
+  "error": null,
+  "route": {
+    "arm": "pinned"
+  }
+}

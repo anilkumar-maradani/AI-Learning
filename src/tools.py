@@ -173,6 +173,27 @@ def search_policy(query: str, form_number: str | None = None, n_results: int = 4
     }
 
 
+def exclusion_schedule(form_number: str) -> dict:
+    """Week 11: one form's COMPLETE exclusion table, uncut. Not a model tool: the
+    workflow (v3) calls it for every form attached to the policy.
+
+    Why it exists: search_policy cuts every passage at 900 characters, and NG-1101's
+    table is 1,609, so rows E-44, E-45 and E-46 never reached the model; and the
+    workflow's one fixed query often ranks no exclusion table at all into its top 4
+    (traces/week11 tr_03c4501f8140: NG-1106 E-93 never in context)."""
+    from hybrid_retrieval import _get_bm25_index
+    if not FORM_RE.match(form_number or ""):
+        return {"error": f"'{form_number}' is not a form number (expected NG-NNNN)"}
+    hits = [c for c in _get_bm25_index().chunks
+            if c["metadata"].get("form_number") == form_number
+            and c["metadata"].get("clause_id") == "EXCLUSION-TABLE"]
+    if not hits:
+        return {"error": f"No exclusion table for {form_number} in the policy library"}
+    return {"passages": [{"chunk_id": h["chunk_id"], "form_number": form_number,
+                          "clause_id": "EXCLUSION-TABLE", "text": h["text"].split("\n", 1)[-1]}
+                         for h in hits]}
+
+
 def compute_payout(claim_number: str, claim_status: str, covered_amount: float,
                    deductible_basis: str, sublimit: float | None = None) -> dict:
     claim = _load_claim(claim_number) if CLAIM_NUMBER_RE.match(claim_number or "") else None
@@ -200,7 +221,8 @@ def compute_payout(claim_number: str, claim_status: str, covered_amount: float,
 
 
 _EXECUTORS = {"get_claim": get_claim, "search_policy": search_policy,
-              "compute_payout": compute_payout}
+              "compute_payout": compute_payout,
+              "exclusion_schedule": exclusion_schedule}  # code-only; not in TOOLS, never offered to a model
 
 
 def dispatch(name: str, arguments: str | dict) -> dict:

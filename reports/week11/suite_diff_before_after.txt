@@ -1,0 +1,5 @@
+suite before (workflow-v2) -> after (workflow-v3): 7/11 -> 10/11
+  regressed (PASS -> FAIL)    0  -
+  fixed (FAIL -> PASS)        3  8 CLM-2026-10008; 10 CLM-2026-10010; W11-1 CLM-2026-10011
+  still failing               1  4 CLM-2026-10004 (decision needs_info != covered; deductible None != 6000)
+  still passing               7  1 CLM-2026-10001; 2 CLM-2026-10002; 3 CLM-2026-10003; 5 CLM-2026-10005; 6 CLM-2026-10006; 7 CLM-2026-10007; 9 CLM-2026-10009

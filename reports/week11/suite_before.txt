@@ -1,0 +1,20 @@
+Week 11 suite, label=before, workflow version=workflow-v2, run 2026-11-03T09:17:17+00:00
+cases: the first 10 Week-6 cases (same 10 as Week 10) + 1 regression case(s) from evals/cases/week11_regressions.jsonl
+
+  case  claim           expected                   got                                    result
+     1  CLM-2026-10001  covered                    covered - pay=3600.0                   PASS
+     2  CLM-2026-10002  excluded E-41              excluded E-41 pay=0.0                  PASS
+     3  CLM-2026-10003  partially_covered E-63     partially_covered E-63 pay=1800.0      PASS
+     4  CLM-2026-10004  covered                    needs_info - pay=None                  FAIL  decision needs_info != covered; deductible None != 6000
+     5  CLM-2026-10005  excluded E-52              excluded E-52 pay=0.0                  PASS
+     6  CLM-2026-10006  covered                    covered - pay=6200.0                   PASS
+     7  CLM-2026-10007  excluded E-73              excluded E-73 pay=0.0                  PASS
+     8  CLM-2026-10008  excluded E-83              excluded - pay=0.0                     FAIL  missing E-83
+     9  CLM-2026-10009  excluded E-44              excluded E-44 pay=0.0                  PASS
+    10  CLM-2026-10010  partially_covered E-45     partially_covered - pay=1900.0         FAIL  missing E-45
+ W11-1  CLM-2026-10011  partially_covered E-93     partially_covered - pay=800.0          FAIL  missing E-93
+
+Week-6 cases      : 7/10
+regression cases  : 0/1
+SUITE             : 7/11  RED
+tokens 17,260  cost $0.00592

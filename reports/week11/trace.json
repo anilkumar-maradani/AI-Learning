@@ -1,0 +1,202 @@
+{
+  "trace_id": "tr_03c4501f8140",
+  "ts_utc": "2026-11-02T07:03:21.545+00:00",
+  "git_commit": "1d57f53",
+  "index_fingerprint": "21919ec27d0641d6",
+  "schema": "w11-request/1",
+  "service": "triage-workflow",
+  "user": "adj-104",
+  "channel": "adjuster_console",
+  "prompt": {
+    "version": "workflow-v2",
+    "system_sha256": "cf7def97607979273fd8ad24bb15af42c91a2874f1dfc4cbba7387d5d8046967",
+    "user_template_sha256": "7153ddf8595d9858c2fac1c2fefa8773c9003cea49ec6542f333d04885d41e51"
+  },
+  "model": "openai/gpt-oss-120b",
+  "input": {
+    "type": "water+home_business",
+    "claim_ref": "[CLAIM_NO:a5ad65]",
+    "forms": [
+      "NG-1101",
+      "NG-1106"
+    ],
+    "fnol": "Radiator leak in the home office damaged equipment.",
+    "notes": {
+      "count": 2,
+      "sha256": "a1a1b4a8bdbb9e8d9b86e7aaa3005af5206a740440125ab59c25a1bc554620f8"
+    }
+  },
+  "retrieval": {
+    "context_ids": [
+      "NG-1106_sa_chunk_003",
+      "NG-1101_sa_chunk_003",
+      "NG-1106_sa_chunk_004",
+      "NG-1101_sa_chunk_004"
+    ]
+  },
+  "output": {
+    "decision": "partially_covered",
+    "exclusion_ids": [],
+    "clauses": [
+      "CLAUSE-HB-1",
+      "CLAUSE-WE-1"
+    ],
+    "payable": 2500.0,
+    "reason": "Business property used at home is covered under HB-1 for water damage, but the $2,500 per occurrence sublimit after the $500 deductible caps the payable amount."
+  },
+  "stop_reason": "final_answer",
+  "spans": [
+    {
+      "span_id": "sp1",
+      "name": "tools:get_claim",
+      "stage": "tools",
+      "start_ms": 0.0,
+      "latency_ms": 0.0,
+      "throttle_ms": 0.0,
+      "tokens": {
+        "prompt": 0,
+        "completion": 0,
+        "total": 0
+      },
+      "cost_usd": 0.0,
+      "attrs": {
+        "tool": "get_claim",
+        "error": null,
+        "notes_count": 2
+      }
+    },
+    {
+      "span_id": "sp2",
+      "name": "retrieval:search_policy",
+      "stage": "retrieval",
+      "start_ms": 0.1,
+      "latency_ms": 21.2,
+      "throttle_ms": 0.0,
+      "tokens": {
+        "prompt": 0,
+        "completion": 0,
+        "total": 0
+      },
+      "cost_usd": 0.0,
+      "attrs": {
+        "tool": "search_policy",
+        "error": null,
+        "query_sha256": "5e9b86d9fc09eabf6eac157956c7d8ad6ea69ee2b6e4e1bcbce1083aca297647",
+        "n_results": 4,
+        "context": [
+          {
+            "rank": 1,
+            "chunk_id": "NG-1106_sa_chunk_003",
+            "form_number": "NG-1106",
+            "clause_id": "CLAUSE-HB-1"
+          },
+          {
+            "rank": 2,
+            "chunk_id": "NG-1101_sa_chunk_003",
+            "form_number": "NG-1101",
+            "clause_id": "CLAUSE-WE-1"
+          },
+          {
+            "rank": 3,
+            "chunk_id": "NG-1106_sa_chunk_004",
+            "form_number": "NG-1106",
+            "clause_id": "CLAUSE-HB-2"
+          },
+          {
+            "rank": 4,
+            "chunk_id": "NG-1101_sa_chunk_004",
+            "form_number": "NG-1101",
+            "clause_id": "CLAUSE-WE-2"
+          }
+        ]
+      }
+    },
+    {
+      "span_id": "sp3",
+      "name": "generation:decide",
+      "stage": "generation",
+      "start_ms": 21.4,
+      "latency_ms": 2626.0,
+      "throttle_ms": 0.0,
+      "tokens": {
+        "prompt": 1021,
+        "completion": 574,
+        "total": 1595
+      },
+      "cost_usd": 0.00058365,
+      "attrs": {
+        "model": "openai/gpt-oss-120b",
+        "prompt_version": "workflow-v2",
+        "temperature": 0.0,
+        "max_tokens": 2000,
+        "finish_reason": "stop",
+        "error": null,
+        "prompt_tokens_by_block": {
+          "system": 269,
+          "claim_file": 200,
+          "policy_passages": 469,
+          "template_and_chat_format": 83
+        }
+      }
+    },
+    {
+      "span_id": "sp4",
+      "name": "tools:compute_payout",
+      "stage": "tools",
+      "start_ms": 2647.7,
+      "latency_ms": 0.0,
+      "throttle_ms": 0.0,
+      "tokens": {
+        "prompt": 0,
+        "completion": 0,
+        "total": 0
+      },
+      "cost_usd": 0.0,
+      "attrs": {
+        "tool": "compute_payout",
+        "error": null,
+        "args": {
+          "claim_status": "covered_subject_to_sublimit",
+          "covered_amount": 3200.0,
+          "deductible_basis": "all_peril",
+          "sublimit": 2500.0
+        },
+        "result": {
+          "payable": 2500.0,
+          "deductible_applied": 500.0,
+          "error": null
+        }
+      }
+    }
+  ],
+  "totals": {
+    "latency_ms": 2647.2,
+    "throttle_ms": 0.0,
+    "tokens": 1595,
+    "cost_usd": 0.00058365,
+    "by_stage": {
+      "retrieval": {
+        "spans": 1,
+        "latency_ms": 21.2,
+        "tokens": 0,
+        "cost_usd": 0.0
+      },
+      "generation": {
+        "spans": 1,
+        "latency_ms": 2626.0,
+        "tokens": 1595,
+        "cost_usd": 0.00058365
+      },
+      "tools": {
+        "spans": 2,
+        "latency_ms": 0.0,
+        "tokens": 0,
+        "cost_usd": 0.0
+      }
+    }
+  },
+  "error": null,
+  "route": {
+    "arm": "pinned"
+  }
+}
