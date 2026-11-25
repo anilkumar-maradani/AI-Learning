@@ -1,0 +1,70 @@
+{
+  "label": "suite",
+  "model": "qwen/qwen3.8-27b",
+  "prompt_sha256": "412d11d83be5c8629179e25a362d14d8ad8e372b5bab1f9f9a055fed2b18beb7",
+  "results": {
+    "W12-B1": {
+      "verdict": "PASS",
+      "reason": "The referral accurately states the decisive facts from the claim file, including the 90mm rain in 3 hours, the entry points (window well and rear door), the damaged items, and the estimate, without asserting any facts not present in the file.",
+      "tokens": 1642,
+      "error": null,
+      "referral_sha256": "38eb0254c65335d97740c8f02808b3f842047373234088e56fb10708806ed460"
+    },
+    "W12-B2": {
+      "verdict": "FAIL",
+      "reason": "The referral fails to point the adjuster to the decisive facts from the claim file, such as the specific cause of the water entry (driveway runoff), the lack of watercourse overflow, and the timing of drying, which are essential for the coverage determination.",
+      "tokens": 1100,
+      "error": null,
+      "referral_sha256": "1e11baaa61bfd85ee07f03712a125a936a730a449a5c56241d221a398f5358fc"
+    },
+    "W12-B3": {
+      "verdict": "PASS",
+      "reason": "The referral accurately states the decisive facts from the claim file (rain duration, entry time/method, lack of watercourse overflow, and damage estimates) without asserting any facts not present in the notes.",
+      "tokens": 1560,
+      "error": null,
+      "referral_sha256": "2064602b4c03f1e658be6a354b7e649be1ec2c7e321188c76b94eba6a78f413d"
+    },
+    "W12-B4": {
+      "verdict": "FAIL",
+      "reason": "The referral fails to point the adjuster to the decisive facts in the claim file, such as the cause of the leak (copper supply line split), the timing of the drying contractor (started within 36 hours), and the specific mold findings, which are necessary to support the coverage decision.",
+      "tokens": 1152,
+      "error": null,
+      "referral_sha256": "c3f72fba51d4fd52f60b3e699319b9f58c614a89ed760cd7d6f9f5af47df0ff1"
+    },
+    "W12-B5": {
+      "verdict": "PASS",
+      "reason": "The referral accurately identifies the decisive facts from the claim file, specifically that the cold water line under the slab sheared due to slab movement caused by subsidence over an old mine, which aligns with the adjuster's decision to cover water damage under GM-3 while denying slab repair under E-81.",
+      "tokens": 1698,
+      "error": null,
+      "referral_sha256": "5012349a7a4b7ed907b306f65612e06c906205b67910e10b4d4d904921f044e8"
+    },
+    "W12-B6": {
+      "verdict": "FAIL",
+      "reason": "The referral asserts that the water escape lasted 45 days, but the claim file only states the cottage was unoccupied for 45 days and does not specify the duration of the water escape.",
+      "tokens": 1602,
+      "error": null,
+      "referral_sha256": "2cf347450a757e298de75387feb987826b0e6c4b9eccc29db991c868385666e2"
+    },
+    "W12-N1": {
+      "verdict": "PASS",
+      "reason": "The referral accurately states the decisive fact that the policy was cancelled for non-payment effective 2025-10-15, prior to the loss date, and all other facts cited (hose burst, machine running, wet floors, estimates) are supported by the claim file notes.",
+      "tokens": 1043,
+      "error": null,
+      "referral_sha256": "83b3ed122542fcb8fb7eddfe3acccfb0e972dd833b007880c7f0b8c633b1c0e5"
+    },
+    "W12-N2": {
+      "verdict": "PASS",
+      "reason": "The referral accurately states the decisive fact that the loss date (2025-02-26) precedes the policy inception date (2025-03-01), which is the basis for the adjuster's decision, and all other facts cited are present in the claim file.",
+      "tokens": 1561,
+      "error": null,
+      "referral_sha256": "a06d3b538050276ce41fcdc6046e8983922c3b715342e7056a4f152f5c5690ff"
+    },
+    "W12-O1": {
+      "verdict": "PASS",
+      "reason": "The referral accurately identifies the decisive facts from the claim file, including the cause of the leak (split supply hose), the duration of the leak (approx. 20 minutes), the immediate mitigation (drying contractor on site same day), and the absence of mold, all of which align with the adjuster's notes.",
+      "tokens": 1765,
+      "error": null,
+      "referral_sha256": "16bf6fc07276ccd489b77836224a2ec04c4c524f9a791cb69b04c6a6c07c5bdc"
+    }
+  }
+}

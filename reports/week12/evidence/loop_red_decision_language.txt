@@ -1,0 +1,27 @@
+Closed loop, RED side: the integrated agent (prompt triage-agent-w12-3, w12-v2, gpt-oss-120b) on W12-B4 / CLM-2026-30004.
+Console output of the run, verbatim (trace tr_7afc74ae3e16; smoke run, so it was not written to the request log):
+
+  intake: claims_system__get_adjuster_notes -> 3 notes (redacted before the model)
+  lap 1: 1479 tok (cum 1479, $0.00031) tools=['coverage__check_coverage_in_force']
+    -> coverage__check_coverage_in_force {"loss_date": "2026-01-20", "policy_number": "HOP-6610304"} {... "in_force": true ...}
+  lap 2: 1776 tok (cum 3255, $0.00065) tools=['coverage__search_policy_wording']
+    -> coverage__search_policy_wording {"form_number": "NG-1101,NG-1103", "loss_date": "2026-01-20", ...} {"rule": "edition in force on the loss date", "passages": [{"chunk_id": "NG-1101_01-26_sa_chunk_002", ...
+  lap 3: 5080 tok (cum 8335, $0.00230) tools=['refer_to_adjuster']
+    -> refer_to_adjuster REJECTED: decision language is not allowed ('excluded', 'covered') ...
+  lap 4: 4889 tok (cum 13224, $0.00352) tools=['refer_to_adjuster']
+    -> refer_to_adjuster REJECTED: decision language is not allowed ('covered') ...
+  lap 5: 5397 tok (cum 18621, $0.00480) tools=['refer_to_adjuster']
+    -> refer_to_adjuster REJECTED: decision language is not allowed ('payable') ...
+  guard rejected the referral 3 times -> manual triage
+STOP no_referral tokens 18621 laps 5 cost 0.004803
+
+What it shows:
+- The runtime guard (src/referral.py DECISION_RE, enforced in code) caught the word "covered" three times.
+  Nothing with a decision word was shipped: the claim fell back to a manual-triage referral.
+- The model could not comply. The endorsement wording itself is full of the banned words
+  ("stays covered under WE-1", "is not covered"), and the model paraphrased the wording with them.
+  The rejection told it which word was wrong, but not where, and offered no alternative vocabulary.
+- Cost of the failure: 3 rejected laps = 15,366 tokens re-sending the whole context.
+
+Fix (prompt triage-agent-w12-4 + guard message): give the model replacement vocabulary, and quote the
+offending fragment back in the rejection. The guard itself is unchanged: the bar is not lowered.

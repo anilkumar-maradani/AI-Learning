@@ -49,6 +49,7 @@ def chat(
     temperature: float = 0.0,
     max_tokens: int = 1200,
     max_attempts: int = 6,
+    reasoning_effort: str | None = None,
 ) -> dict:
     """
     Returns {content, tool_calls, usage{prompt,completion,total}, cost_usd,
@@ -64,6 +65,10 @@ def chat(
     if tools:
         kwargs["tools"] = tools
         kwargs["tool_choice"] = "auto"
+    if reasoning_effort:
+        # Week 12: gpt-oss reasoning effort (low/medium/high). Groq bills reasoning as
+        # completion tokens and does no prompt caching, so this is a direct cost lever.
+        kwargs["extra_body"] = {"reasoning_effort": reasoning_effort}
 
     throttle_s = 0.0
     last_exc = None

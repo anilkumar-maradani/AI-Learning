@@ -1,0 +1,235 @@
+{
+  "label": "before",
+  "n": 5,
+  "passed": 0,
+  "by_mode": {
+    "wrong-edition-risk": {
+      "n": 5,
+      "pass": 0
+    }
+  },
+  "by_assertion": {
+    "referral_made": {
+      "n": 5,
+      "pass": 2
+    },
+    "no_decision_language": {
+      "n": 5,
+      "pass": 5
+    },
+    "in_force_correct": {
+      "n": 5,
+      "pass": 5
+    },
+    "edition_in_force": {
+      "n": 5,
+      "pass": 3
+    },
+    "loss_date_stated": {
+      "n": 5,
+      "pass": 5
+    },
+    "citations_resolve": {
+      "n": 5,
+      "pass": 5
+    },
+    "three_numbers": {
+      "n": 5,
+      "pass": 1
+    },
+    "decisive_clause_surfaced": {
+      "n": 5,
+      "pass": 1
+    }
+  },
+  "wrong_edition_citation_rate": {
+    "cases": 2,
+    "of_cases_with_citations": 2
+  },
+  "decision_language_attempts": {
+    "cases": 3,
+    "of": 5
+  },
+  "decision_language_shipped": {
+    "cases": 0,
+    "of": 5
+  },
+  "rows": [
+    {
+      "case_id": "W12-B1",
+      "claim_number": "CLM-2025-30001",
+      "mode": "wrong-edition-risk",
+      "group": "boundary",
+      "pass": false,
+      "assertions": {
+        "referral_made": true,
+        "no_decision_language": true,
+        "in_force_correct": true,
+        "edition_in_force": false,
+        "loss_date_stated": true,
+        "citations_resolve": true,
+        "three_numbers": false,
+        "decisive_clause_surfaced": false
+      },
+      "detail": {
+        "decision_words": [],
+        "wrong_edition_citations": [
+          "NG-1101 ed. 01-26 · E-42",
+          "NG-1101 ed. 01-26 · WE-2",
+          "NG-1101 ed. 01-26 · WE-3"
+        ],
+        "three_numbers": {
+          "deductible": true,
+          "sublimit": false,
+          "policy_limit": true
+        },
+        "cited_clauses": [
+          "E-42",
+          "WE-2",
+          "WE-3"
+        ],
+        "decision_attempts_caught_by_guard": 0,
+        "guard_rejections": 0,
+        "stop_reason": "referred",
+        "trace_id": "tr_f066271e5ab8"
+      },
+      "has_citations": true
+    },
+    {
+      "case_id": "W12-B2",
+      "claim_number": "CLM-2025-30002",
+      "mode": "wrong-edition-risk",
+      "group": "boundary",
+      "pass": false,
+      "assertions": {
+        "referral_made": false,
+        "no_decision_language": true,
+        "in_force_correct": true,
+        "edition_in_force": true,
+        "loss_date_stated": true,
+        "citations_resolve": true,
+        "three_numbers": false,
+        "decisive_clause_surfaced": false
+      },
+      "detail": {
+        "decision_words": [],
+        "wrong_edition_citations": [],
+        "three_numbers": {
+          "deductible": true,
+          "sublimit": false,
+          "policy_limit": true
+        },
+        "cited_clauses": [],
+        "decision_attempts_caught_by_guard": 1,
+        "guard_rejections": 1,
+        "stop_reason": "no_referral",
+        "trace_id": "tr_a98a571e89e3"
+      },
+      "has_citations": false
+    },
+    {
+      "case_id": "W12-B4",
+      "claim_number": "CLM-2026-30004",
+      "mode": "wrong-edition-risk",
+      "group": "boundary",
+      "pass": false,
+      "assertions": {
+        "referral_made": false,
+        "no_decision_language": true,
+        "in_force_correct": true,
+        "edition_in_force": true,
+        "loss_date_stated": true,
+        "citations_resolve": true,
+        "three_numbers": false,
+        "decisive_clause_surfaced": false
+      },
+      "detail": {
+        "decision_words": [],
+        "wrong_edition_citations": [],
+        "three_numbers": {
+          "deductible": true,
+          "sublimit": false,
+          "policy_limit": true
+        },
+        "cited_clauses": [],
+        "decision_attempts_caught_by_guard": 1,
+        "guard_rejections": 1,
+        "stop_reason": "no_referral",
+        "trace_id": "tr_d47a8e7ea27a"
+      },
+      "has_citations": false
+    },
+    {
+      "case_id": "W12-B5",
+      "claim_number": "CLM-2026-30005",
+      "mode": "wrong-edition-risk",
+      "group": "boundary",
+      "pass": false,
+      "assertions": {
+        "referral_made": true,
+        "no_decision_language": true,
+        "in_force_correct": true,
+        "edition_in_force": false,
+        "loss_date_stated": true,
+        "citations_resolve": true,
+        "three_numbers": false,
+        "decisive_clause_surfaced": true
+      },
+      "detail": {
+        "decision_words": [],
+        "wrong_edition_citations": [
+          "NG-1105 ed. 03-26 · GM-3",
+          "NG-1105 ed. 03-26 · E-83"
+        ],
+        "three_numbers": {
+          "deductible": true,
+          "sublimit": false,
+          "policy_limit": true
+        },
+        "cited_clauses": [
+          "E-83",
+          "GM-3",
+          "WE-1",
+          "WE-2"
+        ],
+        "decision_attempts_caught_by_guard": 0,
+        "guard_rejections": 0,
+        "stop_reason": "referred",
+        "trace_id": "tr_ec876b2f9f45"
+      },
+      "has_citations": true
+    },
+    {
+      "case_id": "W12-B6",
+      "claim_number": "CLM-2025-30006",
+      "mode": "wrong-edition-risk",
+      "group": "boundary",
+      "pass": false,
+      "assertions": {
+        "referral_made": false,
+        "no_decision_language": true,
+        "in_force_correct": true,
+        "edition_in_force": true,
+        "loss_date_stated": true,
+        "citations_resolve": true,
+        "three_numbers": true,
+        "decisive_clause_surfaced": false
+      },
+      "detail": {
+        "decision_words": [],
+        "wrong_edition_citations": [],
+        "three_numbers": {
+          "deductible": true,
+          "sublimit": true,
+          "policy_limit": true
+        },
+        "cited_clauses": [],
+        "decision_attempts_caught_by_guard": 1,
+        "guard_rejections": 1,
+        "stop_reason": "no_referral",
+        "trace_id": "tr_b817a5215532"
+      },
+      "has_citations": false
+    }
+  ]
+}

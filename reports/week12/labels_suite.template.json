@@ -1,0 +1,24 @@
+{
+  "labels": {
+    "W12-B1": null,
+    "W12-B2": null,
+    "W12-B3": null,
+    "W12-B4": null,
+    "W12-B5": null,
+    "W12-B6": null,
+    "W12-N1": null,
+    "W12-N2": null,
+    "W12-O1": null
+  },
+  "sha256": {
+    "W12-B1": "38eb0254c65335d97740c8f02808b3f842047373234088e56fb10708806ed460",
+    "W12-B2": "1e11baaa61bfd85ee07f03712a125a936a730a449a5c56241d221a398f5358fc",
+    "W12-B3": "2064602b4c03f1e658be6a354b7e649be1ec2c7e321188c76b94eba6a78f413d",
+    "W12-B4": "c3f72fba51d4fd52f60b3e699319b9f58c614a89ed760cd7d6f9f5af47df0ff1",
+    "W12-B5": "5012349a7a4b7ed907b306f65612e06c906205b67910e10b4d4d904921f044e8",
+    "W12-B6": "2cf347450a757e298de75387feb987826b0e6c4b9eccc29db991c868385666e2",
+    "W12-N1": "83b3ed122542fcb8fb7eddfe3acccfb0e972dd833b007880c7f0b8c633b1c0e5",
+    "W12-N2": "a06d3b538050276ce41fcdc6046e8983922c3b715342e7056a4f152f5c5690ff",
+    "W12-O1": "16bf6fc07276ccd489b77836224a2ec04c4c524f9a791cb69b04c6a6c07c5bdc"
+  }
+}

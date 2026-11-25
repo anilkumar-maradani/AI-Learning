@@ -1,0 +1,15 @@
+run after: version w12-v2, 5 to run, 0 already saved
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 11100.03it/s]
+  [BM25] Loading all chunks from ChromaDB... 111 chunks loaded.
+  [BM25] Building BM25 index... done.
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 12888.61it/s]
+  W12-B1   CLM-2025-30001  referred        10008 tok  $0.00223  laps 4  guard rejections 0  trace tr_1de01aa5041b
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 14659.43it/s]
+  [BM25] Loading all chunks from ChromaDB... 111 chunks loaded.
+  [BM25] Building BM25 index... done.
+  W12-B2   CLM-2025-30002  no_referral     16483 tok  $0.00383  laps 5  guard rejections 1  trace tr_8972cf01ce2a
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 11443.45it/s]
+  [BM25] Loading all chunks from ChromaDB... 111 chunks loaded.
+  [BM25] Building BM25 index... done.
+  W12-B4: daily token cap reached; re-run the same command to resume

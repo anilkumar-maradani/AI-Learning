@@ -1,0 +1,135 @@
+{
+  "label": "suite",
+  "n": 9,
+  "tool_calls": 33,
+  "correct_tool_calls": 32,
+  "tool_choice_accuracy": 0.9696969696969697,
+  "trajectory_pass": 9,
+  "outcome_pass": 5,
+  "outcome_minus_trajectory_points": -44.4,
+  "rows": [
+    {
+      "case_id": "W12-B1",
+      "claim_number": "CLM-2025-30001",
+      "calls": 3,
+      "correct_calls": 3,
+      "path": [
+        "check_coverage_in_force",
+        "search_policy_wording",
+        "refer_to_adjuster"
+      ],
+      "trajectory_pass": true,
+      "failures": []
+    },
+    {
+      "case_id": "W12-B2",
+      "claim_number": "CLM-2025-30002",
+      "calls": 3,
+      "correct_calls": 3,
+      "path": [
+        "check_coverage_in_force",
+        "search_policy_wording",
+        "refer_to_adjuster"
+      ],
+      "trajectory_pass": true,
+      "failures": []
+    },
+    {
+      "case_id": "W12-B3",
+      "claim_number": "CLM-2026-30003",
+      "calls": 4,
+      "correct_calls": 4,
+      "path": [
+        "check_coverage_in_force",
+        "search_policy_wording",
+        "refer_to_adjuster",
+        "refer_to_adjuster"
+      ],
+      "trajectory_pass": true,
+      "failures": []
+    },
+    {
+      "case_id": "W12-B4",
+      "claim_number": "CLM-2026-30004",
+      "calls": 5,
+      "correct_calls": 5,
+      "path": [
+        "check_coverage_in_force",
+        "search_policy_wording",
+        "refer_to_adjuster",
+        "refer_to_adjuster",
+        "refer_to_adjuster"
+      ],
+      "trajectory_pass": true,
+      "failures": []
+    },
+    {
+      "case_id": "W12-B5",
+      "claim_number": "CLM-2026-30005",
+      "calls": 3,
+      "correct_calls": 3,
+      "path": [
+        "check_coverage_in_force",
+        "search_policy_wording",
+        "refer_to_adjuster"
+      ],
+      "trajectory_pass": true,
+      "failures": []
+    },
+    {
+      "case_id": "W12-B6",
+      "claim_number": "CLM-2025-30006",
+      "calls": 4,
+      "correct_calls": 4,
+      "path": [
+        "check_coverage_in_force",
+        "search_policy_wording",
+        "refer_to_adjuster",
+        "refer_to_adjuster"
+      ],
+      "trajectory_pass": true,
+      "failures": []
+    },
+    {
+      "case_id": "W12-N1",
+      "claim_number": "CLM-2025-30007",
+      "calls": 2,
+      "correct_calls": 2,
+      "path": [
+        "check_coverage_in_force",
+        "refer_to_adjuster"
+      ],
+      "trajectory_pass": true,
+      "failures": []
+    },
+    {
+      "case_id": "W12-N2",
+      "claim_number": "CLM-2025-30008",
+      "calls": 4,
+      "correct_calls": 3,
+      "path": [
+        "check_coverage_in_force",
+        "search_policy_wording",
+        "refer_to_adjuster",
+        "refer_to_adjuster"
+      ],
+      "trajectory_pass": true,
+      "failures": []
+    },
+    {
+      "case_id": "W12-O1",
+      "claim_number": "CLM-2026-20101",
+      "calls": 5,
+      "correct_calls": 5,
+      "path": [
+        "check_coverage_in_force",
+        "search_policy_wording",
+        "refer_to_adjuster",
+        "refer_to_adjuster",
+        "refer_to_adjuster"
+      ],
+      "trajectory_pass": true,
+      "failures": []
+    }
+  ]
+}

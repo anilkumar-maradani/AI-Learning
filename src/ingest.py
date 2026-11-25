@@ -19,6 +19,7 @@ from chromadb.utils import embedding_functions
 sys.path.insert(0, os.path.dirname(__file__))
 from chunkers import naive_chunker, structure_aware_chunker
 from console import enable_utf8
+from editions import date_int, get_edition
 
 enable_utf8()
 
@@ -106,6 +107,7 @@ def ingest_all(reset: bool = True) -> dict:
     endorsement_files = sorted(
         [f for f in os.listdir(ENDORSEMENTS_DIR) if f.endswith(".txt")]
     )
+    seen_ids: dict[str, str] = {}
 
     for filename in endorsement_files:
         filepath = os.path.join(ENDORSEMENTS_DIR, filename)
@@ -118,14 +120,25 @@ def ingest_all(reset: bool = True) -> dict:
             print(f"  WARNING: {filename}: {exc}, skipping.")
             stats["failed_files"].append(filename)
             continue
+        # Week 12: every chunk carries the window its edition was in force, as
+        # yyyymmdd integers, so retrieval can filter on the loss date in code.
+        ed = get_edition(base_meta["form_number"], base_meta["edition_date"])
+        base_meta["effective_from"] = date_int(ed["effective_from"])
+        base_meta["effective_to"] = date_int(ed["effective_to"])
 
         # --- Naive chunks ---
         naive_chunks = naive_chunker(text, base_meta)
+        sa_chunks = structure_aware_chunker(text, base_meta)
+        # An upsert never complains about a repeated id; it overwrites. Refuse instead.
+        for c in naive_chunks + sa_chunks:
+            cid = c["metadata"]["chunk_id"]
+            if cid in seen_ids:
+                raise ValueError(f"chunk id {cid} produced by both {seen_ids[cid]} and {filename}")
+            seen_ids[cid] = filename
         _upsert_chunks(col_naive, naive_chunks)
         stats["naive_chunks"] += len(naive_chunks)
 
         # --- Structure-aware chunks ---
-        sa_chunks = structure_aware_chunker(text, base_meta)
         _upsert_chunks(col_sa, sa_chunks)
         stats["sa_chunks"] += len(sa_chunks)
 
@@ -185,6 +198,6 @@ def resolve_chunk(chunk_id: str, strategy: str = "structure_aware") -> dict | No
 
 
 if __name__ == "__main__":
-    print("Starting ingest of 6 endorsements (base wording NOT re-indexed)...")
+    print("Starting ingest of every endorsement edition in data/policy (base wording NOT re-indexed)...")
     stats = ingest_all(reset=True)
     print(f"\nFinal stats: {stats}")

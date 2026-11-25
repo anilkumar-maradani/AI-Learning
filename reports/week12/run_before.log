@@ -1,0 +1,24 @@
+run before: version w12-v1, 5 to run, 0 already saved
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 9325.10it/s]
+  [BM25] Loading all chunks from ChromaDB... 111 chunks loaded.
+  [BM25] Building BM25 index... done.
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 10238.74it/s]
+  W12-B1   CLM-2025-30001  referred         9265 tok  $0.00209  laps 4  guard rejections 0  trace tr_f066271e5ab8
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 14911.92it/s]
+  [BM25] Loading all chunks from ChromaDB... 111 chunks loaded.
+  [BM25] Building BM25 index... done.
+  W12-B2   CLM-2025-30002  no_referral     15154 tok  $0.00351  laps 5  guard rejections 1  trace tr_a98a571e89e3
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 12877.08it/s]
+  [BM25] Loading all chunks from ChromaDB... 111 chunks loaded.
+  [BM25] Building BM25 index... done.
+  W12-B4   CLM-2026-30004  no_referral     16209 tok  $0.00380  laps 5  guard rejections 1  trace tr_d47a8e7ea27a
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 12877.08it/s]
+  [BM25] Loading all chunks from ChromaDB... 111 chunks loaded.
+  [BM25] Building BM25 index... done.
+  W12-B5   CLM-2026-30005  referred        10032 tok  $0.00219  laps 4  guard rejections 0  trace tr_ec876b2f9f45
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 10924.88it/s]
+  [BM25] Loading all chunks from ChromaDB... 111 chunks loaded.
+  [BM25] Building BM25 index... done.
+  W12-B6   CLM-2025-30006  no_referral     12850 tok  $0.00297  laps 5  guard rejections 1  trace tr_b817a5215532
+-> d:\Projects\AI-Learning\reports\week12\runs_before.jsonl

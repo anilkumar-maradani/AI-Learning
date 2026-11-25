@@ -1,0 +1,20 @@
+
+## Trajectory eval: suite, n=9
+
+| Case | Path | Correct calls | Trajectory | Failure labels |
+|---|---|---:|---|---|
+| W12-B1 | check_coverage_in_force → search_policy_wording → refer_to_adjuster | 3/3 | pass | - |
+| W12-B2 | check_coverage_in_force → search_policy_wording → refer_to_adjuster | 3/3 | pass | - |
+| W12-B3 | check_coverage_in_force → search_policy_wording → refer_to_adjuster → refer_to_adjuster | 4/4 | pass | - |
+| W12-B4 | check_coverage_in_force → search_policy_wording → refer_to_adjuster → refer_to_adjuster → refer_to_adjuster | 5/5 | pass | - |
+| W12-B5 | check_coverage_in_force → search_policy_wording → refer_to_adjuster | 3/3 | pass | - |
+| W12-B6 | check_coverage_in_force → search_policy_wording → refer_to_adjuster → refer_to_adjuster | 4/4 | pass | - |
+| W12-N1 | check_coverage_in_force → refer_to_adjuster | 2/2 | pass | - |
+| W12-N2 | check_coverage_in_force → search_policy_wording → refer_to_adjuster → refer_to_adjuster | 3/4 | pass | - |
+| W12-O1 | check_coverage_in_force → search_policy_wording → refer_to_adjuster → refer_to_adjuster → refer_to_adjuster | 5/5 | pass | - |
+
+Tool-choice accuracy: 32/33 = 97%
+Outcome pass (all assertions): 5/9 = 56%
+Trajectory pass: 9/9 = 100%
+Outcome-vs-trajectory gap: -44.4 points
+-> d:\Projects\AI-Learning\reports\week12\trajectory_suite.json

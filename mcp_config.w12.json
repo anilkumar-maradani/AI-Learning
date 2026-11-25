@@ -1,0 +1,21 @@
+{
+  "mcpServers": {
+    "coverage": {
+      "command": "${python}",
+      "args": ["mcp_servers/coverage/server.py"],
+      "env": {
+        "POLICYLENS_WORDING_VERSION": "${POLICYLENS_WORDING_VERSION}",
+        "POLICYLENS_CALL_LOG": "${POLICYLENS_CALL_LOG}",
+        "HF_HUB_OFFLINE": "1"
+      }
+    },
+    "claims_system": {
+      "command": "${python}",
+      "args": ["mcp_servers/claims_system/server.py"],
+      "env": {
+        "CLAIMS_API_TOKEN": "${CLAIMS_API_TOKEN}",
+        "CLAIMS_DATA_DIR": "${CLAIMS_DATA_DIR}"
+      }
+    }
+  }
+}

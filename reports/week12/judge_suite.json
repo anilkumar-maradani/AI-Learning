@@ -1,0 +1,71 @@
+{
+  "label": "suite",
+  "model": "qwen/qwen3.8-27b",
+  "prompt_file": "judge_w12_v2.txt",
+  "prompt_sha256": "4a4a179ef0975fcb7da4199176d056b5f7b7dfbc8f697d03cfa280eb530411e1",
+  "results": {
+    "W12-B1": {
+      "verdict": "FAIL",
+      "reason": "The referral omits the decisive fact that no body of water overflowed (the creek stayed within its banks), which is required to rule out the flood exclusion E-42.",
+      "tokens": 1738,
+      "error": null,
+      "referral_sha256": "38eb0254c65335d97740c8f02808b3f842047373234088e56fb10708806ed460"
+    },
+    "W12-B2": {
+      "verdict": "FAIL",
+      "reason": "The referral fails to point the adjuster to the decisive facts from the claim file, such as the specific cause of the water entry (runoff from the driveway), the absence of a watercourse overflow, and the timing of the drying process.",
+      "tokens": 1204,
+      "error": null,
+      "referral_sha256": "1e11baaa61bfd85ee07f03712a125a936a730a449a5c56241d221a398f5358fc"
+    },
+    "W12-B3": {
+      "verdict": "PASS",
+      "reason": "The referral accurately lists all decisive facts from the adjuster's notes, including the specific time of entry, the source of the runoff, and the confirmation that no watercourse overflowed, without asserting any unsupported facts.",
+      "tokens": 1672,
+      "error": null,
+      "referral_sha256": "2064602b4c03f1e658be6a354b7e649be1ec2c7e321188c76b94eba6a78f413d"
+    },
+    "W12-B4": {
+      "verdict": "FAIL",
+      "reason": "The referral fails to point the adjuster to the decisive facts regarding the mold claim, specifically that drying began within 48 hours (or 36 hours) and that the hygienist confirmed the mold grew from this specific water escape with no sign of earlier leaks.",
+      "tokens": 1255,
+      "error": null,
+      "referral_sha256": "c3f72fba51d4fd52f60b3e699319b9f58c614a89ed760cd7d6f9f5af47df0ff1"
+    },
+    "W12-B5": {
+      "verdict": "PASS",
+      "reason": "The referral accurately lists all decisive facts relied upon by the adjuster, including the sudden escape of water from the cold water line, the cause of the break (slab movement due to subsidence over an old mine), and the resulting damage, without asserting any unsupported facts.",
+      "tokens": 1798,
+      "error": null,
+      "referral_sha256": "5012349a7a4b7ed907b306f65612e06c906205b67910e10b4d4d904921f044e8"
+    },
+    "W12-B6": {
+      "verdict": "FAIL",
+      "reason": "The referral asserts that the water escape lasted 45 days, which is not stated in the claim file (the file only states the cottage was unoccupied for 45 days and that the pipe split, but does not specify the duration of the water flow).",
+      "tokens": 1723,
+      "error": null,
+      "referral_sha256": "2cf347450a757e298de75387feb987826b0e6c4b9eccc29db991c868385666e2"
+    },
+    "W12-N1": {
+      "verdict": "PASS",
+      "reason": "The referral accurately lists all decisive facts from the adjuster's notes, including the specific cause of the leak, the duration of the water flow, the affected areas, the repair estimates, and the critical fact that the policy was cancelled for non-payment prior to the date of loss.",
+      "tokens": 1147,
+      "error": null,
+      "referral_sha256": "83b3ed122542fcb8fb7eddfe3acccfb0e972dd833b007880c7f0b8c633b1c0e5"
+    },
+    "W12-N2": {
+      "verdict": "PASS",
+      "reason": "The referral accurately identifies the decisive fact that the loss date (2025-02-26) precedes the policy inception date (2025-03-01), which is the sole basis for the adjuster's decision to decline coverage, and contains no unsupported assertions about the loss.",
+      "tokens": 1670,
+      "error": null,
+      "referral_sha256": "a06d3b538050276ce41fcdc6046e8983922c3b715342e7056a4f152f5c5690ff"
+    },
+    "W12-O1": {
+      "verdict": "PASS",
+      "reason": "The referral accurately lists all decisive facts from the adjuster's notes (hose split, 20-minute duration, same-day drying, no mold) and does not assert any facts not present in the claim file.",
+      "tokens": 1852,
+      "error": null,
+      "referral_sha256": "16bf6fc07276ccd489b77836224a2ec04c4c524f9a791cb69b04c6a6c07c5bdc"
+    }
+  }
+}

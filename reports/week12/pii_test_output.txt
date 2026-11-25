@@ -1,0 +1,7 @@
+  traces\w12\coverage_calls_boundary.jsonl: 16 lines clean
+  traces\w12\coverage_calls_suite.jsonl: 19 lines clean
+  traces\w12\external_calls.jsonl: 10 lines clean
+  traces\w12\requests_boundary.jsonl: 8 lines clean
+  traces\w12\requests_suite.jsonl: 9 lines clean
+
+PASS: 62 lines checked against 48 claimant names, 125 notes, claim/policy numbers, injuries and addresses

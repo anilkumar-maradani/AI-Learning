@@ -1,0 +1,30 @@
+server: {'name': 'northgate-coverage', 'version': '1.0.0'}
+tools discovered: ['lookup_policy', 'check_coverage_in_force', 'search_policy_wording']
+  lookup_policy(claim_number, policy_number)  required=[]
+  check_coverage_in_force(policy_number, loss_date)  required=['policy_number', 'loss_date']
+  search_policy_wording(query, loss_date, form_number, product)  required=['query', 'loss_date']
+
+calls:
+  ok  lookup_policy {"claim_number": "CLM-2025-30001"}
+      -> {"policy_number": "HOP-6610301", "product": "homeowners", "plan": "HO-3 Standard", "terms": [{"term_start": "2023-11-27", "term_end": "2024-11-26", "status": "expired", "...
+  ok  check_coverage_in_force {"policy_number": "HOP-6610301", "loss_date": "2025-08-11"}
+      -> {"policy_number": "HOP-6610301", "loss_date": "2025-08-11", "product": "homeowners", "in_force": true, "reason": "loss date falls in the term 2024-11-27 to 2025-11-26", "...
+  ok  check_coverage_in_force {"policy_number": "HOP-6610307", "loss_date": "2025-11-02"}
+      -> {"policy_number": "HOP-6610307", "loss_date": "2025-11-02", "product": "homeowners", "in_force": false, "reason": "term 2025-04-01 to 2026-03-31 was cancelled with effect...
+  ok  search_policy_wording {"query": "rain runoff came in under the back door", "loss_date": "2025-08-11"}
+      -> {"loss_date": "2025-08-11", "rule": "edition in force on the loss date", "passages": [{"chunk_id": "NG-1102_07-23_sa_chunk_004", "form_number": "NG-1102", "edition": "07-...
+  ok  search_policy_wording {"query": "flood", "loss_date": "2025-08-11", "form_number": "NG-1101"}
+      -> {"loss_date": "2025-08-11", "rule": "edition in force on the loss date", "passages": [{"chunk_id": "NG-1101_07-23_sa_chunk_002", "form_number": "NG-1101", "edition": "07-...
+  ok  search_policy_wording {"query": "flood", "loss_date": "2026-03-01", "form_number": "NG-1101"}
+      -> {"loss_date": "2026-03-01", "rule": "edition in force on the loss date", "passages": [{"chunk_id": "NG-1101_01-26_sa_chunk_002", "form_number": "NG-1101", "edition": "01-...
+  ERR search_policy_wording {"query": "windscreen damage", "loss_date": "2025-08-11", "product": "motor"}
+      -> no motor wording in this library: it holds homeowners endorsements only
+  ERR search_policy_wording {"query": "flood", "loss_date": "2025-08-11", "form_number": "NG-1110"}
+      -> form NG-1110 not found: the library holds NG-1101, NG-1102, NG-1103, NG-1104, NG-1105, NG-1106
+  ERR search_policy_wording {"query": "flood", "loss_date": "2019-01-01", "form_number": "NG-1101"}
+      -> no edition of NG-1101 was in force on 2019-01-01; refer the claim
+  ERR search_policy_wording {"query": "flood"}
+      -> loss_date is required (YYYY-MM-DD): the wording that applies depends on the date of loss, because editions change. Pass the claim's date of loss.
+
+PII scan of 10 responses (14,602 chars): CLEAN: no claimant name, address or injury
+server call log for these calls: traces\w12\external_calls.jsonl

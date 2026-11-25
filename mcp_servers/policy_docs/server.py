@@ -104,8 +104,12 @@ _ROW_RE = re.compile(r"^\|\s*(E-\d+)?\s*\|\s*(.*?)\s*\|\s*(.*?)\s*\|\s*$")
 @server.resource("policy://exclusion-schedule", "Exclusion schedule",
                  "Every exclusion code in every Northgate Mutual endorsement, one line each.")
 def exclusion_schedule() -> str:
+    # Week 12: the newest edition of each form only. Listing every file would
+    # put E-42 in twice with different scopes and no edition label in front of
+    # the model (reports/week12/seams.md #11).
+    from editions import editions
     lines = []
-    for path in sorted(glob.glob(os.path.join(POLICY_DIR, "*.txt"))):
+    for path in [os.path.join(POLICY_DIR, eds[-1]["source_file"]) for _, eds in sorted(editions().items())]:
         form = os.path.basename(path).split("_")[0]
         rows: list[list[str]] = []
         for line in open(path, encoding="utf-8"):

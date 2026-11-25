@@ -1,0 +1,38 @@
+
+## Edition-boundary cases: top-3 retrieval, before (no date filter) vs after (filter)
+
+| Case | Claim | Loss date | Deciding clause | Wrong-edition passages in top 3: before | after | Deciding clause (right edition) in top 3: before | after | Verdict |
+|---|---|---|---|---|---|---|---|---|
+| W12-B1 | CLM-2025-30001 | 2025-08-11 | NG-1101 ed. 07-23 WE-4 | 1 (NG-1102 ed. 01-26 CLAUSE-WH-2) | 0 | yes | yes | RED -> GREEN |
+| W12-B2 | CLM-2025-30002 | 2025-12-31 | NG-1101 ed. 07-23 WE-4 | 1 (NG-1103 ed. 02-26 CLAUSE-MR-1) | 0 | yes | yes | RED -> GREEN |
+| W12-B4 | CLM-2026-30004 | 2026-01-20 | NG-1103 ed. 07-23 MR-2 | 1 (NG-1103 ed. 02-26 CLAUSE-MR-1) | 0 | no | yes | RED -> GREEN |
+| W12-B5 | CLM-2026-30005 | 2026-02-14 | NG-1105 ed. 07-23 GM-3 | 1 (NG-1101 ed. 07-23 CLAUSE-WE-2) | 0 | yes | yes | RED -> GREEN |
+| W12-B6 | CLM-2025-30006 | 2025-12-20 | NG-1101 ed. 07-23 E-44 | 2 (NG-1101 ed. 01-26 CLAUSE-WE-1; NG-1101 ed. 01-26 EXCLUSION-TABLE) | 0 | no | no | RED -> RED |
+| W12-B3 | CLM-2026-30003 | 2026-01-01 | NG-1101 ed. 01-26 E-42 | 2 (NG-1101 ed. 07-23 CLAUSE-WE-4; NG-1102 ed. 07-23 CLAUSE-WH-2) | 0 | no | no | RED -> RED |
+
+Straddle cases red before: 5/5; green after: 4/5
+Cases with >=1 wrong-edition passage in top 3: before 6/6, after 0/6
+
+## Non-straddling cases: Week 4 golden set, n=12, loss date assumed 2026-06-01
+
+| Metric | Before (no filter) | After (date filter) |
+|---|---:|---:|
+| hit-rate@3, Week 4 rule (form + fragment, any edition) | 12/12 = 100% | 12/12 = 100% |
+| hit-rate@3, right edition only | 12/12 = 100% | 12/12 = 100% |
+| wrong-edition passages among the 36 top-3 slots | 15 | 0 |
+
+Questions the filter lost (lenient): none; gained: none
+
+## Coverage in force on the loss date: 48/48 claims match the register's expected answer
+
+| Claim | Loss date | In force | Correct | Wording in force that is NOT the newest edition | Reason |
+|---|---|---|---|---|---|
+| CLM-2025-30001 | 2025-08-11 | True | yes | NG-1101 ed. 07-23 | loss date falls in the term 2024-11-27 to 2025-11-26 |
+| CLM-2025-30002 | 2025-12-31 | True | yes | NG-1101 ed. 07-23, NG-1103 ed. 07-23 | loss date falls in the term 2025-03-12 to 2026-03-11 |
+| CLM-2025-30006 | 2025-12-20 | True | yes | NG-1101 ed. 07-23 | loss date falls in the term 2025-08-30 to 2026-08-29 |
+| CLM-2025-30007 | 2025-11-02 | False | yes | - | term 2025-04-01 to 2026-03-31 was cancelled with effect from 2025-10-15 (non-payment of premium) |
+| CLM-2025-30008 | 2025-02-26 | False | yes | - | loss date is before the policy first incepted on 2025-03-01 |
+| CLM-2026-30004 | 2026-01-20 | True | yes | NG-1103 ed. 07-23 (mixed editions on one claim) | loss date falls in the term 2025-12-13 to 2026-12-12 |
+| CLM-2026-30005 | 2026-02-14 | True | yes | NG-1105 ed. 07-23 (mixed editions on one claim) | loss date falls in the term 2025-12-01 to 2026-11-30 |
+
+(The other 41 claims are in force and every attached form is on its newest edition.)

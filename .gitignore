@@ -37,3 +37,6 @@ Thumbs.db
 # MCP server logs (claims-system call log, gateway audit) and Week 9 scratch copies
 logs/
 mcp_servers/policy_docs/_server_at_*.py
+
+# Week 12: triage-time snapshot the claims_system MCP server reads (built by claim_store.write_triage_snapshot)
+data/claims_at_triage/

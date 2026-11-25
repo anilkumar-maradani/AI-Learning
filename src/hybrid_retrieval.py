@@ -117,9 +117,12 @@ class BM25Index:
         self.bm25 = BM25Okapi(tokenized_corpus)
         print(" done.")
 
-    def search(self, query: str, n_results: int = 25) -> list[dict]:
+    def search(self, query: str, n_results: int = 25, keep=None) -> list[dict]:
         """
         Search the BM25 index for the top n_results chunks.
+
+        ``keep`` (Week 12) is a predicate on chunk metadata, applied BEFORE
+        ranking, so a chunk that fails it can never take a candidate slot.
 
         Returns a list of dicts like:
             [{"rank": 1, "chunk_id": ..., "score": ..., "text": ..., "metadata": ...}, ...]
@@ -129,7 +132,9 @@ class BM25Index:
 
         # Pair each chunk with its BM25 score, then sort descending
         scored = sorted(
-            enumerate(scores), key=lambda x: x[1], reverse=True
+            ((i, s) for i, s in enumerate(scores)
+             if keep is None or keep(self.chunks[i]["metadata"])),
+            key=lambda x: x[1], reverse=True
         )[:n_results]
 
         results = []
@@ -232,6 +237,44 @@ def _rrf_fuse(
     return fused
 
 
+# ── Week 12: filters the code enforces ───────────────────────────────────────
+
+def chunk_filter(loss_date=None, forms=None, product=None, latest_only=False):
+    """(chroma_where, predicate) for the same rule on both retrieval legs.
+
+    loss_date    keep only chunks whose edition was in force on that date
+                 (effective_from <= date <= effective_to, yyyymmdd integers)
+    forms        keep only these form numbers
+    product      keep only this policy line (e.g. 'homeowners')
+    latest_only  keep only each form's newest edition: the legacy default for
+                 Week 7-11 code paths, whose claims all post-date every edition
+    """
+    from editions import date_int, latest_edition
+    conds, preds = [], []
+    if loss_date is not None:
+        d = date_int(loss_date)
+        conds += [{"effective_from": {"$lte": d}}, {"effective_to": {"$gte": d}}]
+        preds.append(lambda m, d=d: m.get("effective_from", 0) <= d <= m.get("effective_to", 0))
+    if forms:
+        forms = list(forms)
+        conds.append({"form_number": {"$in": forms}} if len(forms) > 1 else {"form_number": forms[0]})
+        preds.append(lambda m, fs=set(forms): m.get("form_number") in fs)
+    if product:
+        conds.append({"policy_line": product})
+        preds.append(lambda m, p=product: m.get("policy_line") == p)
+    if latest_only:
+        def _latest(m):
+            ed = latest_edition(m.get("form_number"))
+            return ed is not None and m.get("edition_date") == ed["edition_date"]
+        preds.append(_latest)
+        from editions import editions as _eds
+        latest = [e[-1]["source_file"] for e in _eds().values()]
+        conds.append({"source_file": {"$in": latest}})
+    where = None if not conds else conds[0] if len(conds) == 1 else {"$and": conds}
+    keep = None if not preds else (lambda m: all(p(m) for p in preds))
+    return where, keep
+
+
 # ── Public API ────────────────────────────────────────────────────────────────
 
 def hybrid_search(
@@ -239,6 +282,10 @@ def hybrid_search(
     n_results: int = 5,
     bm25_candidates: int = 25,
     vector_candidates: int = 25,
+    loss_date=None,
+    forms=None,
+    product=None,
+    latest_only: bool = False,
 ) -> list[dict]:
     """
     Perform hybrid search: BM25 + Vector Search fused with RRF.
@@ -263,14 +310,16 @@ def hybrid_search(
     # Import here to avoid circular imports
     from retrieval import search as vector_search_fn
 
+    where, keep = chunk_filter(loss_date, forms, product, latest_only)
+
     # Step 1: Vector search (semantic — finds meaning)
     vector_results = vector_search_fn(
-        query, strategy="structure_aware", n_results=vector_candidates
+        query, strategy="structure_aware", n_results=vector_candidates, where_filter=where
     )
 
     # Step 2: BM25 search (keyword — finds exact tokens like "E-43")
     bm25_index = _get_bm25_index()
-    bm25_results = bm25_index.search(query, n_results=bm25_candidates)
+    bm25_results = bm25_index.search(query, n_results=bm25_candidates, keep=keep)
 
     # Step 3: Fuse with RRF — fetch extra candidates so rescue step has room
     fused = _rrf_fuse(vector_results, bm25_results, k=RRF_K, n_results=max(n_results * 3, 15))

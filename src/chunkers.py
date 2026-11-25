@@ -20,6 +20,15 @@ def _token_len(text: str) -> int:
     return len(_ENC.encode(text))
 
 
+def _id_prefix(metadata: dict) -> str:
+    """Week 12: chunk ids carry the edition. Before, two editions of one form
+    produced the same ids and the second upsert silently replaced the first
+    (reports/week12/evidence/seam2_chunk_id_collision.txt: 55 of 111 chunks)."""
+    form = metadata.get("form_number", "UNKNOWN")
+    edition = metadata.get("edition_date")
+    return f"{form}_{edition}" if edition else form
+
+
 def _split_tokens(text: str, max_tokens: int = 400, overlap: int = 50) -> list[str]:
     """Split *text* into token-windows of at most *max_tokens* with *overlap*."""
     tokens = _ENC.encode(text)
@@ -48,7 +57,7 @@ def naive_chunker(text: str, metadata: dict) -> list[dict]:
     """
     windows = _split_tokens(text, max_tokens=400, overlap=50)
     chunks = []
-    form = metadata.get("form_number", "UNKNOWN")
+    form = _id_prefix(metadata)
     for i, window in enumerate(windows):
         chunk_id = f"{form}_naive_chunk_{i:03d}"
         chunk_meta = {
@@ -186,7 +195,7 @@ def structure_aware_chunker(text: str, metadata: dict) -> list[dict]:
         if _token_len(anchored_text) > 400:
             sub_chunks = _split_tokens(anchored_text, max_tokens=400, overlap=50)
             for j, sub in enumerate(sub_chunks):
-                chunk_id = f"{form}_sa_chunk_{i:03d}_{j:02d}"
+                chunk_id = f"{_id_prefix(metadata)}_sa_chunk_{i:03d}_{j:02d}"
                 chunk_meta = {
                     **metadata,
                     "chunk_id": chunk_id,
@@ -196,7 +205,7 @@ def structure_aware_chunker(text: str, metadata: dict) -> list[dict]:
                 }
                 chunks.append({"text": sub, "metadata": chunk_meta})
         else:
-            chunk_id = f"{form}_sa_chunk_{i:03d}"
+            chunk_id = f"{_id_prefix(metadata)}_sa_chunk_{i:03d}"
             chunk_meta = {
                 **metadata,
                 "chunk_id": chunk_id,

@@ -23,6 +23,9 @@ Everything in `data/` was written for this project.
 | `data/policy/` | six endorsement forms of a fictional carrier, Northgate Mutual: escape of water (NG-1101), windstorm and hurricane (NG-1102), mold (NG-1103), valuable articles (NG-1104), earth movement (NG-1105), home business (NG-1106) |
 | `data/claims/open_claims.jsonl` | 10 open claims (policy terms, estimate lines, dated adjuster notes) that the agent triages |
 | `data/claims/closed_claims.jsonl` | 30 closed claims, each ending in the adjuster's decision, for the summary writer |
+| `data/claims/w12_claims.jsonl` | 8 closed claims dated either side of an endorsement edition change, two with no cover in force (Week 12) |
+| `data/policy/*_07-23.txt` | the prior edition of all six forms (in force from 2023-07-01 until each 2026 edition took effect) |
+| `data/policies/policies.jsonl` | policy register: product, plan and every term (dates, status, cancellation, forms, deductible, Coverage A) |
 
 The first version of this repository used an endorsement corpus copied from
 another repository. It was removed on 2026-09-30. The Week 3–5 reports that
@@ -50,6 +53,7 @@ copy .env.example .env                       # then paste your GROQ_API_KEY
 | 9 | `python evals/week9.py tools` · `... query` · `... wire` · `... errors --before-rev REV` · `... gateway` | MCP: tools discovered from `mcp_config.json`, the claims-system server added by config only |
 | 10 | `python evals/week10.py single` · `squad` · `judge` · `table` · `fail --case 2` | orchestrator + 2 workers vs the single agent on 10 Week-6 cases: 4 numbers, re-send multiplier, injected worker failure |
 | 11 | `python evals/week11.py traffic` · `plant` · `drill start` · `find` · `show` · `drill found` · `trace` · `case` · `suite` · `diff` · `cost` · `tenx` · `outcomes` | request log with spans for the production workflow, a timed drill to find a planted bad coverage answer, its regression case RED then GREEN, cost by stage, what breaks at 10x |
+| 12 | `python policylens.py setup` · `python policylens.py triage CLM-2025-30001` · `python policylens.py eval run --label L` · `python policylens.py serve-mcp` | the integrated capstone: one entry point, FNOL in → coverage-in-force check → wording in force on the loss date (MCP, date filter in code) → referral to an adjuster with citations by clause, edition and loss date; eval suite, judge, trajectory, PII test ([write-up](reports/week12/README.md)) |
 | any | `python chat.py` | interactive grounded Q&A over the forms |
 
 Each week's write-up: [Week 6](reports/week6/README.md) ·
@@ -82,6 +86,7 @@ data/claims/*.jsonl ──claim_store──────────────�
 | `mcp_server.py`, `mcp_client.py`, `mcp_agent.py`, `mcp_servers/` | 9 |
 | `squad.py` | 10 |
 | `observability.py`, `triage_service.py` | 11 |
+| `editions.py`, `policy_register.py`, `referral.py`, `triage_agent.py`, `mcp_servers/coverage/`, `policylens.py` | 12 |
 
 ## Configuration
 

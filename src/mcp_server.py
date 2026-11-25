@@ -26,9 +26,11 @@ No model is called anywhere in a server. The server exposes a capability; the
 host runs the model.
 """
 
+import hashlib
 import inspect
 import json
 import sys
+import time
 import traceback
 
 PROTOCOL_VERSION = "2025-06-18"
@@ -43,10 +45,16 @@ class ToolError(Exception):
 
 
 class Server:
-    def __init__(self, name: str, version: str, instructions: str = ""):
+    def __init__(self, name: str, version: str, instructions: str = "", call_log: str | None = None):
         self.name, self.version, self.instructions = name, version, instructions
         self._tools: dict[str, dict] = {}
         self._resources: dict[str, dict] = {}
+        # Week 12: one line per tools/call, joined to the caller's trace by the
+        # trace id it sent in params._meta (a caller that sends none gets a fresh
+        # id). The line holds exactly what was handed out, redacted on write.
+        self.call_log = call_log
+        self.client_info: dict = {}
+        self.current_meta: dict = {}
         # The protocol owns stdout. Anything else that prints (model loading,
         # index building) would corrupt the stream, so ordinary prints go to
         # stderr from here on and the protocol writes to the saved handle.
@@ -91,6 +99,7 @@ class Server:
     # -- method handlers ----------------------------------------------------
 
     def _initialize(self, params: dict) -> dict:
+        self.client_info = params.get("clientInfo") or {}
         caps = {"tools": {"listChanged": False}}
         if self._resources:
             caps["resources"] = {"subscribe": False, "listChanged": False}
@@ -111,14 +120,41 @@ class Server:
         if name not in self._tools:
             raise _RpcError(INVALID_PARAMS, f"Unknown tool: {name}")
         args = params.get("arguments") or {}
+        self.current_meta = params.get("_meta") or {}
+        t0 = time.perf_counter()
         try:
             out = self._tools[name]["fn"](**args)
+            text = out if isinstance(out, str) else json.dumps(out, ensure_ascii=False)
+            is_error = False
         except ToolError as exc:
-            return {"content": [{"type": "text", "text": str(exc)}], "isError": True}
+            text, is_error = str(exc), True
         except TypeError as exc:
-            return {"content": [{"type": "text", "text": f"bad arguments: {exc}"}], "isError": True}
-        text = out if isinstance(out, str) else json.dumps(out, ensure_ascii=False)
-        return {"content": [{"type": "text", "text": text}], "isError": False}
+            text, is_error = f"bad arguments: {exc}", True
+        self._log_call(name, args, text, is_error, (time.perf_counter() - t0) * 1000)
+        return {"content": [{"type": "text", "text": text}], "isError": is_error}
+
+    def _log_call(self, tool: str, args: dict, text: str, is_error: bool, latency_ms: float) -> None:
+        """One redacted line per call; a logging failure never breaks the protocol."""
+        if not self.call_log:
+            return
+        try:
+            from tracing import EventWriter
+            meta = self.current_meta
+            EventWriter(self.call_log).write({
+                "trace_id": meta.get("trace_id"),
+                "parent_span_id": meta.get("span_id"),
+                "caller": {k: self.client_info.get(k) for k in ("name", "version")},
+                "server": self.name,
+                "tool": tool,
+                "args": args,
+                "is_error": is_error,
+                "latency_ms": round(latency_ms, 1),
+                "result": text,
+                "result_sha256": hashlib.sha256(text.encode("utf-8")).hexdigest(),
+                "result_chars": len(text),
+            })
+        except Exception as exc:  # noqa: BLE001
+            print(f"[{self.name}] call log write failed: {type(exc).__name__}: {exc}", file=sys.stderr)
 
     def _resources_list(self, _params: dict) -> dict:
         return {"resources": [r["spec"] for r in self._resources.values()]}

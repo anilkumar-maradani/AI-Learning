@@ -1,0 +1,16 @@
+Seam 2 evidence: the Week 3 chunker with both editions present (before any fix)
+Command: the existing chunkers.structure_aware_chunker over data/policy/*.txt in ingest's sorted file order,
+keyed by chunk_id the way ingest._upsert_chunks keys the Chroma upsert.
+
+chunks produced: 111 | distinct ids kept by upsert: 56 | silently overwritten: 55
+NG-1101 {'07-23': 11}
+NG-1102 {'07-23': 10}
+NG-1103 {'07-23': 8}
+NG-1104 {'07-23': 9}
+NG-1105 {'07-23': 9}
+NG-1106 {'07-23': 9}
+
+Reading: every surviving id holds 07-23 text, because "NG-1101_07-23.txt" sorts after "NG-1101_01-26.txt".
+Re-ingesting with the old ids would have replaced ALL 2026 wording with 2023 wording,
+without an error, and every Week 7-11 tool would have answered 2026 claims from 2023 wording.
+Fix: chunk ids carry the edition (NG-1101_01-26_sa_chunk_003); see src/chunkers.py.

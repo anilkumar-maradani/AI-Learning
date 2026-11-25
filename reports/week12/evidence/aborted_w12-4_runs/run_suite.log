@@ -1,0 +1,18 @@
+run suite: version w12-v2, 25 to run, 0 already saved
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 11146.14it/s]
+  [BM25] Loading all chunks from ChromaDB... 111 chunks loaded.
+  [BM25] Building BM25 index... done.
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 11448.00it/s]
+  W12-B1   CLM-2025-30001  referred        11016 tok  $0.00144  laps 4  guard rejections 1  trace tr_6b7c950e62b7
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 17168.59it/s]
+  [BM25] Loading all chunks from ChromaDB... 111 chunks loaded.
+  [BM25] Building BM25 index... done.
+  W12-B2   CLM-2025-30002  referred        17798 tok  $0.00235  laps 5  guard rejections 1  trace tr_df1ccd65fa73
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 12855.63it/s]
+  [BM25] Loading all chunks from ChromaDB... 111 chunks loaded.
+  [BM25] Building BM25 index... done.
+  W12-B3   CLM-2026-30003  referred         8206 tok  $0.00101  laps 4  guard rejections 0  trace tr_32c7587b4694
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 11444.97it/s]
+  [BM25] Loading all chunks from ChromaDB... 111 chunks loaded.
+  [BM25] Building BM25 index... done.

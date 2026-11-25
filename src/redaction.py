@@ -66,6 +66,23 @@ _PATTERNS: list[tuple[str, re.Pattern]] = [
         r"(?:Street|St|Avenue|Ave|Road|Rd|Lane|Ln|Drive|Dr|Court|Ct|Boulevard|Blvd|Way|Terrace|Ter|Place|Pl|Circle|Cir|Bend)\b")),
 ]
 
+# Week 12: injuries. Adjuster notes carry them ("sprained her left wrist",
+# "treated at Westbrook Urgent Care") and nothing above matched them
+# (reports/week12/seams.md #10). Anchored on a body part or a place of medical
+# care, so property facts ("the supply line broke", "cut the power") survive.
+_BODY = (r"(?:wrists?|arms?|legs?|ankles?|hands?|back|head|neck|ribs?|hips?|knees?|shoulders?"
+         r"|fingers?|foot|feet|face|eyes?|collarbone|elbows?|toes?)")
+_INJURY_VERB = (r"(?:sprain(?:ed|s)?|fractur(?:e|ed|es)|broke|broken|cut|cuts|burn(?:ed|t|s)?|scald(?:ed|s)?"
+                r"|bruis(?:e|ed|es)|injur(?:e|ed|es|y)|hurt|twist(?:ed|s)?|strain(?:ed|s)?|dislocat(?:e|ed|es))")
+INJURY_RE = re.compile(
+    rf"\b{_INJURY_VERB}\s+(?:(?:his|her|their|my|a|an|the|both)\s+)?(?:(?:left|right|lower|upper)\s+)?"
+    rf"{_BODY}\b(?!\s+(?:door|wall|yard|garden|porch|steps?|room|of)\b)"
+    r"|\b(?:treated|seen|examined|admitted)\s+(?:at|in|by|to)\s+(?:the\s+)?(?:[A-Z][\w'’-]+\s+){0,3}"
+    r"(?:Urgent\s+Care|Hospital|Clinic|A&E|ER|Emergency(?:\s+Room|\s+Department)?|Medical\s+Cent(?:er|re))\b"
+    r"|\b(?:concussion|whiplash|laceration|stitches|sutures|hospitali[sz]ed|urgent\s+care|emergency\s+room)\b",
+    re.IGNORECASE)
+_PATTERNS.append(("INJURY", INJURY_RE))
+
 # Words that look like names but are policy vocabulary. Never pseudonymise these.
 _NAME_STOPWORDS = {
     "named storm", "national hurricane", "hurricane center", "special form",
@@ -83,19 +100,31 @@ def _looks_like_policy_term(name: str) -> bool:
 
 # A person name cued by an explicit role word — the only way we pseudonymise
 # free-text capitalised words, so "National Hurricane Center" survives intact.
+# Week 12 fix: the cue words were case-sensitive, so "Ms. Whitlock" and
+# "Insured Rosa Delgado" never matched; only "ms." / "insured" in lower case did.
+# The cue is now case-insensitive; the name itself must still be capitalised.
 _NAME_CUE = re.compile(
-    r"\b(?:claimant|insured|policyholder|named insured|mr\.?|mrs\.?|ms\.?|dr\.?)\s+"
+    r"\b(?i:claimant|insured|policyholder|named insured|mr\.?|mrs\.?|ms\.?|dr\.?),?\s+"
     r"((?:[A-Z][a-z'’-]+)(?:\s+[A-Z][a-z'’-]+){0,2})")
 
 
-def redact_text(text: str, known_names: list[str] | None = None) -> tuple[str, dict]:
+# Week 12: what may reach the MODEL. Claim and policy numbers are business
+# identifiers the agent must pass back to tools, so they stay; the brief's PII
+# line (names, addresses, injuries) and contact details go. Logs still get the
+# full set (all kinds), so numbers are pseudonymised on disk.
+PERSONAL_KINDS = frozenset({"EMAIL", "PHONE", "ADDRESS", "INJURY", "CLAIMANT"})
+
+
+def redact_text(text: str, known_names: list[str] | None = None,
+                kinds: frozenset | None = None) -> tuple[str, dict]:
     """
     Return ``(redacted_text, counts)``.
 
     ``known_names`` is the roster the caller already holds in structured form
     (the claimant on the claim file). Those are matched exactly and are the
     reliable path; the cue-word regex is the safety net for names that only
-    appear inside free text.
+    appear inside free text. ``kinds`` limits which categories are replaced
+    (default: all).
     """
     counts: dict[str, int] = {}
     out = text
@@ -107,6 +136,8 @@ def redact_text(text: str, known_names: list[str] | None = None) -> tuple[str, d
     # 1. Structured identifiers first, so an email or phone is consumed whole
     #    rather than half-eaten by a surname match inside it.
     for kind, pattern in _PATTERNS:
+        if kinds is not None and kind not in kinds:
+            continue
         def _sub(m: re.Match, _kind: str = kind) -> str:
             return _token(_kind, m.group(0))
         out, n = pattern.subn(_sub, out)
@@ -146,6 +177,8 @@ _LEAK_CHECKS = [
     ("policy_no", _PATTERNS[1][1]),
     ("email", _PATTERNS[2][1]),
     ("phone", _PATTERNS[3][1]),
+    ("address", _PATTERNS[4][1]),     # Week 12
+    ("injury", INJURY_RE),            # Week 12
 ]
 
 

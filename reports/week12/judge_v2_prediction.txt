@@ -1,0 +1,15 @@
+Judge v2 prediction, written before judge v2 ran.
+
+v1 (qwen/qwen3.8-27b, judge_w12.txt) agreed with the hand labels on 7/9 = 78%.
+Both misses lean the same way: the judge said PASS where the label was FAIL.
+  W12-B1: the referral omits the fact the decision uses to rule out E-42 (no body of water overflowed).
+  W12-O1: a citation reason asserts something the claim file never says (the escape was inside the structure and needs tear-out).
+
+v2 (judge_w12_v2.txt) makes two changes:
+  1. facts used to RULE OUT an exclusion count as decisive facts;
+  2. citation reasons count as assertions about the loss.
+
+Expected: B1 and O1 flip to FAIL, giving 9/9.
+Risk: the stricter reading of reasons also flips a PASS label to FAIL. Most at risk is W12-B3, whose WE-1 reason calls
+surface runoff a "sudden escape"; I labelled it PASS because that is a misapplied clause, not a fact about the loss.
+v2 is tuned on these same 9 cases, so its agreement number is optimistic, not held-out.

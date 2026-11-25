@@ -141,7 +141,16 @@ def get_claim(claim_number: str) -> dict:
     return out
 
 
-def search_policy(query: str, form_number: str | None = None, n_results: int = 4) -> dict:
+def _edition_for(form_number: str, loss_date=None) -> dict | None:
+    """Week 12: the edition a lookup reads. With a loss date, the edition in force
+    on it; without one, the newest edition (the legacy default: every Week 7-11
+    claim post-dates every edition, so for them newest == in force)."""
+    from editions import edition_in_force, latest_edition
+    return edition_in_force(form_number, loss_date) if loss_date else latest_edition(form_number)
+
+
+def search_policy(query: str, form_number: str | None = None, n_results: int = 4,
+                  loss_date: str | None = None) -> dict:
     from hybrid_retrieval import hybrid_search
     if form_number and not FORM_RE.match(form_number):
         return {"error": f"'{form_number}' is not a form number (expected NG-NNNN)"}
@@ -149,17 +158,23 @@ def search_policy(query: str, form_number: str | None = None, n_results: int = 4
         # Week 8 mitigation: the whole form, in document order, minus header chunks.
         # Before, 4 ranked slots were often spent on PREAMBLE chunks and the agent
         # re-searched the same form to find the clause it still needed.
+        # Week 12: ONE edition of the form, never both interleaved.
         from hybrid_retrieval import _get_bm25_index
+        ed = _edition_for(form_number, loss_date)
         hits = sorted(
             (c for c in _get_bm25_index().chunks
-             if c["metadata"].get("form_number") == form_number
+             if ed is not None
+             and c["metadata"].get("form_number") == form_number
+             and c["metadata"].get("edition_date") == ed["edition_date"]
              and c["metadata"].get("clause_id") != "PREAMBLE"),
             key=lambda c: c["metadata"]["chunk_index"],
         )
         if not hits:
-            return {"error": f"No form {form_number} in the policy library"}
+            return {"error": f"No form {form_number} in the policy library"
+                    + (f" in force on {loss_date}" if loss_date else "")}
     else:
-        hits = hybrid_search(query, n_results=n_results)
+        hits = hybrid_search(query, n_results=n_results, loss_date=loss_date,
+                             latest_only=loss_date is None)
     return {
         "passages": [
             {
@@ -184,8 +199,11 @@ def exclusion_schedule(form_number: str) -> dict:
     from hybrid_retrieval import _get_bm25_index
     if not FORM_RE.match(form_number or ""):
         return {"error": f"'{form_number}' is not a form number (expected NG-NNNN)"}
+    ed = _edition_for(form_number)          # Week 12: one edition, never both tables
     hits = [c for c in _get_bm25_index().chunks
-            if c["metadata"].get("form_number") == form_number
+            if ed is not None
+            and c["metadata"].get("form_number") == form_number
+            and c["metadata"].get("edition_date") == ed["edition_date"]
             and c["metadata"].get("clause_id") == "EXCLUSION-TABLE"]
     if not hits:
         return {"error": f"No exclusion table for {form_number} in the policy library"}

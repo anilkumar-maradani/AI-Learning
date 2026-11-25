@@ -154,8 +154,14 @@ class MCPServer:
         self.tools = tools
         return tools
 
-    def call_tool(self, name: str, arguments: dict) -> dict:
-        return self.request("tools/call", {"name": name, "arguments": arguments})
+    def call_tool(self, name: str, arguments: dict, meta: dict | None = None) -> dict:
+        """``meta`` (Week 12) travels as params._meta, the MCP spec's slot for
+        request metadata: the host's trace id and span id, so a server that logs
+        it can be joined to the host trace. A server that ignores it is unaffected."""
+        params = {"name": name, "arguments": arguments}
+        if meta:
+            params["_meta"] = meta
+        return self.request("tools/call", params)
 
     def read_resource(self, uri: str) -> str:
         res = self.request("resources/read", {"uri": uri})
@@ -211,7 +217,7 @@ class ToolRegistry:
                 out.append((srv.name, uri, srv.read_resource(uri)))
         return out
 
-    def call(self, full_name: str, arguments: str | dict) -> dict:
+    def call(self, full_name: str, arguments: str | dict, meta: dict | None = None) -> dict:
         """Returns {server, tool, is_error, text}. Never raises for a model mistake."""
         if full_name not in self.routes:
             return {"server": None, "tool": full_name, "is_error": True,
@@ -223,7 +229,7 @@ class ToolRegistry:
             return {"server": srv.name, "tool": t["name"], "is_error": True,
                     "text": f"arguments are not valid JSON: {exc}"}
         try:
-            res = srv.call_tool(t["name"], args)
+            res = srv.call_tool(t["name"], args, meta=meta)
         except MCPError as exc:
             return {"server": srv.name, "tool": t["name"], "is_error": True, "text": str(exc)}
         return {"server": srv.name, "tool": t["name"], "is_error": bool(res.get("isError")),
